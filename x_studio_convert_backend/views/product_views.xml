@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_product__397c3339-2957-4a9b-bea6-9228c3427bba -->
+    <record model="ir.ui.view" id="product_product_tree_view_x_studio">
+        <field name="name">product.product.tree.inherit.x_studio</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list[1]/field[@name='name']" position="after">
+                <field name="supplier_taxes_id" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='product_template_variant_value_ids']" position="after">
+                <field name="property_account_expense_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- studio_customization.odoo_studio_product__50afed7d-081e-4776-886f-45719f2cef35 -->
+    <record model="ir.ui.view" id="product_template_view_tree_x_studio">
+        <field name="name">product.template.view.tree.inherit.x_studio</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list[1]/field[@name='name']" position="after">
+                <field name="tracking" optional="show"/>
+                <xpath expr="//field[@name='qty_available']" position="move"/>
+                <field name="location_id" optional="show"/>
+                <field name="x_studio_prices_last_updated" optional="show"/>
+                <field name="property_stock_inventory" optional="show"/>
+                <field name="x_studio_additional_description" optional="show"/>
+                <field name="x_studio_hs_code_1" optional="show" string="Country of Origin"/>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="bom_count" optional="show"/>
+                <field name="x_studio_hs_code" optional="show"/>
+                <field name="x_studio_cylinder_size" optional="show"/>
+                <field name="x_studio_gas_type" optional="show"/>
+                <field name="x_studio_reliance_information" optional="show"/>
+                <field name="used_in_bom_count" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='responsible_id']" position="after">
+                <field name="route_ids" optional="show"/>
+                <field name="cost_method" optional="show"/>
+                <field name="x_studio_drawing_reference" optional="show"/>
+                <field name="seller_ids" optional="show"/>
+                <field name="variant_seller_ids" optional="show"/>
+                <field name="property_account_expense_id" optional="show"/>
+                <field name="property_account_income_id" optional="show"/>
+                <!--<field name="available_threshold" optional="show"/>-->
+                <field name="x_studio_reorder_telephone" optional="show"/>
+                <field name="property_stock_production" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="after">
+                <field name="purchase_ok" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_product__20bbb6de-89d4-48e9-88f9-89b72a948468 -->
+    <record id="product_template_only_form_view_x_studio" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.x_studio</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/div[not(@name)][1]"-->
+            <!--position="after">-->
+            <!--<notebook name="studio_notebook_Nc8uk">-->
+            <!--<page string="New Page" name="studio_page_Nc8uk">-->
+            <!--<group name="studio_group_Nc8uk">-->
+            <!--</group>-->
+            <!--</page>-->
+            <!--</notebook>-->
+            <!--</xpath>-->
+            <!--<xpath expr="//group[@name='group_general']" position="attributes">-->
+            <!--<attribute name="attrs">{"invisible": [["x_studio_additional_description","=",False]]}</attribute>-->
+            <!--</xpath>-->
+            <xpath expr="//field[@name='active']" position="before">
+                <field name="x_studio_additional_description" string="Additional Description"/>
+            </xpath>
+            <xpath expr="//field[@name='product_tooltip']" position="after">
+                <field name="x_studio_contact_name" string="contact name"/>
+                <field name="x_studio_reorder_telephone" string="Reorder telephone"/>
+                <field name="x_studio_drawing_reference" string="Drawing reference"/>
+                <field name="x_studio_hs_code" string="HS Code"/>
+            </xpath>
+            <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[not(@name)][1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[1]"
+                   position="before">
+                <field name="can_be_expensed"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="x_studio_secondary_comments" string="Secondary comments"/>
+            </xpath>
+            <xpath expr="//field[@name='responsible_id']" position="before">
+                <field name="location_id"/>
+            </xpath>
+            <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[not(@name)][1]"
+                   position="inside">
+                <page string="Product Specifics" name="studio_page_yPL1G">
+                    <group name="studio_group_yPL1G">
+                        <group name="studio_group_yPL1G_left">
+                            <field name="x_studio_hs_code_1" string="Country of Origin"/>
+                            <field name="x_studio_product_notes" string="Product Notes"/>
+                            <field name="x_studio_reliance_information" string="Reliance Information"/>
+                        </group>
+                        <group name="studio_group_yPL1G_right">
+                            <field name="x_studio_prices_last_updated" string="Prices last updated"/>
+                            <field name="x_studio_cylinder_size" string="Cylinder Size"/>
+                            <field name="x_studio_gas_type" string="Gas Type"/>
+                            <!--<field name="x_studio_text_field_RsAVs"/>-->
+                        </group>
+                    </group>
+                    <!-- https://spantech.odoo.com/web#id=465&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+                    <group name="product_specifics_2">
+                        <group>
+                            <field name="part_code"/>
+                            <field name="details"/>
+                            <field name="net_weight"/>
+                            <field name="gross_weight"/>
+                            <field name="volume_sp"/>
+                            <field name="pressure"/>
+                            <field name="shelf_life"/>
+                            <field name="product_class"/>
+                            <field name="un_number"/>
+                            <field name="shipping_name"/>
+                        </group>
+                        <group>
+                            <field name="tunnel_code"/>
+                            <field name="sds_number"/>
+                            <field name="label_template"/>
+                            <field name="traffic_code"/>
+                            <field name="size"/>
+                            <field name="valve"/>
+                            <field name="accuracy"/>
+                            <field name="location"/>
+                            <field name="contract_number"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- https://spantech.odoo.com/web#id=909&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+                <!-- Only be visible for MML Company -->
+                <page string="MML ZOHO Information" name="mml_zoho_info" invisible="company_id != 3">
+                    <group>
+                        <group string="Instrument Information">
+                            <field name="mml_instrument_number"/>
+                            <field name="mml_instrument_owner"/>
+                            <field name="mml_instrument_name"/>
+                            <field name="mml_build_name"/>
+                            <field name="mml_model"/>
+                            <field name="mml_platform"/>
+                            <field name="mml_responsible_rep" placeholder="Rep Name..." options="{'no_create':True}"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            <field name="mml_commissioning_engineer" options="{'no_create':True}"/>
+                            <field name="mml_remote_engineer"/>
+                            <field name="mml_warranty"/>
+                            <field name="mml_warranty_expiry"/>
+                            <field name="mml_inactive"/>
+                        </group>
+                        <group string="Commissioning Information">
+                            <field name="mml_qc_file_date"/>
+                            <field name="mml_acceptance_date"/>
+                            <field name="mml_commissioning_info_sent"/>
+                            <field name="mml_training_complete"/>
+                            <field name="mml_hs_info_sent"/>
+                            <field name="mml_outstanding_items"/>
+                            <field name="mml_install_date"/>
+                            <field name="mml_complete"/>
+                            <field name="mml_install_report"/>
+                        </group>
+                        <group string="User Information">
+                            <field name="mml_owner"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            <field name="mml_main_user"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            <field name="mml_user_2"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            <field name="mml_user_3"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            <field name="mml_notes"/>
+                        </group>
+                        <group string="Nano Loading Head Information">
+                            <field name="mml_nano_head"/>
+                            <field name="mml_scratch"/>
+                            <field name="mml_nano_indentation"/>
+                            <field name="mml_friction"/>
+                            <field name="mml_enhanced_nano"/>
+                            <field name="mml_nano_impact"/>
+                            <field name="mml_fretting"/>
+                            <field name="mml_nano_tribo_test"/>
+                        </group>
+                        <group string="Micro Loading Head Info">
+                            <field name="mml_micro_head"/>
+                            <field name="mml_micro_scratch"/>
+                            <field name="mml_micro_indentation"/>
+                            <field name="mml_micro_friction"/>
+                            <field name="mml_enhanced_micro"/>
+                            <field name="mml_micro_impact"/>
+                        </group>
+                        <group string="Imaging Options">
+                            <field name="mml_microscope"/>
+                            <field name="mml_nano_positioning_stage"/>
+                            <field name="mml_afm"/>
+                            <field name="mml_rapid_mapping"/>
+                            <field name="mml_ht_optics"/>
+                            <field name="mml_nano_wear"/>
+                        </group>
+                        <group string="Environmental Options">
+                            <field name="mml_hot_stage"/>
+                            <field name="mml_cold_stage"/>
+                            <field name="mml_purge_number"/>
+                            <field name="mml_liquid_cell"/>
+                            <field name="mml_humidity"/>
+                        </group>
+                        <group string="Other Options">
+                            <field name="mml_dmct_option"/>
+                            <field name="mml_specials"/>
+                            <field name="mml_other_options"/>
+                            <field name="mml_sales_notes"/>
+                        </group>
+                        <group string="Upgrades">
+                            <field name="mml_detail_upgrades"/>
+                        </group>
+                        <group string="Technical details">
+                            <field name="mml_operating_system"/>
+                            <field name="mml_pc_tag_no"/>
+                            <field name="mml_serial_no"/>
+                            <field name="mml_sample_stage_controller"/>
+                            <field name="mml_av_table_type"/>
+                            <field name="mml_ssc_serial_number"/>
+                            <field name="mml_ntx_version"/>
+                            <field name="mml_heat_shield_type"/>
+                            <field name="mml_ntx_serial_no"/>
+                            <field name="mml_impulse"/>
+                            <field name="mml_hot_stage_controller"/>
+                            <field name="mml_indenter_holder"/>
+                            <field name="mml_hsc_serial_number"/>
+                            <field name="mml_additional_info"/>
+                            <field name="mml_machine_specific_notes"/>
+                        </group>
+                        <group string="Old Fields">
+                            <field name="mml_loading_head"/>
+                            <field name="mml_control_unit"/>
+                            <field name="mml_purge_chamber"/>
+                        </group>
+                        <group string="Comments">
+                            <field name="mml_comments"/>
+                            <field name="mml_modified_time"/>
+                            <field name="mml_created_time"/>
+                            <field name="mml_product_tag_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_edit_color': 1}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="bottle_label_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div class="certificate_report" style="page-break-after: always;">
+                    <div style="display:block;">
+                        <div t-if="docs.logo_use != 'custom'" style="float: left;width:33%;text-align:center">
+                            <span t-if="docs.logo_use != 'custom'">
+                                <h4 style="color:red">AG Gases &amp; Equipment Ltd</h4>
+                                <span style="font-size:10px;line-height:0px">
+                                    <p style="line-height:0px;font-weight:bolder;font-family: 'Roboto-Medium';">Unit 1A
+                                        Britannic
+                                        Works,
+                                    </p>
+                                    <p style="line-height:0px;">Broom Street, Hanley,Stoke-on-Trent,</p>
+                                    <p style="line-height:0px;">England, ST1 2ER</p>
+                                    <p style="line-height:0px;">Office: +44(0)1782616611&amp;nbsp;&amp;nbsp;Email:prod@agequip.co.uk</p>
+                                    <p style="line-height:0px;">www.agequip.co.uk</p>
+                                </span>
+                            </span>
+                        </div>
+                        <div t-if="docs.logo_use == 'custom'" style="float: left; width:63%;text-align:center">
+                            <img t-if="docs.logo_use == 'custom'" t-attf-src="data:image/png;base64,{{docs.logo}}"
+                                 style="width:100%;"></img>
+                        </div>
+                        <!--<div t-if="docs.logo_use == 'custom'" style="float: left; width:63%; text-align:center;">
+                            <img t-if="docs.logo_use == 'custom'" 
+                                 t-attf-src="data:image/png;base64,{{docs.logo}}" 
+                                 style="width:500px; height:100px; object-fit: contain;"/>
+                        </div>-->
+                        <div style="float: left;width:30%; text-align: center; margin-top:12px;">
+                            <img t-if="docs.logo_use != 'custom'" alt="Logo" style="height:120px;"
+                                 src="/pdf_report/static/description/AG_GASES_Logo_2.jpeg"/>
+                            <!-- <p t-if="docs.logo_use == 'custom'">
+                                <t t-if="docs.sale_id.partner_invoice_id">
+                                    <h6 t-field="docs.sale_id.partner_invoice_id.name"/>
+                                    <p style="line-height:1px;" t-if="docs.sale_id.partner_invoice_id.street">
+                                        <t t-esc="docs.sale_id.partner_invoice_id.street"/>
+                                    </p>
+                                    <p style="line-height:1px;" t-if="docs.sale_id.partner_invoice_id.street2">
+                                        <t t-esc="docs.sale_id.partner_invoice_id.street2"/>
+                                    </p>
+                                    <p style="line-height:1px;" t-if="docs.sale_id.partner_invoice_id.city">
+                                        <t t-esc="docs.sale_id.partner_invoice_id.city"/>
+                                    </p>
+                                    <p style="line-height:1px;" t-if="docs.sale_id.partner_invoice_id.zip">
+                                        <t t-esc="docs.sale_id.partner_invoice_id.zip"/>
+                                    </p>
+                                    <p style="line-height:1px;" t-if="docs.sale_id.partner_invoice_id.country_id">
+                                        <t t-esc="docs.sale_id.partner_invoice_id.country_id.name"/>
+                                    </p>
+                                </t>
+                            </p> -->
+                        </div>
+                        <div style="float: left;width:35%;text-align:center">
+                            <table style="border:1px dashed #FFF !important;padding: 0px;margin: 0px;font-size:12px; text-align: left; line-height: 3px;"
+                                   class="table borderless" width="100%">
+                                <tr>
+                                    <td >
+                                        <b>Customer PO</b>
+                                    </td>
+                                    <td>
+                                        <t t-if="docs.sale_id" t-esc="docs.sale_id.client_order_ref"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Cylinder NO</b>
+                                    </td>
+                                    <td>
+                                        <t t-esc="cylinder.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Part Code</b>
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.product_id.part_code"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Mfg Number</b></td>
+                                    <td><t t-if="docs.sale_id" t-esc="docs.sale_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>SDS Number</b>
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.product_id.sds_number"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <table style="border:1px dashed #FFF !important;padding: 0px;margin: 0px;" class="table borderless"
+                           width="100%">
+                        <tbody>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px !important;font-size:11px !important" width="40%">
+                                    <div>
+                                        <h6>
+                                            <strong>Operating Instructions</strong>
+                                        </h6>
+                                        <ul>
+                                            <li style="margin: 2px 0;">Do not handle the Cylinder or use the contents until you have read and understood the Safety Data Sheet.</li>
+                                            <li style="margin: 2px 0;">Ensure that the regulator is clean and compatible with the cylinder.Screw the regulator onto the valve outlet, point away from the body and other personnel until pressure is registered on the gauge (if fitted)</li>
+                                            <li style="margin: 2px 0;">Use on/off knob to release gas at pre-set flow rate indicated on the regulator.</li>
+                                            <li style="margin: 2px 0;">Always remove the regulator after use. This Cylinder will re-seal after the regulator is removed. There may be a slight "hiss" of gas as the regulator is removed.</li>
+                                            <li style="margin: 2px 0;">Use PPE as directed by the Safety Data Sheet.</li>
+                                            <li style="margin: 2px 0;">Please dispose of in accordance with local regulations.</li>
+                                            <li style="margin: 2px 0;">This cylinder can be recycled-please contact your local supplier for more details. these details always the same.</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td style="border:0px !important;text-align:left" width="60%">
+                                    <table style="border:1px dashed #FFF !important;padding: 0px;margin: 0px; font-size:14px;"
+                                           class="table borderless" width="100%">
+                                        <tbody>
+                                            <tr style="border:0px dashed #ccc !important;">
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <b>Component</b>
+                                                </td>
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <b>Requested Value</b>
+                                                </td>
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <b>Certified Value</b>
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="docs.components_ids" t-as="components"
+                                                style="border:0px dashed #ccc !important;">
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <t t-esc="components.component"/>
+                                                </td>
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <t t-esc="components.requested_value"/>
+                                                </td>
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <t t-esc="components.certified_value"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table style="border:1px dashed #fff !important;padding: 0px;margin: 0px;"
+                                           class="table borderless">
+                                        <tbody>
+                                            <tr style="border:0px dashed #ccc !important;font-size:12px">
+                                                <td style="border:0px dashed #ccc !important;">
+                                                    <t t-esc="docs.product_id.un_number"/>
+                                                    <t t-esc="docs.product_id.shipping_name"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container" style="margin-top:-25px!important;">
+                        <div class="row align-items-center">
+                            <!-- <div class="o_colored_level" style="width:60%;font-size:11px;"> -->
+                            <div class="o_colored_level" t-att-style="'font-size:11px;width:40%' if docs.product_id.nrc_imgs in ['nrc8','nrc9'] else 'font-size:11px;width:40%'">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc2'" t-out="docs.product_id.nrc2"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc3'" t-out="docs.product_id.nrc3"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc4'" t-out="docs.product_id.nrc4"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'" t-out="docs.product_id.nrc5"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc6'" t-out="docs.product_id.nrc6"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc7'" t-out="docs.product_id.nrc7"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc8'" t-out="docs.product_id.nrc8"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc9'" t-out="docs.product_id.nrc9"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc11'" t-out="docs.product_id.nrc11"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc12'" t-out="docs.product_id.nrc12"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc13'" t-out="docs.product_id.nrc13"/>
+                            </div>
+                            <div style="margin-top: 90px; width:60%; margin-left:15px;">
+                                <table style="border:0px dashed #ffffff !important;padding: 0px; bottom:0;"
+                                   class="table">
+                                    <tbody>
+                                        <tr style="border:0px dashed #D3D3D3 !important;font-size:12px;">
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Production Date:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <t t-if="docs.mark_done_date" t-esc="docs.mark_done_date.strftime('%d-%m-%Y')"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Valid Date:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <span t-esc="docs.valid_date.strftime('%d-%m-%Y')"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:0px dashed #D3D3D3 !important;font-size:12px;">
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Size:</b>
+                                                <t t-esc="docs.product_id.x_studio_cylinder_size"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Pressure:</b>
+                                                <t t-esc="docs.product_id.pressure"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Class:</b>
+                                                <t t-esc="docs.product_id.product_class"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="position: relative;">
+                    <div style="position: absolute;bottom:0; z-index:-1;">
+                        <img src="/pdf_report/static/src/imgs/fwdlogos/recycling.png" style="width:5%;"/>
+                    </div>
+                    <div style="position: absolute;bottom:0;right:0!important; text-align:right; width:90%;">
+                        <div style="width:95%;">
+                            <table height="75px" width="75px" 
+                                    style="display: inline-block; vertical-align: bottom; margin: 0; padding: 0; border-collapse: collapse; margin-right:25px;">
+                                <tr>
+                                    <td style="margin: 0; padding: 0;">
+                                        <center>
+                                            <span t-field="cylinder.cylinder_qrcode" t-options="{'widget': 'image'}"/>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </table>
+                            <img t-if="docs.product_id.nrc_imgs not in ['nrc12','nrc13']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh cylinder.jpg"
+                                 style="max-width: 100%; width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc3']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6','nrc8','nrc9','nrc11']"
+                                 src="/pdf_report/static/src/imgs/nrc4_cac_certificate.png"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc3']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser yellow.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6','nrc8','nrc9','nrc11']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser red.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc7','nrc8','nrc9']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh person.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc8','nrc9']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh exclamation.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2','nrc3','nrc7']"
+                                 src="/pdf_report/static/src/imgs/fwdlogos/coshh green cylinder.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                                 src="/pdf_report/static/src/imgs/nrc12/compressed_gas_diamond_nrc12.png"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                                 src="/pdf_report/static/src/imgs/nrc12/flammable_gas_diamond_nrc12.png"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                                 src="/pdf_report/static/src/imgs/nrc12/skull_nrc12.jpeg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                                 src="/pdf_report/static/src/imgs/nrc12/flammable _gas_nrc12.gif"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                                 src="/pdf_report/static/src/imgs/nrc12/toxic-gas-2-.png"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                                 src="/pdf_report/static/src/imgs/nrc13/coshh_cylinder.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                                 src="/pdf_report/static/src/imgs/nrc13/coshh_exclamation.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                                 src="/pdf_report/static/src/imgs/nrc13/corrosive.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                            <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                                 src="/pdf_report/static/src/imgs/nrc13/non_flammable_compressed_gas_2.jpg"
+                                 style="max-width: 100%;width:11%;bottom:0;"/>
+                         </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

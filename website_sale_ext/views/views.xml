@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_submenu_extended" inherit_id="website.submenu">
+        <xpath expr="//li/a[@t-att-href='submenu.clean_url()']" position="attributes">
+            <attribute name="data-bs-auto-close" add="outside" separator=" "/>
+        </xpath>
+        <xpath expr="//li[@t-elif='show_dropdown']/a" position="attributes">
+            <attribute name="data-bs-auto-close" add="outside" separator=" "/>
+            <attribute name="t-att-hb_href">submenu.clean_url()</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='item_class']" position="replace">
+            <t t-set="item_class" t-valuef="dropend"/>
+        </xpath>
+
+    </template>
+</odoo>

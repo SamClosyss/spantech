@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="helpdesk_ticket_view_form_extended" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.view.form.extended</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="before">
+                <group string="Details">
+                    <group>
+                        <field name="historic_st_number" invisible="company_id != 1"/>
+                        <field name="historic_date"/>
+                        <field name="work_order"/>
+                        <field name="rma_number"/>
+                        <field name="status_spl"/>
+                        <field name="arrival_date_at_spl" string="Products received at our Warehouse on"/>
+                    </group>
+                    <group>
+                        <field name="shipping_date_to_service"/>
+                        <field name="product_serial_number"/>
+                        <field name="client_po"/>
+                        <field name="invoiced_to_client_on"/>
+                        <field name="receipt"/>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="product_tmpl_id"/>
+                <!-- https://spantech.odoo.com/web?debug=1#id=1085&menu_id=554&cids=4%2C7%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form -->
+                <field name="organisation_id"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web?debug=1#id=1085&menu_id=554&cids=4%2C7%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">User</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- https://spantech.odoo.com/web?debug=1#menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&id=1027&action=806&model=project.task&view_type=form -->
+    <record id="helpdesk_ticket_view_kanban_extended" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.extended</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_content')]/div[2]" position="after">
+                <div>
+                    <field name="product_id"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

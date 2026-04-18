@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_extended" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.extended</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- https://spantech.odoo.com/web#id=623&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="inside">
+                <group name="note_group" col="6" class="mt-2 mt-md-0" string="Special Requirements">
+                    <group colspan="4">
+                        <field name="special_requirements" nolabel="1" placeholder="Special Requirements..."/>
+                    </group>
+                    <div class="oe_clear"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

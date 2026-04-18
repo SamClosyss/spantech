@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_template_action_tree" model="ir.ui.view">
+        <field name="name">template.action.tree</field>
+        <field name="model">template.action</field>
+        <field name="arch" type="xml">
+            <tree string="Template Actions" editable="bottom">
+                <field name="company_id"/>
+                <field name="action_id" options="{'no_create': True}"/>
+                <field name="menu_action_ids" widget="many2many_tags" invisible="1"/>
+                <field name="template_model" invisible="1"/>
+                <field name="email_template_id" domain="[('model_id.model', '=', template_model)]"/>
+                <field name="pdf_report_id" domain="[('model', '=', template_model)]"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_template_action" model="ir.actions.act_window">
+        <field name="name">Template Actions</field>
+        <field name="res_model">template.action</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_template_action" name="Template Actions" parent="base.menu_administration" sequence="10"/>
+
+    <menuitem id="submenu_template_action" name="Template Actions" parent="menu_template_action" action="action_template_action"/>
+
+
+</odoo>

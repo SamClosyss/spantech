@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- payment_ipay related fields in payment transaction definition -->
+    <record id="transaction_form_ipay" model="ir.ui.view">
+        <field name="name">transaction.form.ipay</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <field name="provider_reference" position="after">
+                <field name="provider_code" invisible="True"/>
+                <field name="ipay_txncd" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
+                <field name="ipay_channel" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
+                <field name="ipay_amount" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
+                <field name="ipay_currency_id" invisible="True"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- payment_ipay related fields in payment provider definition -->
+    <record id="provider_form_ipay" model="ir.ui.view">
+        <field name="name">provider.form.ipay</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group attrs="{'invisible': [('code', '!=', 'ipayafrica')]}" class="text-nowrap">
+                    <field name="ipay_vendor_id"/>
+                    <field name="ipay_hash_key"/>
+                    <field name="ipay_checkout_url"/>
+                    <field name="ipay_callback_url"/>
+                    <field name="ipay_currency_id"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <!-- ipay list view definition -->
+    <record model="ir.ui.view" id="ipay_list">
+        <field name="name">ipay list</field>
+        <field name="model">ipay.data</field>
+        <field name="arch" type="xml">
+            <tree edit="0" delete="0" import="0" create="0" decoration-info="reconciled == False" decoration-muted="reconciled == True">
+                <field name="reconciled" invisible="1"/>
+                <field name="txncd"/>
+                <field name="msisdn_id"/>
+                <field name="msisdn_idnum"/>
+                <field name="order_id"/>
+                <field name="channel"/>
+                <field name="tokenid"/>
+                <field name="tokenemail"/>
+                <field name="card_mask"/>
+                <field name="write_uid" string="Reconciled by" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                <field name="write_date" string="Reconciled on" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                <field name="mc" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_ipay_filter" model="ir.ui.view">
+        <field name="name">ipay.data.select</field>
+        <field name="model">ipay.data</field>
+        <field name="arch" type="xml">
+            <search string="Search iPay Payment Gateway Details">
+                <field name="txncd" string="iPay details" filter_domain="['|','|','|','|','|',('txncd','ilike',self), ('channel','ilike',self), ('order_id', 'ilike', self), ('msisdn_id', 'ilike', self), ('msisdn_idnum', 'ilike', self), ('status', 'ilike', self)]"/>
+                <separator/>
+                <filter name="all_reconciled_payments" domain="[('reconciled','=', True)]" help="All reconciled payments"/>
+                <filter name="all_unreconciled_payments"  domain="[('reconciled','=', False)]" help="All Unreconciled payments"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_status" string="ipay Status" context="{'group_by':'status'}"/>
+                    <filter name="group_by_msisdn_id" string="Customer" context="{'group_by':'msisdn_id'}"/>
+                    <filter name="group_by_msisdn_idnum" string="Customer" context="{'group_by':'msisdn_idnum'}"/>
+                    <filter name="status_grouped" string="Reconciled" context="{'group_by':'reconciled'}"/>
+                    <separator/>
+                    <filter name="create_date_day" string="Date Created" context="{'group_by':'create_date'}"/>
+                    <separator/>
+                    <filter name="write_date_day" string="Date Modified" context="{'group_by':'write_date'}"/>
+                    <separator/>
+                    <filter name="write_uid" string="Cashier (person who reconciled)" context="{'group_by':'write_uid'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ipay_base form view definition -->
+    <record model="ir.ui.view" id="ipay_base_form">
+        <field name="name">ipay_base form</field>
+        <field name="model">ipay.data</field>
+        <field name="arch" type="xml">
+            <form edit="0" delete="0" import="0" create="0">
+                <sheet>
+                    <field name="reconciled" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <group col="4" style="white-space:nowrap">
+                        <field name="txncd"/>
+                        <field name="msisdn_id"/>
+                        <field name="msisdn_idnum"/>
+                        <field name="order_id"/>
+                        <field name="channel"/>
+                        <field name="tokenid"/>
+                        <field name="tokenemail"/>
+                        <field name="card_mask"/>
+                        <field name="write_uid" string="Reconciled by" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                        <field name="write_date" string="Reconciled on" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                        <field name="mc"/>
+                        <field name="qwh"/>
+                        <field name="afd"/>
+                        <field name="poi"/>
+                        <field name="uyt"/>
+                        <field name="ifd"/>
+                        <field name="agt"/>
+                        <field name="p1"/>
+                        <field name="p2"/>
+                        <field name="p3"/>
+                        <field name="p4"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ipay_base data view action window -->
+    <record model="ir.actions.act_window" id="ipay_action_window">
+        <field name="name">iPay Data Details</field>
+        <field name="res_model">ipay.data</field>
+        <field name="search_view_id" ref="view_ipay_filter"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="iPay Details" id="ipay_mobile_root_menu" action="ipay_action_window" parent="account.root_payment_menu"  groups="account.group_account_manager"/>
+
+</odoo>

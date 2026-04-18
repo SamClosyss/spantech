@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <div t-name="website_sale_ext.custom_video_dialog_content">
+        <div class="row">
+            <div class="col o_video_dialog_form">
+                <div class="mb-2">
+                    <label class="col-form-label" for="o_video_text">
+                        <b>Video code </b>(URL or Embed)
+                    </label>
+                    <input class="form-control" id="video_url"
+                              placeholder="Copy-paste your URL or embed code here"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</templates>

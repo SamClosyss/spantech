@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cac_box_label_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-set="doc" t-value="docs[0]" />
+
+            <style>
+                .o_report_layout_standard {
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }
+            
+                .label-sheet {
+                    margin-left: 78.5px;
+                    padding: 0;
+                    max-width: 170mm; <!--2 boxes with gaps (80mm * 2 + 3mm gap) + margin buffer-->
+                }
+            
+                .label-table {
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 3mm 3mm; /* Horizontal and vertical gap */
+                }
+            
+                .label-box {
+                    width: 94mm;
+                    height: 92mm;
+                    border: 0; <!--1px solid #000-->
+                    border-radius: 1.5mm;
+                    box-sizing: border-box;
+                    
+                    overflow: hidden; <!--Prevent content from expanding box-->
+                    display: flex; <!--Optional: helps align inner content-->
+                    flex-direction: column; <!--Allows stacking child content vertically-->
+                    justify-content: flex-start; <!--Or center, if needed-->
+                    
+                    margin: 0 auto;
+                    padding: 4mm;
+                    text-align: left;
+                }
+                .label-cell {
+                    width: 94mm;
+                    height: 92mm;
+                    padding: 0;
+                    margin: 0;
+                    overflow: hidden;
+                    vertical-align: top;
+                    
+                    text-align: center; 
+                    
+                }
+                .border0{
+                    border:0px solid #ffffff!important;
+                }
+            </style>
+
+            <div class="cac_box_label_report label-sheet" style="page-break-after: always;">
+                <table class="label-table">
+                    <tr>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-1'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-2'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-3'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-4'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-5'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-box">
+                                <div style="font-size: 12px; margin: 0; padding: 0;">
+                                    <div style="width: 100%; clear: both;">
+                                        <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                        <span style="float: right;" t-esc="docs.name + '-6'"/>
+                                    </div>
+
+                                    <div style="width: 100%; clear: both; text-align: right; margin-top: 2px; margin-bottom: 2px;">
+                                        <t t-if="docs.get_valid_until_date_dateformat()">
+                                            Valid Until: 
+                                            <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                        </t>
+                                        <t t-else="">
+                                            Valid Until: <span class="ml4">-</span>
+                                        </t>
+                                    </div>
+                                    <table class="border0" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; vertical-align: top; font-size: 12px; width: 50%;">
+                                                <t t-foreach="docs.components_ids" t-as="components">
+                                                    <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                        <span t-esc="components.requested_value"/>
+                                                        <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                    </div>
+                                                </t>
+                                            </td>
+                                            <td style="text-align: right; vertical-align: top; width: 50%;">
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="width:40%;" />
+                                                </t>
+                                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="width:40%; vertical-align: middle; margin: 0; padding: 0;" />
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="text-align: left; margin-top: 8px;">
+                                        <div>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac"/>
+                                            <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                                <div class="danger_text" style="margin-top: 4px;">
+                                                    <p style="font-weight: bold; margin: 0;">DANGER</p>
+                                                    <p style="margin: 0;">Extremely flammable gas. Contains gas under pressure; may explode if heated.</p> 
+                                                    <p style="margin: 0;">Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align: left; margin-top: 4px;">
+                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

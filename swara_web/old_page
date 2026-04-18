@@ -1,0 +1,269 @@
+<t name="Home" t-name="website.homepage">
+  <t t-call="website.layout">
+    <t t-set="pageName" t-value="'homepage'"/>
+    <div id="wrap" class="oe_structure oe_empty">
+    <!-- Hero Section Start -->
+	<section class="hero-section">
+		<div class="hero__inner">
+			<h2 class="title">Little Swara Shop</h2>
+			<div class="subtitle">
+				<p>bringing safari charm to your life</p>
+			</div>
+      </div>
+	</section>
+	<!-- Hero Section End -->
+
+	<!-- Living Section Start -->
+	<section class="living-section container">
+		<div class="row living-inner">
+			<div class="col-md-6">
+				<img src="/swara_web/static/src/images/living-bg.jpg" class="img img-fluid" />
+			</div>
+			<div class="col-md-6 living-content">
+				<h2 class="title">Living a safari life</h2>
+				<div class="subtitle">
+					<p>Bring the warmth of an African setting to your home and live a safari life every day. Karibu!</p>
+				</div>
+			</div>
+		</div>		
+	</section>
+	<!-- Living Section End -->
+
+	<!-- Feature Section Start -->
+	<section class="feature-section container">
+		<div class="section-header">
+			<h2 class="text-center">Out of Kenya</h2>
+		</div>
+
+			<div class="row">
+				<div class="col-md-4 feature-card">
+					<img src="/swara_web/static/src/images/feature1.jpg" class="img img-responsive" />
+					<h3 class="title">From the land of Maasai</h3>
+					<div class="description">
+						<p>
+							There are 42 tribes in Kenya, however just several have been widely known due to nature programs and movies. We have paired with artisans from many different tribes to combine their ancient artworks with modern day life. Let's enrich our lives with color, texture&amp;nbsp;and&amp;nbsp;the famous safari charm.&amp;nbsp;
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 feature-card">
+					<img src="/swara_web/static/src/images/feature2.jpg" class="img img-responsive" />
+					<h3 class="title">From the land of Maasai</h3>
+					<div class="description">
+						<p>
+							Our workshop is nested within a wildlife sanctuary in Kenya. We are inspired by over 3000 wild animals roaming freely around us, hence we liberally use animal print throughout our handmade accessories.  From timeless zebra to painted cotton fabrics, we bring wild nature to your home. 
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 feature-card">
+					<img src="/swara_web/static/src/images/feature3.jpg" class="img img-responsive" />
+					<h3 class="title">From the land of Maasai</h3>
+					<div class="description">
+						<p>
+							Our artisans are often single supporters of large families, handmaking our safari accessories often with very basic tools and old machinery. Some of our paintings are made by impoverished artists, talented youngsters whose school fees are paid by proceeds from their artwork. By purchasing our products you are directly contributing toward wellbeing of a large number of people and families in Kenya.
+						</p>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- Feature Section End -->
+
+
+	<!-- Featured Collection Section Start -->
+	<section class="feature-collection-section">
+		<div class="container">
+			<div class="section-header text-center">
+				<h2>Featured Collection</h2>
+			</div>
+			<div class="row">
+			   <t t-foreach="request.env['product.template'].sudo().search([],limit=8)" t-as="proud">
+			      <t t-set="combination_info" t-value="proud._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+				<div class="col-md-3 feature-card col-6">
+					<a t-att-href="proud.website_url">
+						<img t-attf-src="/web/image/product.template/#{proud.id}/image_256/" class="img img-responsive" />
+						<h3 class="title"><t t-esc="proud.name" /></h3>
+						<!--<div class="price">-->
+						<!--	<p>-->
+						<!--		2,900.00 RSD-->
+						<!--	</p>-->
+						<!--</div>-->
+						<div class="product_price mb-1" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                        <span class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                        <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+                    </div>
+					</a>		
+				</div>
+				</t>
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection2.jpg" class="img img-responsive" />-->
+				<!--		<h3 class="title">Haljine sa rukavima</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				3,200.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection3.jpg" class="img img-responsive" />-->
+				<!--		<h3 class="title">Haljina Heshima</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				3,400.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection4.jpg" class="img img-responsive" />-->
+				<!--		<h3 class="title">Duge haljine</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				3,500.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection5.jpg" class="img img-fluid" />-->
+				<!--		<h3 class="title">Suknje - duge</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				2,800.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection6.jpg" class="img img-responsive" />-->
+				<!--		<h3 class="title">Suknje - kratke</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				2,400.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection7.jpg" class="img img-fluid" />-->
+				<!--		<h3 class="title">Kaftan haljine</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				2,900.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+				<!--<div class="col-md-3 feature-card col-6">-->
+				<!--	<a href="#">-->
+				<!--		<img src="/swara_web/static/src/images/collection8.jpg" class="img img-fluid" />-->
+				<!--		<h3 class="title">Haljine za puniji stas</h3>-->
+				<!--		<div class="price">-->
+				<!--			<p>-->
+				<!--				3,200.00 RSD-->
+				<!--			</p>-->
+				<!--		</div>-->
+				<!--	</a>		-->
+				<!--</div>-->
+			</div>
+			
+		</div>
+	</section>
+	<!-- Featured Collection End -->
+
+	<!-- Hero Section Start -->
+	<section class="hero-section-2">
+		<div class="hero__inner row">
+			<div class="container">
+				<h2 class="title">Handmade in Kenya</h2>
+				<div class="subtitle">
+					<p>All our products are locally sourced, hand-made everyday essentials, often made with old-fashioned and simple tools.</p>
+				</div>
+			</div>
+      </div>
+	</section>
+	<!-- Hero Section End -->
+
+
+
+	<!-- Slider Section -->
+	<section class="quote-section container">
+		<div class="slick-slider">
+			<div class="quote-element element-1">
+				<img src="/swara_web/static/src/images/quote.png" class="quote" />
+				<div class="quote-text">
+					<p>When you follow the path of your father, you learn to walk like him.</p>
+				</div>
+				<span>
+					African proverb
+				</span>
+			</div>
+			<div class="quote-element element-2">
+				<img src="/swara_web/static/src/images/quote.png" class="quote" />
+				<div class="quote-text">
+					<p>You must judge the man by the work of  his hands.</p>
+				</div>
+				<span>
+					African proverb
+				</span>
+			</div>
+			<div class="quote-element element-3">
+				<img src="/swara_web/static/src/images/quote.png" class="quote" />
+				<div class="quote-text">
+					<p>Life is like a shadow and a mist; it passes quickly by, and is no more. </p>
+				</div>
+				<span>
+					African proverb
+				</span>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Slider Section End -->
+
+
+
+
+	<!-- image Section Start -->
+	<section class="image-section row">
+	  <!--<t t-foreach="request.env['swara.collections'].sudo().search([])" t-as="collection">-->
+			<!--<div class="col-md-4 img-card">-->
+			<!--	<a t-attf-href="/collection/#{slug(collection)}">-->
+			<!--		<img t-att-src="'/web/image/swara.collections/%s/image/'%collection.id" class="img img-fluid" />-->
+			<!--		<h3 class="card-title"><t t-esc="collection.name" /></h3>-->
+			<!--	</a>-->
+			<!--</div>-->
+			<!-- image Section Start -->
+	<!--<section class="image-section row">-->
+			<div class="col-md-4 img-card">
+				<a href="#">
+					<img src="/swara_web/static/src/images/img1.jpg" class="img img-fluid" />
+					<h3 class="card-title">Tribal jewellery</h3>
+				</a>
+			</div>
+			<div class="col-md-4 img-card">
+				<a href="#">
+					<img src="/swara_web/static/src/images/img2.jpg" class="img img-fluid" />
+					<h3 class="card-title">Maasai shoes</h3>
+				</a>
+			</div>
+			<div class="col-md-4 img-card">
+				<a href="#">
+					<img src="/swara_web/static/src/images/img3.jpg" class="img img-fluid" />
+					<h3 class="card-title">Safari style</h3>
+				</a>
+			</div>
+	</section>
+	<!--		</t>-->
+	<!--</section>-->
+	<!-- image Section End -->
+    </div>
+  </t>
+</t>

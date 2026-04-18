@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sspzoo_invoice_document">
+        <t t-call="web.html_container">
+            <t t-set="o" t-value="docs"/>
+
+            <div class="header">
+                <div style="width: 45%;float:left;border: 2px solid #000000;box-shadow: 2px 2px #000000;">
+                    <img style="padding:5px;max-width: 225px; max-height:225px;" alt="Logo"
+                         t-attf-src="/pdf_report/static/description/sspzoo_icon.png"/>
+                    <p style="text-align:left;padding-left: 10px;font-size: 12px;">
+                        <b>Seller:</b>(Sprzedawca):
+                        <br/>
+                        SPANTECH SPÓŁKA Z OGRANICZONĄ
+                        <br/>
+                        <span>ODPOWIEDZIALNOŚCIĄ</span>
+                        <br/>
+                        <br/>
+                        <span>Aleja Krakowska 1</span>
+                        <span>|</span>
+                        <span>05-552 Wola Mrokowska</span>
+                        <span>|</span>
+                        <span>Poland Reg No:</span>
+                        <span>0000622244</span>
+                        <span>|</span>
+                        <span>VAT No:</span>
+                        <span>PL1231319498</span>
+                        <span>EORI No:</span>
+                        <span>PL123131949800000</span>
+                        <span>|</span>
+                        <span>BDO No:</span>
+                        <span>000107016</span>
+                        <br/>
+                        <br/>
+                        <span>Tel:</span>+48 22 487 98 44
+                        <span>|</span>
+                        <span>Mob:</span>+48 519 150 515
+                        <br/>
+                        <span>E-mail:</span>
+                        info@spantech.pl
+                    </p>
+                </div>
+                <div style="width: 54%;float:left;">
+                    <div style="margin: 0px 16px 16px 16px;border:1px solid #FFFFFF !important">
+                        <table style="border:1px solid #FFFFFF !important" border="0" width="100%">
+                            <tr style="border:0px;background:#a9a6a6;font-size:28px;" align="center" height="20px">
+                                <th style="border:0px;" colspan="2">VAT Invoice</th>
+                            </tr>
+                            <tr style="font-size:18px;border:0px;" align="center" height="20px">
+                                <td style="border:0px;" colspan="2">Document Number:
+                                    <b>
+                                        <span t-esc="o.name"/>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;font-size: 16px;">
+                                <td style="border:0px;" width="50%" align="left">
+                                    Date of Issue:
+                                    <br/>
+                                    <i>(Data wystawienia faktury)</i>
+                                    <div style="margin:10px 0px"/>
+                                </td>
+                                <td style="border:0px;" width="50%" align="right">
+                                    <b>2022-07-28</b>
+                                    <div style="margin:10px 0px"/>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;font-size: 16px;">
+                                <td style="border:0px;" width="50%" align="left">
+                                    Date of delivery/service:
+                                    <br/>
+                                    <i>(Data dostawy/wykonania usługi))</i>
+                                    <div style="margin:10px 0px"/>
+                                </td>
+                                <td style="border:0px;" width="50%" align="right">
+                                    <b>2022-07-28</b>
+                                    <div style="margin:10px 0px"/>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;font-size: 16px;">
+                                <td style="border:0px;" width="50%" colspan="2" align="right">
+                                    <span style="padding-right: 24px;">Page: (Strona)</span>
+                                    <b>
+                                        <span class="page"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article" style="padding:0px !important;margin:0px !important;margin-top:10px !important" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <table style="border:1px solid #FFFFFF !important" width="100%">
+                    <tr style="border:1px solid #FFFFFF !important;font-size:12px;" align="left">
+                        <th style="border:1px solid #FFF" colspan="2">
+                            <b>Bank: ING Bank Śląski S.A. IBAN: PL 35 1050 1025 1000 0090 8141 8528</b>
+                        </th>
+                    </tr>
+                    <tr style="border:1px solid #FFFFFF !important;font-size:12px;" align="left">
+                        <th style="border:1px solid #FFF" colspan="2">
+                            <b>Code BIC SWIFT: INGBPLPW</b>
+                        </th>
+                    </tr>
+                    <tr style="border:1px solid #FFFFFF !important;font-size: 12px;">
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <b>Buyer:</b>
+                            <i>(Nabywca:)</i>
+                            <br/>
+                            <b>
+                                <t t-esc="o.partner_id.name"/>
+                            </b>
+                        </td>
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <b>Delivery address:</b>
+                            <i>(Adres dostawy:)</i>
+                            <br/>
+                            <b>
+                                <t t-esc="o.partner_shipping_id.name"/>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 12px;border:1px solid #FFF">
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <address t-field="o.partner_id"
+                                     t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                        </td>
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <address t-field="o.partner_shipping_id"
+                                     t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 12px;border:1px solid #FFF">
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <b>India</b>
+                            <br/>
+                            <b>GST No.: 24AABCU0216A1Z9</b>
+                        </td>
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <b>India</b>
+                            <br/>
+                            <b>GST No.: 24AABCU0216A1Z9</b>
+                        </td>
+                    </tr>
+                    <tr style="border:1px solid #FFF" height="10px;"></tr>
+                    <tr style="font-size: 12px;border:1px solid #FFF">
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                            <b>Customer's Purchase Order:</b>
+                            <i>222200126</i>
+                        </td>
+                    </tr>
+                    <tr style="font-size: 12px;border:1px solid #FFF">
+                        <td style="border:1px solid #FFF" width="50%" align="left">
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" class="table">
+                    <tr style="font-size:14px;border: 2px solid #000000;">
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>No:</b>
+                            <br/>
+                            <i>(Lp:)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>Item/Service Name</b>
+                            <br/>
+                            <i>(Nazwa towaru/usługi)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>CN Code</b>
+                            <br/>
+                            <i>(Kod CN)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>Quantity</b>
+                            <br/>
+                            <i>(Ilość)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>UOM</b>
+                            <br/>
+                            <i>(J.m.)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>Unit net price EUR</b>
+                            <br/>
+                            <i>(Cena jedn. netto)</i>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>VAT</b>
+                        </td>
+                        <td align="left"
+                            style="border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                            <b>Value EUR</b>
+                            <br/>
+                            <i>(Wartość)</i>
+                        </td>
+                    </tr>
+                    <tr height="8px;">
+                        <t t-esc="o.invoice_line_ids"/>
+                    </tr>
+                    <tbody>
+                        <t t-set="count" t-value="1"/>
+                        <tr t-foreach="o.invoice_line_ids" t-as="line"
+                            style="border:1px solid #FFFFFF !important;font-size: 12px;">
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <b>
+                                    <t t-esc="count"/>
+                                </b>
+                                <t t-set="count" t-value="1+count"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <b>
+                                    <t t-esc="line.product_id.name"/>
+                                </b>
+                                <br/>
+                                <t t-esc="line.product_tmpl_notes"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.product_tmpl_hs_code"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.quantity"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.product_uom_id.name"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.price_unit"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.tax_base_amount"/>
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                <t t-esc="line.price_subtotal"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="100%" class="table">
+                    <tr>
+                        <th align="left"
+                            style="border:1px solid #a9a6a6; !important;background: #a9a6a6;">
+                            <b>Payment method:</b>
+                        </th>
+                        <th align="left"
+                            style="border:1px solid #a9a6a6; !important;background: #a9a6a6;">
+                            <b>Due Date:</b>
+                        </th>
+                        <th align="left"
+                            style="border:1px solid #a9a6a6; !important;background: #a9a6a6;">
+                            <b>Amount:</b>
+                        </th>
+                        <th align="left"
+                            style="border:1px solid #a9a6a6; !important;background: #a9a6a6;">
+                            <b>Currency:</b>
+                        </th>
+                        <td style="border-left:1px solid #a9a6a6 !important;background: #a9a6a6;"></td>
+                        <td style="border-left:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <b>Net Price [EUR]</b>
+                        </td>
+                        <td style="border-left:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <b>VAT [EUR]</b>
+                        </td>
+                        <td style="border-left:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <b>Value [EUR]</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <i>(sposób zapłaty:)</i>
+                        </td>
+                        <td style="border:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <i>(termin płatności:)</i>
+                        </td>
+                        <td style="border:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <i>(LKwotap:)</i>
+                        </td>
+                        <td style="border:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <i>(waluta:)</i>
+                        </td>
+                        <td style="border:1px solid #a9a6a6 !important;background: #a9a6a6;">
+                            <b style="background: #a9a6a6;font-size: 12px;">Total:</b>
+                            <i style="background: #a9a6a6;">(Razem:)</i>
+                        </td>
+                        <td style="border:1px solid #FFFFFF !important;">
+                            <b>1 990,00</b>
+                        </td>
+                        <td style="border:1px solid #FFFFFF !important;">
+                            <b>0,00</b>
+                        </td>
+                        <td style="border:1px solid #FFFFFF !important;">
+                            <b>1 990,00</b>
+                        </td>
+                    </tr>
+                    <tr height="8px;"></tr>
+                    <tbody>
+                        <tr style="border:1px solid #FFFFFF !important;font-size: 12px;">
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                Bank transfer
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                2022-09-12
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                1 990,00
+                            </td>
+                            <td align="left"
+                                style="border:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                                EUR
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div t-attf-class="footer o_standard_footer">
+                <div style="width: 100%;height: 100%; float:right">
+                    <div style="margin: 0px 16px 16px 0px;">
+                        <table style="border:1px solid #FFFFFF !important" width="100%" class="table">
+                            <tr style="background:#a9a6a6;border:1px solid #FFFFFF !important">
+                                <th style="border:1px solid #FFFFFF !importantborder-right:1px solid #a9a6a6;"
+                                    align="left">
+                                    <span style="font-size:16px;padding-left: 6px;">Total to be Paid:</span>
+                                    <br/>
+                                    <i style="font-size: 16px;padding-left: 6px;">(Do zapłaty:)</i>
+                                </th>
+                                <th style="border:1px solid #FFFFFF !important" align="right">
+                                    <span style="font-size:16px;padding-right: 6px;">1 990,00 EUR</span>
+                                </th>
+                            </tr>
+                            <tr style="border:1px solid #FFFFFF !importantfont-size:16px;" align="right">
+                                <td style="border:1px solid #FFFFFF !important" colspan="2">
+                                    Say Total: one thousand, nine hundred ninety EUR 0 /100
+                                    <br/>
+                                    <i style="font-size: 12px;">
+                                        (Słownie: jeden tysiąc dziewięćset dziewięćdziesiąt EUR 0 /100 )
+                                    </i>
+                                </td>
+                            </tr>
+                            <tr style="border:1px solid #FFFFFF !importantfont-size:16px;" align="center">
+                                <td style="border:1px solid #FFFFFF !important" colspan="2">
+                                    Exchange rate <i style="font-size: 16px;">(kurs wymiany)</i>: 1 EUR = 4,7811 PLN
+                                </td>
+                            </tr>
+                            <tr style="font-size: 16px;">
+                                <td width="50%" align="left" style="border-bottom: 3px solid #000;">
+                                    <span style="font-size:16px;">Paid:</span>
+                                    0,00
+                                    <br/>
+                                    <i>(Zapłacono)</i>
+                                </td>
+                                <td width="50%" align="right" style="border-bottom: 3px solid #000;">
+                                    <span style="font-size: 16px;">To be Paid:</span>
+                                    1 990,00
+                                    <br/>
+                                    <i>(Do zapłaty:)</i>
+                                </td>
+                            </tr>
+                            <tr height="20px;"></tr>
+                        </table>
+
+                        <table style="border:1px solid #FFF" width="100%">
+                            <tr style="border:1px solid #FFFFFF !importantfont-size: 20px;">
+                                <td width="30%" align="center" style="border-bottom: 3px solid #000;">
+                                    <b style="font-size: 18px;">Artur Kulińczak</b>
+                                </td>
+                                <td width="5%"/>
+                                <td width="15%" align="center" style="border-bottom: 3px solid #000;">
+
+                                </td>
+                                <td width="5%"/>
+                                <td width="30%" align="center" style="border-bottom: 3px solid #000;">
+                                    <b style="font-size: 18px;">Chirag Bhavsar</b>
+                                </td>
+                            </tr>
+                            <tr style="border:1px solid #FFFFFF !importantfont-size: 18px;">
+                                <td width="30%" align="center" style="border:1px solid #FFFFFF !important">
+                                    <span style="font-size: 18px;">Person authorized to issue the invoice</span>
+                                    <br/>
+                                    <i>(Osoba uprawniona do wystawienia faktury)</i>
+                                </td>
+                                <td width="5%"/>
+                                <td width="15%" align="center"></td>
+                                <td width="5%"/>
+                                <td width="30%" align="center">
+                                    <span style="font-size: 16px;border:1px solid #FFFFFF !important">Person authorized
+                                        to issue the invoice
+                                    </span>
+                                    <br/>
+                                    <i>(Osoba uprawniona do wystawienia faktury)</i>
+                                </td>
+                            </tr>
+                            <tr style="font-size: 16px;border:1px solid #FFFFFF !important">
+                                <td width="100%" align="right" colspan="5">
+                                    Comarch ERP Optima, v. 2021.3.1.1015, nr klucza 5000183430s
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,20 @@
+<odoo>
+	<template id="shipping_policy">
+		<t t-call="website.layout">
+			<main class="container oe_structure oe_empty">
+		      	<div class="row">
+		  			<div class="offset-md-3 col-md-6 shopify-policy__body text-dark">
+		    			<h1 class="text-center mb-3 mt-5">Политика испоруке</h1>
+		    			<div class="rte">
+							<p class="mb-3">Online orders for Kenya will be processed and shipped within 1-3 business days from date of purchase. Shipped orders will be sent via courier with a tracking number.</p>
+							<p class="mb-3">Online International orders will be sent via courier with a document with a tracking number and the customer is responsible for customs and all duties of import to their country.</p>
+							<p class="mb-3">We are not responsible for returned, damaged, lost, or stolen packages, nor are we responsible for incorrect addresses. We ship to the address provided at checkout. If a package is returned due to an incorrect address, we are happy to resend it to you, but may charge an additional shipping fee. Shipping fees are non-refundable, even if orders are returned.</p>
+		    			</div>
+		  			</div>
+		  			<div class="col-md-3"></div>
+				</div>
+
+    		</main>
+		</t>
+	</template>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+<template name="Embed Video" id="embed_video">
+    <section class="embed_video text-center">
+        <div class="embed_video_embedded container o_not_editable pt64 pb64">
+            <div class="font-monospace pt8 bg-light">&#10;Click on <b>"Edit"</b> in the right panel to add your Video&#10;</div>
+        </div>
+        <video preload="auto" class="d-none w-100" autoplay="autoplay" loop="loop">
+            <source src="" ></source>
+        </video>
+    </section>
+</template>
+
+<!-- Snippet's Options -->
+<template id="embed_video_options" inherit_id="website.snippet_options">
+    <xpath expr="//div[@data-js='Box']" position="before">
+        <div data-js="EmbedVideo" data-selector=".embed_video">
+            <we-row string="Video">
+                <we-button data-edit-video="" data-no-preview="true"
+                        class="o_we_edit_video o_we_no_toggle o_we_bg_success active"
+                        title="Edit embedded video">Edit</we-button>
+            </we-row>
+        </div>
+    </xpath>
+</template>
+
+<template id="embed_video_snippets" inherit_id="website.snippets" priority="8">
+    <xpath expr="//div[@id='snippet_effect']/div[hasclass('o_panel_body')]" position="inside">
+        <t t-snippet="website_sale_ext.embed_video" string="Embed Video"
+           t-thumbnail="/website/static/src/img/snippets_thumbs/s_embed_code.svg" t-forbid-sanitize="true"/>
+    </xpath>
+</template>
+
+<template id="payment_section_message" inherit_id="website_sale.payment">
+    <xpath expr="//div[@t-if='errors']" position="replace">
+         <t t-if="errors">
+             <t t-if='website.custom_error_message'>
+                 <div class="alert alert-danger" role="alert">
+                    <div t-field="website.payment_error_message" />
+                </div>
+             </t>
+             <t t-else = "">
+                <t t-foreach="errors" t-as="error">
+                    <div class="alert alert-danger" t-if="error" role="alert">
+                        <h4>
+                            <t t-esc="error[0]" />
+                        </h4>
+                        <t t-esc="error[1]" />
+                    </div>
+                </t>
+             </t>
+         </t>
+     </xpath>
+</template>
+<template id="cart_summary_inherit_website_sale_subscription" inherit_id="website_sale.cart_lines">
+    <xpath expr="//table[@id='cart_products']//td[hasclass('td-product_name')]" position="inside">
+            <div t-if="line.product_id.free_qty >= 1" t-attf-class="in_availability_message_#{line.product_id.id} mb-1">
+                <div id="stock_in_delivery_msg">
+                    <div class="text-primary">
+                        <i class="fa fa-truck me-1"/>
+                        <span>Delivery in 2-3 Days</span>
+                    </div>
+                </div>
+            </div>
+            <div t-else="" t-attf-class="in_availability_message_#{line.product_id.id} mb-1">
+                <div id="stock_in_delivery_msg">
+                    <div class="text-primary" >
+                        <small><span t-esc="line.product_id.out_of_stock_message"/></small>
+                    </div>
+                </div>
+            </div>
+    </xpath>
+</template>
+
+</odoo>

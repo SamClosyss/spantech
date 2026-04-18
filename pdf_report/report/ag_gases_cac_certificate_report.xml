@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CAC NRC Certificate -->
+    <template id="cac_nrc_certificate_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div class="cac_certificate_report" style="page-break-after: always;">
+                    <div style="display:block;">
+                        <div style="float: left;width:100%;">
+                            <img t-if="docs.logo_use != 'custom'" alt="Logo" style="height:120px;"
+                                 src="/pdf_report/static/src/imgs/cac_add_and_logo_new.png"/>
+                            <img t-if="docs.logo_use == 'custom'" t-attf-src="data:image/png;base64,{{docs.logo}}"
+                                 style="height:120px;"></img>
+                        </div>
+                        <div style="float: left;width:49%;text-align:center" t-if="docs.logo_use == 'custom'">
+                            <t t-if="docs.sale_id.partner_shipping_id">
+                                <h6 t-field="docs.sale_id.partner_shipping_id.name"/>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.street">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.street"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.street2">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.street2"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.city">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.city"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.zip">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.zip"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.country_id">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.country_id.name"/>
+                                </p>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="row" style="width:100%; text-align: center;">
+                        <p class="text-center mt16" style="text-align: center; font-size:14px; font-weight: bold;">Certificate of Composition</p>
+                    </div>
+                    <div style="width:100%; margin-top:-10px;" class="row border_none_table">
+                        
+                        <div style="width:45%;">
+                            <table style="font-size:12px; line-height: 2px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="white-space:nowrap;"><b>Part No. </b></td>
+                                    <td style="white-space:nowrap;"><t t-if="docs.sale_id" t-esc="docs.product_id.default_code"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:55%;">
+                            <table style="font-size:12px; line-height: 2px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td><b>Batch No.</b></td>
+                                    <td><t t-esc="docs.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder No</b></td>
+                                    <td><t t-esc="cylinder.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder Valve</b></td>
+                                    <td><t t-esc="docs.product_id.valve"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder Size</b></td>
+                                    <td><t t-esc="docs.product_id.x_studio_cylinder_size"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Net Weight(kg)</b></td>
+                                    <td><t t-esc="docs.product_id.net_weight"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p style="padding:1px"></p>
+                    <table style="font-size:12px; margin-top:-10px; line-height: 1px; border:0px solid #ffffff;" class="table" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Component</b>
+                                </td>
+                                <td>
+                                    <b>Requested Value</b>
+                                </td>
+                                <td>
+                                    <b>Certified Value</b>
+                                </td>
+                                <td>
+                                    <b>Uncertainty</b>
+                                </td>
+                            </tr>
+                            <tr t-foreach="docs.components_ids" t-as="components"
+                                style="font-style: italic;">
+                                <td>
+                                    <t t-esc="components.component"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.requested_value"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.certified_value"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.accuracy"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="row" style="width:100%; margin-top:-10px;">
+                        <div style="width:50%;">
+                            <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Pressure: </b></span>
+                                        <span t-esc="docs.product_id.pressure"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Manufactured Date: </b></span>
+                                        <span t-if="docs.mark_done_date" t-esc="docs.mark_done_date.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Valid until: </b></span>
+                                        <span t-esc="docs.get_valid_until_date()"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>UN Number: </b></span>
+                                        <span t-esc="docs.product_id.un_number"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:50%;">
+                            <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Volume: </b></span>
+                                        <span t-esc="docs.product_id.volume_sp"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Min Usage Temp: </b></span>
+                                        <span t-esc="docs.product_id.x_studio_min_use_temperature"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Certified by: </b></span>
+                                        <span t-esc="docs.user_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Class: </b></span>
+                                        <span t-esc="docs.product_id.product_class"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="width:100%;">
+                        <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                            class="table" width="100%">
+                            <tr>
+                                <td style="padding: 0; padding-left: 8px;">
+                                    <b>Name: </b>
+                                    <span t-esc="docs.product_id.shipping_name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div style="width:70%; left:0!important; text-align:left;">
+                            <p style="font-size:12px; margin-top:-5px;">
+                            The cylinder above referenced was produced from cylinders prepared by gravimetric methods and then analysed by comparison to primary gravimetric standards, traceable via SI to the mole. All expressions for amount of substance are for gas phase, and are by mol percent unless otherwise noted. 'Air' is defined as 20.9% oxygen relative to the overall mixture, with the remainder as nitrogen.
+                        </p>
+                         </div>
+                         <div style="width:30%; right:0!important; text-align:right; margin-top:-5px;">
+                            <img src="/pdf_report/static/src/imgs/sci_qual_label_new.png"
+                                 style="max-width: 100%;height: auto;width:85%"/>
+                        </div>
+                     </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+    <!-- CAC HPC Certificate -->
+    <template id="cac_hpc_certificate_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div class="cac_certificate_report" style="page-break-after: always;">
+                    <div style="display:block;">
+                        <div style="float: left;width:100%;">
+                            <img t-if="docs.logo_use != 'custom'" alt="Logo" style="height:120px;"
+                                 src="/pdf_report/static/src/imgs/cac_add_and_logo_new.png"/>
+                            <img t-if="docs.logo_use == 'custom'" t-attf-src="data:image/png;base64,{{docs.logo}}"
+                                 style="height:120px;"></img>
+                        </div>
+                        <div style="float: left;width:49%;text-align:center" t-if="docs.logo_use == 'custom'">
+                            <t t-if="docs.sale_id.partner_shipping_id">
+                                <h6 t-field="docs.sale_id.partner_shipping_id.name"/>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.street">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.street"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.street2">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.street2"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.city">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.city"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.zip">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.zip"/>
+                                </p>
+                                <p style="line-height:1px;" t-if="docs.sale_id.partner_shipping_id.country_id">
+                                    <t t-esc="docs.sale_id.partner_shipping_id.country_id.name"/>
+                                </p>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="row" style="width:100%; text-align: center;">
+                        <p class="text-center mt16" style="text-align: center; font-size:14px; font-weight: bold;">Certificate of Composition</p>
+                    </div>
+                    <div style="width:100%; margin-top:-10px;" class="row border_none_table">
+                        
+                        <div style="width:45%;">
+                            <table style="font-size:12px; line-height: 2px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="white-space:nowrap;"><b>Part No. </b></td>
+                                    <td style="white-space:nowrap;"><t t-if="docs.sale_id" t-esc="docs.product_id.default_code"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:55%;">
+                            <table style="font-size:12px; line-height: 2px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td><b>Batch No.</b></td>
+                                    <td><t t-esc="docs.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder No</b></td>
+                                    <td><t t-esc="cylinder.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder Valve</b></td>
+                                    <td><t t-esc="docs.product_id.valve"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder Size</b></td>
+                                    <td><t t-esc="docs.product_id.x_studio_cylinder_size"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Net Weight(kg)</b></td>
+                                    <td><t t-esc="docs.product_id.net_weight"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p style="padding:1px"></p>
+                    <table style="font-size:12px; margin-top:-10px; line-height: 1px; border:0px solid #ffffff;" class="table" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Component</b>
+                                </td>
+                                <td>
+                                    <b>Requested Value</b>
+                                </td>
+                                <td>
+                                    <b>Certified Value</b>
+                                </td>
+                                <td>
+                                    <b>Uncertainty</b>
+                                </td>
+                            </tr>
+                            <tr t-foreach="docs.components_ids" t-as="components"
+                                style="font-style: italic;">
+                                <td>
+                                    <t t-esc="components.component"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.requested_value"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.certified_value"/>
+                                </td>
+                                <td>
+                                    <t t-esc="components.accuracy"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="row" style="width:100%; margin-top:-10px;">
+                        <div style="width:50%;">
+                            <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Pressure: </b></span>
+                                        <span t-esc="docs.product_id.pressure"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Manufactured Date: </b></span>
+                                        <span t-if="docs.mark_done_date" t-esc="docs.mark_done_date.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Valid until: </b></span>
+                                        <span t-esc="docs.get_valid_until_date()"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>UN Number: </b></span>
+                                        <span t-esc="docs.product_id.un_number"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:50%;">
+                            <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                                class="table" width="100%">
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Volume: </b></span>
+                                        <span t-esc="docs.product_id.volume_sp"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Min Usage Temp: </b></span>
+                                        <span t-esc="docs.product_id.x_studio_min_use_temperature"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Certified by: </b></span>
+                                        <span t-esc="docs.user_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0; padding-left: 8px;">
+                                        <span><b>Class: </b></span>
+                                        <span t-esc="docs.product_id.product_class"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="width:100%;">
+                        <table style="font-size:12px; line-height: 1px; border:0px solid #ffffff;"
+                            class="table" width="100%">
+                            <tr>
+                                <td style="padding: 0; padding-left: 8px;">
+                                    <b>Name: </b>
+                                    <span t-esc="docs.product_id.shipping_name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="display:inline-block;justify-content: center;width:100%;font-size:12px;margin-top:-5px;">
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac_new"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc4'" t-out="docs.product_id.nrc4_cac_new"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc5'" t-out="docs.product_id.nrc5_cac_new"/>
+                    </div>
+                    <table style="border:0px dashed #ffffff !important;padding: 0px; bottom:0;"
+	                    class="table">
+	                     <tbody>
+	                         <tr style="border:0px dashed #D3D3D3 !important;font-size:12px;">
+	                             <td style="border:0px dashed #ccc !important; width:55%!important; padding-left:0px;">
+	                                 <t t-esc="docs.product_id.un_number"/>
+	                                 <t t-esc="docs.product_id.shipping_name"/>
+	                                 <br/>
+	                                 <t t-esc="docs.product_id.net_weight"/>
+	                             </td>
+	                             <td t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5']" style="border:0px dashed #D3D3D3 !important; width:10%!important;">
+	                                 <img src="/pdf_report/static/src/imgs/nrc4_cac_certificate.png" style="width:100%;"/>
+	                             </td>
+	                             <td style="border:0px dashed #D3D3D3 !important; width:10%!important;">
+	                                 <img src="/pdf_report/static/src/imgs/compressed_gas_diamond.png" style="width:100%; background-color:#ffffff;"/>
+	                             </td>
+	                         </tr>
+	                     </tbody>
+                    </table>
+                    <div class="row mt16">
+                        <div style="width:70%; left:0!important; text-align:left;">
+                            <p style="font-size:12px; margin-top:-5px;">
+                            Please note all units are in mol%. Mixture uncertainty is +/-1%. Relative mixtures are certified gravimetrically adhering to ISO9001:2015 procedures. The weights used to calibrate the balances are traceable to the National Physical Laboratory (NPL). High purity raw materials supplied under a Certificate of Conformity are used to ensure the final gravimetric filling accuracy.
+                        </p>
+                         </div>
+                         <div style="width:30%; right:0!important; text-align:right; margin-top:-5px;">
+                            <img src="/pdf_report/static/src/imgs/sci_qual_label_new.png"
+                                 style="max-width: 100%;height: auto;width:85%"/>
+                        </div>
+                     </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="mml_saleorder_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+            <t t-set="forced_vat"
+               t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+            <div class="page sale-receipt">
+                <div class="oe_structure"/>
+                <u>
+                    <h1 class="mt16" style="text-align:center;">
+                        <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                            <span t-if="doc.state not in ['draft','sent']">Order #</span>
+                            <span t-if="doc.state in ['draft','sent']">Quotation #</span>
+                        </t>
+                        <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                            <span>Pro-Forma Invoice #</span>
+                        </t>
+                        <span t-field="doc.name"/>
+                    </h1>
+                </u>
+
+                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                    <div class="row mt32 mb32" id="informations">
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Prepared For:</strong>
+                            <address t-field="doc.partner_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            <p t-if="doc.partner_id.vat">
+                                <t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>
+                                :
+                                <span t-field="doc.partner_id.vat"/>
+                            </p>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Email:</strong>
+                            <p class="m-0" t-field="doc.partner_id.email"/>
+                        </div>
+                        <div t-if="doc.date_order and doc.state not in ['draft','sent']"
+                             class="col-auto col-3 mw-100 mb-2">
+                            <strong>Order Date:</strong>
+                            <p class="m-0" t-field="doc.date_order"/>
+                        </div>
+                        <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Quotation Date:</strong>
+                            <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                        </div>
+                        <div t-if="doc.validity_date and doc.state in ['draft', 'sent']"
+                             class="col-auto col-3 mw-100 mb-2"
+                             name="expiration_date">
+                            <strong>Expiration:</strong>
+                            <p class="m-0" t-field="doc.validity_date"/>
+                        </div>
+                    </div>
+                </t>
+                <table t-if="env.context.get('proforma', False) or is_pro_forma"
+                       class="table table-sm o_main_table address_table" name="invoice_line_table">
+                    <thead>
+                        <tr class="bg-lightgrey">
+                            <th class="text-left">
+                                <!--<span class="text-bold">Prepared For</span>-->
+                                <span class="text-bold">Invoice to</span>
+                            </th>
+                            <th class="text-left">
+                                <span class="text-bold">Ship to</span>
+                            </th>
+                            <th class="text-left">
+                                <span class="text-bold">Reference No:</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="address_tbody">
+                        <tr>
+                            <td class="text-left">
+                                <t t-if="doc.partner_invoice_id">
+                                    <h6 t-field="doc.partner_invoice_id.name"/>
+                                    <p>
+                                        <span t-if="doc.partner_invoice_id.street">
+                                            <t t-esc="doc.partner_id.street"/>
+                                        </span>
+                                        <span t-if="doc.partner_invoice_id.street2">
+                                            <t t-esc="doc.partner_id.street2"/>
+                                        </span>
+                                        <span t-if="doc.partner_invoice_id.city">
+                                            <t t-esc="doc.partner_id.city"/>
+                                        </span>
+                                        <span t-if="doc.partner_invoice_id.zip">
+                                            <t t-esc="doc.partner_id.zip"/>
+                                        </span>
+                                        <span t-if="doc.partner_invoice_id.country_id">
+                                            <t t-esc="doc.partner_id.country_id.name"/>
+                                        </span>
+                                    </p>
+                                    <p t-if="doc.partner_invoice_id.vat">
+                                        <t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>
+                                        :
+                                        <span t-field="doc.partner_invoice_id.vat"/>
+                                    </p>
+                                </t>
+                                <t t-else="">
+                                    <h6>-</h6>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="doc.partner_shipping_id">
+                                    <h6 t-field="doc.partner_shipping_id.name"/>
+                                    <p>
+                                        <span t-if="doc.partner_shipping_id.street">
+                                            <t t-esc="doc.partner_shipping_id.street"/>
+                                        </span>
+                                        <span t-if="doc.partner_shipping_id.street2">
+                                            <t t-esc="doc.partner_shipping_id.street2"/>
+                                        </span>
+                                        <span t-if="doc.partner_shipping_id.city">
+                                            <t t-esc="doc.partner_shipping_id.city"/>
+                                        </span>
+                                        <span t-if="doc.partner_shipping_id.zip">
+                                            <t t-esc="doc.partner_shipping_id.zip"/>
+                                        </span>
+                                        <span t-if="doc.partner_shipping_id.country_id">
+                                            <t t-esc="doc.partner_shipping_id.country_id.name"/>
+                                        </span>
+                                    </p>
+                                    <p t-if="doc.partner_shipping_id.vat">
+                                        <t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>
+                                        :
+                                        <span t-field="doc.partner_shipping_id.vat"/>
+                                    </p>
+                                </t>
+                                <t t-else="">
+                                    <h6>-</h6>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="is_pro_forma">
+                                    <span t-field="doc.proforma_invoice_number"/>
+                                </t>
+                                <t t-elif="doc.name">
+                                    <span t-field="doc.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <h6>Attn:</h6>
+                                <t t-if="doc.partner_contact_id">
+                                    <span t-field="doc.partner_contact_id.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Shipping:</h6>
+                                <t t-if="doc._name == 'sale.order'">
+                                    <span t-field="doc.shipping_info"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="doc.date_order and doc.state not in ['draft','sent']"
+                                   class="col-auto col-3 mw-100 mb-2">
+                                    <h6>Order Date:</h6>
+                                    <span t-esc="doc.date_order.date()"/>
+                                </t>
+                                <t t-elif="doc.date_order and doc.state in ['draft','sent']"
+                                   class="col-auto col-3 mw-100 mb-2">
+                                    <h6>Quotation Date:</h6>
+                                    <span t-esc="doc.date_order.date()"/>
+                                </t>
+                                <t t-else="">
+                                    <h6>Date:</h6>
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <h6>Customers Purchase Order Number:</h6>
+                                <t t-if="doc.client_order_ref">
+                                    <span t-field="doc.client_order_ref"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Incoterm:</h6>
+                                <t t-if="doc.wo_incoterm">
+                                    <span t-field="doc.wo_incoterm"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Payment terms:</h6>
+                                <t t-if="doc.payment_term_id">
+                                    <span t-field="doc.payment_term_id"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <h6>Customers RFQ:</h6>
+                                <t t-if="doc.client_order_rfq">
+                                    <span t-field="doc.client_order_rfq"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="env.context.get('confirmation', False) or is_order_conformation">
+                                    <h6>Due Date:</h6>
+                                </t>
+                                <t t-else="">
+                                    <h6>Quote Expiry:</h6>
+                                </t>
+                                <t t-if="doc.validity_date">
+                                    <span t-field="doc.validity_date"
+                                          t-options='{"widget": "date"}'/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Lead Time:</h6>
+                                <t t-if="doc.lead_time_sp">
+                                    <span t-field="doc.lead_time_sp"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <!-- Is there a discount on at least one line? -->
+                <t t-set="display_discount" t-value="any(l.discount for l in doc.order_line)"/>
+                <table class="table table-sm o_main_table" style="width:100%" name="main_table">
+                    <tr>
+                        <td style="width:50%" class="text-center">
+                            System Number
+                        </td>
+                        <td colspan="4" style="width:50%" class="text-center">
+                            62
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%" class="text-center">
+                            Operating Software
+                        </td>
+                        <td colspan="4" style="width:50%" class="text-center">
+                            P3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%" class="text-center">
+                            Single or Dual loading head
+                        </td>
+                        <td colspan="4" style="width:50%" class="text-center">
+                            Dual
+                        </td>
+                    </tr>
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th style="width:50%" name="th_description" class="text-left">Item</th>
+                            <th style="width:15%" name="th_priceunit" class="text-center">Price Not Including VAT</th>
+                            <th style="width:10%" name="th_tax" class="text-center">VAT</th>
+                            <th style="width:10%" name="th_quantity" class="text-center">Quantity</th>
+                            <th style="width:15%" name="th_total" class="text-center">Total Price Including VAT</th>
+                            <!--<th name="th_subtotal" class="text-right">-->
+                            <!--<span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>-->
+                            <!--<span groups="account.group_show_line_subtotals_tax_included">Total Price</span>-->
+                            <!--</th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                               groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                               groups="account.group_show_line_subtotals_tax_included"/>
+
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <td name="td_name">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td name="td_priceunit" class="text-center">
+                                        <span t-field="line.price_subtotal"/>
+                                    </td>
+                                    <td name="td_taxes" class="text-center">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-field="line.price_tax"/>
+                                    </td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-esc="int(line['product_uom_qty'])"/>
+                                        <!--<span t-field="line.product_uom_qty"/>-->
+                                        <!--<span t-field="line.product_uom"/>-->
+                                    </td>
+                                    <td name="td_subtotal" class="text-center">
+                                        <span t-field="line.price_total"/>
+                                    </td>
+                                    <!--<td name="td_subtotal" class="text-right o_price_total">-->
+                                    <!--<span t-field="line.price_subtotal"-->
+                                    <!--groups="account.group_show_line_subtotals_tax_excluded"/>-->
+                                    <!--<span t-field="line.price_total"-->
+                                    <!--groups="account.group_show_line_subtotals_tax_included"/>-->
+                                    <!--</td>-->
+                                </t>
+                            </tr>
+
+                            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section')">
+                                <tr class="is-subtotal text-right">
+                                    <td name="td_section_subtotal" colspan="99">
+                                        <strong class="mr16">Subtotal</strong>
+                                        <span
+                                                t-esc="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+                <div t-if="env.context.get('proforma', False) or is_pro_forma" class="clearfix" name="so_total_summary">
+                    <div id="total" class="row border-dark border mx-0" style="border-width: 2px !important;"
+                         name="total">
+                        <div class="col-7">
+                            <p class="payment_details py-2">
+                                <span class="font_bold">
+                                    <u>Payment details</u>
+                                </span>
+                                <br/>
+                                <t t-if="doc.company_id.report_format == 'MML_report'">
+                                    <strong>Pount Sterling (<span t-field="doc.currency_id.name"/>) Account:
+                                    </strong>
+                                    <br/>
+                                    <span>National Westminster Bank plc</span>
+                                    <br/>
+                                    <span>Bank address: 35 King William Street, Blackburn</span>
+                                    <br/>
+                                    <span>BB1 7DL, United Kingdom</span>
+                                    <br/>
+                                    <strong>Sort Code:</strong>01-00-85
+                                    <br/>
+                                    <t t-if="doc.currency_id.name == 'USD'">
+                                        <strong>Account No:</strong>140/00/17099463
+                                    </t>
+                                    <t t-elif="doc.currency_id.name == 'EUR'">
+                                        <strong>Account No:</strong>550/00/17102677
+                                    </t>
+                                    <t t-else="">
+                                        <strong>Account No:</strong>14299135
+                                    </t>
+                                    <br/>
+                                    <strong>SWIFT:</strong>NWBK GB 2L
+                                    <br/>
+                                    <t t-if="doc.currency_id.name == 'USD'">
+                                        <strong>IBAN:</strong>GB59 NWBK 6073 0117 0994 63
+                                    </t>
+                                    <t t-elif="doc.currency_id.name == 'EUR'">
+                                        <strong>IBAN:</strong>GB08 NWBK 6072 0217 1026 77
+                                    </t>
+                                    <t t-else="">
+                                        <strong>IBAN:</strong>GB24 NWBK 0100 8514 2991 35
+                                    </t>
+                                </t>
+                            </p>
+                        </div>
+                        <div class="col-5 p-0 align-self-stretch d-flex">
+                            <table class="table table-sm border border-dark total_table"
+                                   style="page-break-inside: avoid;color: black;font-weight: bold;">
+                                <!-- Tax totals -->
+                                <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                                <t t-call="account.document_tax_totals"/>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="clearfix" name="so_total_summary">-->
+                <!--<div id="total" class="row" name="total">-->
+                <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                <!--<table class="table table-sm">-->
+                <!--&lt;!&ndash; Tax totals &ndash;&gt;-->
+                <!--<t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>-->
+                <!--<t t-call="account.document_tax_totals"/>-->
+                <!--</table>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="oe_structure"/>
+                <br/>
+                <!-- https://spantech.odoo.com/web#id=480&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+                <p t-if="doc.is_IGM_customer" class="terms mt-1">
+                    <span class="font_bold" style="font-size:20px">
+                        <u>For IGM Declaration</u>
+                    </span>
+                    <br/>
+                    <table name="IFM_Info" class="table table-sm o_main_table address_table" style="width:70%;">
+                        <tbody>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Consignee Name</td>
+                                <td class="text-center">
+                                    <span t-field="doc.consignee_name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Notify Party</td>
+                                <td class="text-center">
+                                    <span t-field="doc.notify_party"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Value For Customs with Currency</td>
+                                <td class="text-center">
+                                    <span t-field="doc.value_for_customs_with_currency"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Manifested Gross Weight</td>
+                                <td class="text-center">
+                                    <span t-field="doc.manifested_gross_weight"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Manifested Packages</td>
+                                <td class="text-center">
+                                    <span t-field="doc.manifested_packages"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="width:20%;">Descrition of Goods</td>
+                                <td class="text-center">
+                                    <span t-field="doc.description_of_goods"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+
+                <br/>
+                <br/>
+                <p t-if="doc.payment_term_id.note" class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Payment:</u>
+                    </span>
+                    <br/>
+                    <span t-field="doc.payment_term_id.note"/>
+                    <br/>
+                </p>
+
+                <p class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Conditions of Sale:</u>
+                    </span>
+                    <br/>
+                    <span>All Sales are subject to Micro Materials Ltd standard Conditions of Sale, available at
+                        <a href="https://www.micromaterials.co.uk/about/terms-and-conditions">
+                            https://www.micromaterials.co.uk/about/terms-and-conditions
+                        </a>
+                    </span>
+                    <br/>
+                    <br/>
+                    <span>
+                        Payment via wire/electronic transfer is the requested method of payment. MML account details
+                        will be supplied with invoices.
+                    </span>
+                    <br/>
+                    <br/>
+                    <span>It has come to our attention that somebody has contacted one of our customers claiming that
+                        our bank details have changed.
+                        Our bank details have NOT changed. All our bank details remain the same without any alterations.
+                        Please report any bank change request to us via a confirmed secure method and do not respond to
+                        bank change request.
+                    </span>
+                    <br/>
+                    <br/>
+                </p>
+                <p class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Prices:</u>
+                    </span>
+                    <br/>
+                    <!--<span>-->
+                    <!--Price CPT Loughborough University according to incoterms 2020, shown in £ sterling. Exclusive of-->
+                    <!--VAT unless stated.-->
+                    <!--</span>-->
+                    <span t-field="doc.proforma_inv_prices"/>
+                    <br/>
+                    <br/>
+                </p>
+                <p class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Delivery:</u>
+                    </span>
+                    <br/>
+                    <!--<span>-->
+                    <!--Currently available 6 weeks after receipt of official Purchase Order-->
+                    <!--</span>-->
+                    <span t-field="doc.proforma_inv_delivery"/>
+                    <br/>
+                    <br/>
+                </p>
+                <p class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Delivery:</u>
+                    </span>
+                    <br/>
+                    <!--<span>-->
+                    <!--This quotation is valid for 90 days from the date of issue.-->
+                    <!--</span>-->
+                    <span t-field="doc.proforma_inv_delivery_days"/>
+                    <br/>
+                    <br/>
+                </p>
+
+                <div class="oe_structure"/>
+
+                <!--<div t-if="doc.signature" class="mt32 ml64 mr4" name="signature">-->
+                <!--<div class="offset-8">-->
+                <!--<strong>Signature</strong>-->
+                <!--</div>-->
+                <!--<div class="offset-8">-->
+                <!--<img t-att-src="image_data_uri(doc.signature)" style="max-height: 4cm; max-width: 8cm;"/>-->
+                <!--</div>-->
+                <!--<div class="offset-8 text-center">-->
+                <!--<p t-field="doc.signed_by"/>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="oe_structure"/>-->
+
+                <!--<p t-field="doc.note"/>-->
+                <!--<p t-if="not is_html_empty(doc.payment_term_id.note)">-->
+                <!--<span t-field="doc.payment_term_id.note"/>-->
+                <!--</p>-->
+                <!--<p id="fiscal_position_remark"-->
+                <!--t-if="doc.fiscal_position_id and not is_html_empty(doc.fiscal_position_id.sudo().note)">-->
+                <!--<strong>Fiscal Position Remark:</strong>-->
+                <!--<span t-field="doc.fiscal_position_id.sudo().note"/>-->
+                <!--</p>-->
+            </div>
+        </t>
+    </template>
+
+</odoo>

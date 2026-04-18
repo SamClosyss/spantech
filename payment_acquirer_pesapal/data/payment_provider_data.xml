@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_provider_pesapal" model="payment.provider">
+        <field name="name">Pesapal</field>
+        <field name="display_as">Pesapal</field>
+        <field name="image_128" type="base64" file="payment_acquirer_pesapal/static/description/icon.png" />
+        <field name="code">pesapal</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="module_id" ref="base.module_payment_acquirer_pesapal"/>
+        <field name="redirect_form_view_id" ref="redirect_form" />
+        <field name="pesapal_consumer_key">dummy</field>
+        <field name="pesapal_consumer_secret">dummy</field>
+        <field name="pre_msg">
+<![CDATA[
+<p>You will be redirected to the Pesapal payment page after clicking on the payment button.</p>
+]]>
+        </field>
+    </record>
+</odoo>

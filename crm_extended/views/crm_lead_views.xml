@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="crm_lead_view_form_extended" model="ir.ui.view">
+        <field name="name">crm.lead.form.extended</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='lead']/group[1]/group[2]" position="inside">
+                <field name="competition"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web#menu_id=554&cids=1%2C2%2C3%2C4&id=481&action=806&model=project.task&view_type=form -->
+            <xpath expr="//div[@id='probability']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@id='probability']" position="after">
+                <field name="scotsman_estimate" widget="float" class="oe_inline"/>
+                <span class="oe_grey">%%</span>
+            </xpath>
+            <!-- Add Responsible Rep to Oppertunity -->
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <!--<field name="partner_responsible_rep" attrs="{'invisible': [('partner_id', '=', False)]}"-->
+                       <!--options="{'no_create':True}"/>-->
+                <field name="partner_responsible_rep" options="{'no_create':True}"/>
+            </xpath>
+            <!-- Add Responsible Rep to Leads -->
+            <xpath expr="//group[@name='lead_priority']/field[@name='tag_ids']" position="after">
+                <field name="partner_responsible_rep" options="{'no_create':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- https://spantech.odoo.com/web#menu_id=554&cids=1%2C2%2C3%2C4&id=481&action=806&model=project.task&view_type=form -->
+    <record id="crm_case_kanban_view_leads_extended" model="ir.ui.view">
+        <field name="name">crm.case.kanban.view.leads.extended</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_card_crm_lead_revenue')]" position="after">
+                <div id="scotsman_estimate" class="o_row d-flex">
+                    <field name="scotsman_estimate" widget="float" class="oe_inline"/>
+                    <span class="oe_grey">%%</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- https://spantech.odoo.com/web?debug=1#id=1002&menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form-->
+        <record id="product_template_extended_form_view" model="ir.ui.view">
+            <field name="name">product.template.extended.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <!-- https://spantech.odoo.com/web#id=1087&menu_id=554&cids=4%2C1%2C7%2C3%2C8%2C6%2C5%2C10%2C9%2C2&action=806&model=project.task&view_type=form -->
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]"
+                       position="inside">
+                    <page string="GHS Configuration" name="nrc_html" attrs="{'invisible': [('company_id', '!=', 7)]}">
+                        <group string="GHS Html Section">
+                            <field name="nrc1" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc1')]}"/>
+                            <field name="nrc2" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc2')]}"/>
+                            <field name="nrc3" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc3')]}"/>
+                            <field name="nrc4" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc4')]}"/>
+                            <field name="nrc5" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc5')]}"/>
+                            <field name="nrc6" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc6')]}"/>
+                            <field name="nrc7" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc7')]}"/>
+                            <field name="nrc8" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc8')]}"/>
+                            <field name="nrc9" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc9')]}"/>
+                            <field name="nrc11" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc11')]}"/>
+                            <field name="nrc1_cac" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc1')]}"/>
+                           <field name="nrc4_cac" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc4')]}"/>
+                            <field name="nrc1_cac_new" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc1')]}"/>
+                           <field name="nrc4_cac_new" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc4')]}"/>
+                            <field name="nrc12" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc12')]}"/>
+                            <field name="nrc13" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc13')]}"/>
+                           <field name="nrc5_cac" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc5')]}"/>
+                           <field name="nrc5_cac_new" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc5')]}"/>
+                           <field name="nrc3_cac" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc3')]}"/>
+                           <!--<field name="nrc3_cac_new" colspan="2" widget="html" class="oe-bordered-editor"
+                                   options="{'style-inline': true, 'codeview': true, 'dynamic_placeholder': true}"
+                                   attrs="{'invisible': ['|',('company_id', '!=', 7),('nrc_imgs','!=','nrc3')]}"/>-->
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//group[@name='group_standard_price']/field[@name='company_id']" position="after">
+                    <field name="useable_time_span" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+                    <field name="nrc_imgs" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+                </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[not(@name)][1]"
+                       position="inside">
+                    <page string="Components" name="components" attrs="{'invisible': [('company_id', '!=', 7)]}">
+                        <field name="components_ids">
+                            <tree editable="top">
+                                <field name="component"/>
+                                <field name="requested_value"/>
+                                <field name="accuracy"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="product_extended_form_view" model="ir.ui.view">
+            <field name="name">product.extended.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[not(@name)][1]"
+                       position="inside">
+                    <page string="Components" name="components" attrs="{'invisible': [('company_id', '!=', 7)]}">
+                        <field name="components_ids">
+                            <tree editable="top">
+                                <field name="component"/>
+                                <field name="requested_value"/>
+                                <field name="accuracy"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

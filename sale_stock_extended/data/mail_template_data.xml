@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_send_weekly_delivery_notification" model="mail.template">
+            <field name="name">Notification: Send Weekly Delivery Notification</field>
+            <field name="model_id" ref="base.model_res_company"/>
+            <field name="subject">Delivery Notification</field>
+            <field name="email_from">{{ (object.email_formatted or '') }}</field>
+            <field name="email_to"></field>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" width="590"
+                       style="padding: 0px; background-color: white; color: #454748; border-collapse:separate;">
+                    <tbody>
+                        <!-- CONTENT -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                       style="min-width: 590px; background-color: white; padding: 0px 0px 0px 0px; border-collapse:separate;">
+                                    <tr>
+                                        <td valign="top" style="font-size: 13px;">
+                                            Your Delivery report as Below
+                                            <br/>
+                                            <br/>
+                                            <t t-if="ctx.get('move_ref')">
+                                                <t t-foreach="ctx.get('move_ref')" t-as="line">
+                                                    <hr/>
+                                                    <table width="100%">
+                                                        <tr>
+                                                            <td>
+                                                                Name
+                                                            </td>
+                                                            <td width="100px" align="right">
+                                                                Amount
+                                                            </td>
+                                                            <td width="100px" align="right">
+                                                                Expected Delivery
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong t-out="line.product_id.display_name or ''"></strong>
+                                                            </td>
+                                                            <td width="100px" align="right">
+                                                                <t t-out="int(line.product_uom_qty) or ''">10000</t>
+                                                                <t t-out="line.product_uom.name or ''">Units</t>
+                                                            </td>
+                                                            <td width="100px" align="right">
+                                                                <!-- <strong t-out="format_date(line.picking_id.scheduled_date, '%d/%m/%Y') or ''"></strong>-->
+                                                                <strong t-out="format_date(line.picking_id.scheduled_date) or ''"></strong>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </t>
+                                                <hr/>
+                                            </t>
+                                            <div>
+                                                <strong>Thank you for shopping with <t t-out="object.name or ''"></t>!
+                                                </strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

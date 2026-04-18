@@ -1,0 +1,407 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_ipay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-06 22:07+0000\n"
+"PO-Revision-Date: 2023-03-06 22:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__afd
+msgid "Afd"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__agt
+msgid "Agt"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "All Unreconciled payments"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "All reconciled payments"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__mc
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_transaction__ipay_amount
+msgid "Amount Paid"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,help:payment_ipay.field_payment_transaction__ipay_amount
+msgid ""
+"Amount paid by customer. \n"
+"                The currency may differ from that of the sales order itself"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__ipay_callback_url
+msgid "Callback URL"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__card_mask
+msgid "Card Mask"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Cashier (person who reconciled)"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__ipay_checkout_url
+msgid "Checkout URL"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__code
+msgid "Code"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_transaction__ipay_currency_id
+msgid "Currency(iPay)"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Customer"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__msisdn_id
+msgid "Customer ID"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__msisdn_idnum
+msgid "Customer Phone"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Date Created"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Date Modified"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Group By"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__ipay_hash_key
+msgid "Hash Key"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__id
+msgid "ID"
+msgstr ""
+
+#. module: payment_ipay
+#. odoo-python
+#: code:addons/payment_ipay/models/ipay.py:0
+#, python-format
+msgid "IPAY_AFRICA: Payment data received was not saved."
+msgstr ""
+
+#. module: payment_ipay
+#. odoo-python
+#: code:addons/payment_ipay/models/payment_transaction.py:0
+#, python-format
+msgid ""
+"IPAY_AFRICA: Received data for Order reference %s, but no transaction found"
+msgstr ""
+
+#. module: payment_ipay
+#. odoo-python
+#: code:addons/payment_ipay/controllers/main.py:0
+#, python-format
+msgid ""
+"IPAY_AFRICA: cannot find matching payment transaction.Redirecting to "
+"/shop/payment page."
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__ifd
+msgid "Ifd"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__ivm
+msgid "Invoice ID"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__order_id
+msgid "Order Ref"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__p1
+msgid "P1"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__p2
+msgid "P2"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__p3
+msgid "P3"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__p4
+msgid "P4"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__channel
+msgid "Payment Channel"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__provider_id
+msgid "Payment Gateway"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model,name:payment_ipay.model_account_payment_method
+msgid "Payment Methods"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model,name:payment_ipay.model_payment_provider
+msgid "Payment Provider"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model,name:payment_ipay.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__poi
+msgid "Poi"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__qwh
+msgid "Qwh"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__reconciled
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Reconciled"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.ipay_base_form
+#: model_terms:ir.ui.view,arch_db:payment_ipay.ipay_list
+msgid "Reconciled by"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.ipay_base_form
+#: model_terms:ir.ui.view,arch_db:payment_ipay.ipay_list
+msgid "Reconciled on"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,help:payment_ipay.field_payment_transaction__ipay_id
+msgid "Related payment details for the transaction"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "Search iPay Payment Gateway Details"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__status
+msgid "Status"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,help:payment_ipay.field_payment_provider__ipay_currency_id
+#: model:ir.model.fields,help:payment_ipay.field_payment_transaction__ipay_currency_id
+msgid ""
+"The ipay currency. Default is KES.                 If the sales order is in "
+"a different currency other than the ipay currency,                 it has to"
+" be converted to the ipay currency"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,help:payment_ipay.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__tokenemail
+msgid "Token Email"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__tokenid
+msgid "Token ID"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.ipay_list
+msgid "Total"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__txncd
+msgid "Transaction Code"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_ipay_data__uyt
+msgid "Uyt"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__ipay_vendor_id
+msgid "Vendor ID"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:payment.provider,pre_msg:payment_ipay.payment_provider_ipay
+msgid "You will be redirected to iPay checkout page for payment."
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:payment.provider,auth_msg:payment_ipay.payment_provider_ipay
+msgid "Your payment has been authorized."
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:payment.provider,cancel_msg:payment_ipay.payment_provider_ipay
+msgid "Your payment has been cancelled."
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:payment.provider,pending_msg:payment_ipay.payment_provider_ipay
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:payment.provider,done_msg:payment_ipay.payment_provider_ipay
+msgid "Your payment has been successfully processed. Thank you!"
+msgstr ""
+
+#. module: payment_ipay
+#: model:account.payment.method,name:payment_ipay.payment_method_ipayafrica
+msgid "iPay Africa"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_transaction__ipay_channel
+msgid "iPay Channel"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.actions.act_window,name:payment_ipay.ipay_action_window
+msgid "iPay Data Details"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.ui.menu,name:payment_ipay.ipay_mobile_root_menu
+msgid "iPay Details"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields.selection,name:payment_ipay.selection__payment_provider__code__ipayafrica
+#: model:payment.provider,name:payment_ipay.payment_provider_ipay
+msgid "iPay Payment Gateway"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model,name:payment_ipay.model_ipay_data
+msgid "iPay Payment Gateway Data"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_transaction__ipay_id
+msgid "iPay Transaction"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_transaction__ipay_txncd
+msgid "iPay Transaction ID"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "iPay details"
+msgstr ""
+
+#. module: payment_ipay
+#: model:ir.model.fields,field_description:payment_ipay.field_payment_provider__ipay_currency_id
+msgid "ipay Currency"
+msgstr ""
+
+#. module: payment_ipay
+#: model_terms:ir.ui.view,arch_db:payment_ipay.view_ipay_filter
+msgid "ipay Status"
+msgstr ""

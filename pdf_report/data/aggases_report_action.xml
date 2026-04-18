@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- https://spantech.odoo.com/web?debug=1#id=1002&menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form-->
+        <record id="action_certificate_report_pdf" model="ir.actions.report">
+            <field name="name">Certificate</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.certificate_report_pdf</field>
+            <field name="report_file">pdf_report.certificate_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.aggased_certificate_paperformat"/>
+            <field name="print_report_name">'Certificate- %s' % object.name</field>
+        </record>
+        <record id="action_bottle_label_report_pdf" model="ir.actions.report">
+            <field name="name">Bottle Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.bottle_label_report_pdf</field>
+            <field name="report_file">pdf_report.bottle_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.aggased_bottle_label_paperformat"/>
+            <field name="print_report_name">'Bottle Label- %s' % object.name</field>
+        </record>
+        
+        <!-- CAC -->
+        <record id="action_cac_label_report_pdf" model="ir.actions.report">
+            <field name="name">CAC Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.cac_label_report_pdf</field>
+            <field name="report_file">pdf_report.cac_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.aggases_cac_label_paperformat"/>
+            <field name="print_report_name">'CAC Label- %s' % object.name</field>
+        </record>
+        <!--QR Code Report-->
+        <record id="action_print_qr_code_report" model="ir.actions.report">
+            <field name="name">QR Code Report</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.qrcode_report_pdf</field>
+            <field name="report_file">pdf_report.qrcode_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.qrcode_report_paperformat"/>
+            <field name="print_report_name">'QR Code- %s' % object.name</field>
+        </record>
+        
+        <!-- CAC NRC Certificate -->
+        <record id="action_cac_nrc_certificate_report" model="ir.actions.report">
+            <field name="name">CAC NRC Certificate</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.cac_nrc_certificate_report_pdf</field>
+            <field name="report_file">pdf_report.cac_nrc_certificate_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.cac_nrc_certificate_paperformat"/>
+            <field name="print_report_name">'CAC NRC Certificate- %s' % object.name</field>
+        </record>
+        
+        <!-- CAC HPC Certificate -->
+        <record id="action_cac_hpc_certificate_report" model="ir.actions.report">
+            <field name="name">CAC HPC Certificate</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.cac_hpc_certificate_report_pdf</field>
+            <field name="report_file">pdf_report.cac_hpc_certificate_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.cac_hpc_certificate_paperformat"/>
+            <field name="print_report_name">'CAC HPC Certificate- %s' % object.name</field>
+        </record>
+        
+        <!--All In Gas Label-->
+        <record id="action_all_in_gas_label_report" model="ir.actions.report">
+            <field name="name">All In Gas Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.all_in_gas_label_report_pdf</field>
+            <field name="report_file">pdf_report.all_in_gas_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.all_in_gas_label_paperformat"/>
+            <field name="print_report_name">'All In Gas Label- %s' % object.name</field>
+        </record>
+        
+        <!--CAC Box Label-->
+        <record id="action_cac_box_label_report" model="ir.actions.report">
+            <field name="name">CAC Box Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.cac_box_label_report_pdf</field>
+            <field name="report_file">pdf_report.cac_box_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.cac_box_label_paperformat"/>
+            <field name="print_report_name">'CAC Box Label- %s' % object.name</field>
+        </record>
+        
+        <!--Kimessa Report-->
+        <record id="action_kimessa_report" model="ir.actions.report">
+            <field name="name">Kimessa Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.kimessa_label_report_pdf</field>
+            <field name="report_file">pdf_report.kimessa_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.kimessa_label_paperformat"/>
+            <field name="print_report_name">'Kimessa Label- %s' % object.name</field>
+        </record>
+        
+        <record id="action_all_in_gas_certificate_report_pdf" model="ir.actions.report">
+            <field name="name">All in Gas Certificate</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.all_in_gas_certificate_report_pdf</field>
+            <field name="report_file">pdf_report.all_in_gas_certificate_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.all_in_gas_certificate_paperformat"/>
+            <field name="print_report_name">'All in Gas Certificate- %s' % object.name</field>
+        </record>
+        
+        <record id="action_cac_nkd_report" model="ir.actions.report">
+            <field name="name">CAC NKD Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.cac_nkd_label_report_pdf</field>
+            <field name="report_file">pdf_report.cac_nkd_label_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.cac_nkd_label_paperformat"/>
+            <field name="print_report_name">'CAC NKD Label- %s' % object.name</field>
+        </record>
+
+        <!--All In Gas Label (Krapp)-->
+        <record id="action_all_in_gas_krapp_label_report" model="ir.actions.report">
+            <field name="name">All In Gas Krapp Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.all_in_gas_label_krapp_report_pdf</field>
+            <field name="report_file">pdf_report.all_in_gas_label_krapp_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.all_in_gas_label_krapp_paperformat"/>
+            <field name="print_report_name">'All In Gas Label(Krapp) - %s' % object.name</field>
+        </record>
+        
+        <!--1 GasTech-->
+        <record id="action_gas_tech_report" model="ir.actions.report">
+            <field name="name">GasTech Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.gas_tech_report_pdf</field>
+            <field name="report_file">pdf_report.gas_tech_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'GasTech Label - %s' % object.name</field>
+        </record>
+        
+        <!--2 GasAlarm-->
+        <record id="action_gas_alarm_report" model="ir.actions.report">
+            <field name="name">GasAlarm Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.gas_alarm_report_pdf</field>
+            <field name="report_file">pdf_report.gas_alarm_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'GasAlarm Label - %s' % object.name</field>
+        </record>
+        
+        <!--3 Encore Monitoring-->
+        <record id="action_encore_monitoring_report" model="ir.actions.report">
+            <field name="name">Encore Monitoring Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.encore_monitoring_report_pdf</field>
+            <field name="report_file">pdf_report.encore_monitoring_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'Encore Monitoring Label - %s' % object.name</field>
+        </record>
+        
+        <!--4 CAC Gas Asia-->
+        <record id="action_CAC_gas_asia_report" model="ir.actions.report">
+            <field name="name">CAC Gas Asia Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.CAC_gas_asia_report_pdf</field>
+            <field name="report_file">pdf_report.CAC_gas_asia_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'CAC Gas Asia Label - %s' % object.name</field>
+        </record>
+        
+        <!--5 CAC Gas Instrumentation-->
+        <record id="action_CAC_gas_instrumentation_report" model="ir.actions.report">
+            <field name="name">CAC Gas Instrumentation Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.CAC_gas_instrumentation_report_pdf</field>
+            <field name="report_file">pdf_report.CAC_gas_instrumentation_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'CAC Gas Instrumentation Label - %s' % object.name</field>
+        </record>
+        
+        <!--6 NZ Safety Blackwoods-->
+        <record id="action_NZ_safety_blackwoods_report" model="ir.actions.report">
+            <field name="name">NZ Safety Blackwoods Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.NZ_safety_blackwoods_report_pdf</field>
+            <field name="report_file">pdf_report.NZ_safety_blackwoods_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'NZ Safety Blackwoods Label - %s' % object.name</field>
+        </record>
+        
+        <!--7 Mine Safety-->
+        <record id="action_mine_safety_report" model="ir.actions.report">
+            <field name="name">Mine Safety Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.mine_safety_report_pdf</field>
+            <field name="report_file">pdf_report.mine_safety_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'Mine Safety Label - %s' % object.name</field>
+        </record>
+        
+        <!--8 Skillpro-->
+        <record id="action_skillpro_report" model="ir.actions.report">
+            <field name="name">Skillpro Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.skillpro_report_pdf</field>
+            <field name="report_file">pdf_report.skillpro_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'Skillpro Label - %s' % object.name</field>
+        </record>
+
+		<!--9 Alliance Safety-->
+		<record id="action_alliance_safety_report" model="ir.actions.report">
+            <field name="name">Alliance Safety Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.alliance_safety_report_pdf</field>
+            <field name="report_file">pdf_report.alliance_safety_report_pdf</field>
+            <field name="paperformat_id" ref="pdf_report.a5_paperformat"/>
+            <field name="print_report_name">'Alliance Safety Label - %s' % object.name</field>
+        </record>
+        
+    </data>
+</odoo>

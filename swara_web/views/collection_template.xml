@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Template for Swara Collections -->
+    <template id="collection_template" name="Swara Collection Template">
+        <t t-call="website.layout">
+            <!-- Hero Section Start -->
+
+            <section class="hero-section-category-1 safari" t-attf-style="background-image: url(#{image_url});">
+                <div class="hero__inner row">
+                    <div class="container">
+                        <h2 class="title">
+                            <t t-esc="collection.name"/>
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <section class="collection-description container">
+                <!--        <p>Haljine sa upecatljivom kragom, haljine A kroja, sa rukavima ili sa vezenim okovratnikom. Pamuk koji
+                                    ne gubi oblik, pogodan za poslovnu odecu.
+                                </p>
+                                <p>Suknje, kratke (60 cm) ili duge (105 cm).</p>
+                                <p>Odaberite dezen i kreirajte svoju omiljenu garderobu.</p>
+                                <p>Za sve nedoumice, pisite nam na Facebook ili Instagram mesendzer @africkaradionica.</p>
+                                <p>Porucivanje iskljucivo preko ovog sajta.</p>
+                                <p>Svi artikli su rucno radjeni i sitna odstupanja su moguca (1-3 cm). Ukoliko ste perfekcionista mozda
+                                    ovo i nije prodavnica za vas.
+                                </p>        -->
+                <t t-esc="collection.description"/>
+            </section>
+            <!-- Hero Section End -->
+
+            <!-- Filter Header -->
+            <section class="filter-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 row" t-if="categories">
+                            <div class="item-wrapper">
+                                <label>Filter From</label>
+                                <select class="filter-input js_categ">
+                                    <t t-foreach="categories" t-as="category">
+                                        <option t-value="category.id">
+                                            <t t-esc="category.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="item-wrapper ml-4">
+                                <label>Sorted By</label>
+                                <select class="filter-input">
+                                    <option>New Arrival</option>
+                                    <option>A - Z Products List</option>
+                                    <option>Z - A Products List</option>
+                                    <option>High - Low Products Price</option>
+                                    <option>Low - High Products Price</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 product-count">
+                            <label>
+                                <t t-esc="product_count"/>
+                                products
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Filter Header End -->
+
+
+            <!--  YOU MAY ALSO LIKE section Start -->
+            <section class="feature-collection-section">
+                <div class="container">
+                    <div class="row">
+                        <t t-foreach="products" t-as="proud">
+                            <t t-set="combination_info"
+                               t-value="proud._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                            <div class="col-md-3 feature-card col-6">
+                                <a t-att-href="'/collection/product/%s'%slug(proud)">
+                                    <img t-attf-src="/web/image/product.template/#{proud.id}/image_256/"
+                                         class="img img-responsive"/>
+                                    <h3 class="title">
+                                        <t t-esc="proud.name"/>
+                                    </h3>
+                                    <div class="product_price mb-1" itemprop="offers" itemscope="itemscope"
+                                         itemtype="http://schema.org/Offer">
+                                        <span class="h5" t-if="combination_info['price']"
+                                              t-esc="combination_info['price']"
+                                              t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
+                                             style="white-space: nowrap;" t-esc="combination_info['list_price']"
+                                             t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                                        <span itemprop="priceCurrency" style="display:none;"
+                                              t-esc="website.currency_id.name"/>
+                                    </div>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+
+                </div>
+            </section>
+            <!-- YOU MAY ALSO LIKE Section End -->
+
+        </t>
+    </template>
+
+    <template id="collection_product_template" name="Swara Collection Product">
+        <t t-call="website.layout">
+            <!-- Living Section Start -->
+            <t t-set="additional_title" t-value="product.name"/>
+            <t t-set="combination" t-value="product._get_first_possible_combination()"/>
+            <t t-set="combination_info"
+               t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+             <div class="oe_structure oe_empty oe_structure_not_nearest" id="oe_structure_website_sale_product_1" data-editor-message="DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL PRODUCTS"/>
+                <section t-attf-class="product_description_section container py-4 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}" id="product_detail" t-att-data-view-track="view_track and '1' or '0'" t-att-data-product-tracking-info="json.dumps(request.env['product.template'].get_google_analytics_data(combination_info))">
+<!--            <section class=" container">-->
+                <div class="row living-inner">
+                    <div class="col-lg-6">
+                        <div class="simple-gallery">
+                            <figure id="magnifying_area">
+                                <img id="magnifying_img"
+                                     t-attf-src="/web/image/product.template/#{product.id}/image_256/"
+                                     t-attf-zoom="/web/image/product.template/#{product.id}/image_256/"
+                                     class="img img-responsive maxi"/>
+                                <!--                                <img src="/swara_web/static/src/images/product1.jpg"-->
+                                <!--                                     class="img img-fluid maxi"/>-->
+                            </figure>
+                            <!-- <img class="maxi" src="images/product1.jpg" zoom="images/product1.jpg" class="img img-fluid"> -->
+
+                            <div class="mini">
+                                <t t-foreach="product.product_variant_ids" t-as="product_variant">
+                                    <img t-attf-src="/web/image/product.product/#{product_variant.id}/image_256/"
+                                         class="col-3"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="mini-mobile">
+                            <t t-foreach="product.product_variant_ids" t-as="product_variant">
+                                <img t-attf-src="/web/image/product.product/#{product_variant.id}/image_256/"
+                                     class="col-3"/>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 living-content justify-content-start">
+                        <h1 class="title">
+                            <t t-esc="product.name"/>
+                        </h1>
+                        <h6 class="price">
+                            <t t-set="proud" t-value="product"/>
+                            <t t-set="combination_info"
+                               t-value="proud._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                            <div class="product_price mb-1" itemprop="offers" itemscope="itemscope"
+                                 itemtype="http://schema.org/Offer">
+                                <span class="h5" t-if="combination_info['price']"
+                                      t-esc="combination_info['price']"
+                                      t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
+                                     style="white-space: nowrap;" t-esc="combination_info['list_price']"
+                                     t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                                <span itemprop="priceCurrency" style="display:none;"
+                                      t-esc="website.currency_id.name"/>
+                            </div>
+                        </h6>
+                        <div class="subtitle">
+                            <t t-esc="product.description_sale"/>
+                        </div>
+                        <!--                        <form class="product_form" action="/s">-->
+                        <!--                            <t t-if="product.attribute_line_ids">-->
+                        <!--                                <t t-foreach="product.attribute_line_ids" t-as="attribute_line">-->
+                        <!--                                    <div class="label">-->
+                        <!--                                        <t t-esc="attribute_line.attribute_id.name"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <select class="selector-wrapper col-6">-->
+                        <!--                                        <t t-foreach="attribute_line.value_ids" t-as="attribute_value">-->
+                        <!--                                            <option>-->
+                        <!--                                                <t t-esc="attribute_value.name"/>-->
+                        <!--                                            </option>-->
+                        <!--                                        </t>-->
+                        <!--                                    </select>-->
+                        <!--                                </t>-->
+                        <!--                            </t>-->
+                        <!--                            <button type="submit" class="addtocart_btn col-12">Add To Cart</button>-->
+                        <!--                            <button class="payment-button col-12">Buy it now</button>-->
+                        <!--                        </form>-->
+                        <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="js_product js_main_product mb-3">
+                                <div>
+                                    <t t-call="website_sale.product_price"/>
+                                    <small class="ml-1 text-muted o_base_unit_price_wrapper d-none"
+                                           groups="website_sale.group_show_uom_price">
+                                        <t t-call="website_sale.base_unit_price"/>
+                                    </small>
+                                </div>
+                                <t t-placeholder="select">
+                                    <input type="hidden" class="product_id" name="product_id"
+                                           t-att-value="product_variant.id"/>
+                                    <input type="hidden" class="product_template_id" name="product_template_id"
+                                           t-att-value="product.id"/>
+                                    <input t-if="product.public_categ_ids.ids" type="hidden" class="product_category_id"
+                                           name="product_category_id" t-att-value="product.public_categ_ids.ids[0]"/>
+                                    <t t-if="combination" t-call="sale.variants">
+                                        <t t-set="ul_class" t-valuef="flex-column"/>
+                                        <t t-set="parent_combination" t-value="None"/>
+                                    </t>
+                                    <t t-else="">
+                                        <ul class="d-none js_add_cart_variants"
+                                            t-att-data-attribute_exclusions="{'exclusions: []'}"/>
+                                    </t>
+                                </t>
+                                <p t-if="True" class="css_not_available_msg alert alert-warning">This combination does
+                                    not exist.
+                                </p>
+                                <div id="add_to_cart_wrap" class="d-inline">
+                                    <a role="button" id="add_to_cart"
+                                       class="btn btn-primary btn-lg js_check_product a-submit my-1 mr-1 px-5 font-weight-bold flex-grow-1"
+                                       href="#"><i class="fa fa-shopping-cart mr-2"/>ADD TO CART
+                                    </a>
+                                    <div id="product_option_block" class="d-inline-block align-middle"/>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="description">
+                            <t t-esc="product.description">
+                            </t>
+                            <!--                            <p>@Rolke haljine su vrlo brzo postale nas zastitni znak. Secene kruzno ili kao A kroj, ove-->
+                            <!--                                haljine su idealni poslovni outfit, savrseno uklopljen sa sakoom, pamucne ali sa kragnom-->
+                            <!--                                koja stoji i posle pranja. Postojane boje, komotne i prilagodljive, idealne za zenu od-->
+                            <!--                                karijere.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Velicine:</p>-->
+                            <!--                            <p>Petit - tunika haljina duzine 87cm ili haljina duzine 97 cm. Odgovara visini do 170cm.-->
+                            <!--                            </p>-->
+                            <!--                            <p>'A' kroj - jednostavnija u naborima ali duza, i odgovara zenama visim od 170cm.</p>-->
+                            <!--                            <p>Porudzbina se obavlja preko opadajuceg menija a ne preko fotografije. Kada zavrsite-->
+                            <!--                                porudzbinu, stize vam email sa fotografijom porudzbine, ukoliko to nije ono sto ste-->
+                            <!--                                zeleli, javite se na: shop@swaraacacia.com-->
+                            <!--                            </p>-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Living Section End -->
+
+
+            <!--  YOU MAY ALSO LIKE section Start -->
+            <section class="feature-collection-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <h2>YOU MAY ALSO LIKE</h2>
+                    </div>
+                    <div class="row">
+                        <t t-foreach="product.alternative_product_ids" t-as="proud">
+                            <div class="col-md-3 feature-card col-6">
+                                <a t-att-href="'/collection/product/%s'%slug(proud)">
+                                    <img t-attf-src="/web/image/product.template/#{proud.id}/image_256/"
+                                         class="img img-responsive"/>
+                                    <h3 class="title">
+                                        <t t-esc="proud.name"/>
+                                    </h3>
+                                    <div class="price">
+                                        <t t-set="combination_info"
+                                           t-value="proud._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                                        <div class="product_price mb-1" itemprop="offers" itemscope="itemscope"
+                                             itemtype="http://schema.org/Offer">
+                                            <span class="h5" t-if="combination_info['price']"
+                                                  t-esc="combination_info['price']"
+                                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                            <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
+                                                 style="white-space: nowrap;" t-esc="combination_info['list_price']"
+                                                 t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                            <span itemprop="price" style="display:none;"
+                                                  t-esc="combination_info['price']"/>
+                                            <span itemprop="priceCurrency" style="display:none;"
+                                                  t-esc="website.currency_id.name"/>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </section>
+            <!-- YOU MAY ALSO LIKE Section End -->
+        </t>
+    </template>
+
+</odoo>

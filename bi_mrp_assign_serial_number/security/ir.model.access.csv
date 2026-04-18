@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bi_mrp_assign_serial_number.access_mrp_production_assign,access_mrp_production_assign,bi_mrp_assign_serial_number.model_mrp_production_assign,base.group_user,1,1,1,1
+
+bi_mrp_assign_serial_number.access_lot_list,access_lot_list,bi_mrp_assign_serial_number.model_lot_list,base.group_user,1,1,1,1

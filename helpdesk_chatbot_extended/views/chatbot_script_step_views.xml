@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+       <record id="chatbot_script_step_view_form_inherit_email_chatbot_extended" model="ir.ui.view">
+            <field name="name">chatbot.script.step.view.form.inherit.email_chatbot_extended</field>
+            <field name="model">chatbot.script.step</field>
+            <field name="inherit_id" ref="im_livechat.chatbot_script_step_view_form"/>
+            <field name="arch" type="xml">
+                <field name="step_type" position="after">
+                    <field name="is_sent_mail" invisible="step_type != 'question_email'"/>
+                    <field name="email" invisible="is_sent_mail == False"
+                           title="You can set multiple email address with comma"/>
+
+                    <!--<group invisible="is_sent_mail == False">-->
+                    <!--<field name="email" invisible="is_sent_mail == False"/>-->
+                    <!--<p>You can set multiple email address with comma</p>-->
+                    <!--</group>-->
+
+                    <field name="email_template_id" invisible="is_sent_mail == False"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

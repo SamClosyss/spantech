@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_only_form_view_extended">
+        <field name="name">product_template_only_form_view_extended</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button string="Set Variant Image" type="object" name="set_varinat_images"
+                        attrs="{'invisible': ['|', ('company_id', '!=', 2), ('attribute_line_ids', '=', [])]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

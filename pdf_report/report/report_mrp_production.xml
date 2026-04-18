@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add Special Requirements to Production Order report -->
+    <template id="report_mrporder_extended_spantech" inherit_id="mrp.report_mrporder">
+        <xpath expr="//div[@t-if='o.workorder_ids']" position="before">
+            <div class="row mt32 mb32">
+                <div class="col-6">
+                    <strong>Customer Special Requirement:</strong>
+                    <br/>
+                    <span t-field="o.requirement"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

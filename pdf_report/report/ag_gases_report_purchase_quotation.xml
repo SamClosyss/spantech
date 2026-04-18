@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="ag_gases_report_purchase_order">
+        <t t-call="pdf_report.spantech_layout_standard">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            <t t-set="doc" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            <br/>
+            <br/>
+            <div class="page purchase-receipt">
+                <div class="oe_structure"/>
+
+                <table class="table table-sm o_main_table address_table" name="invoice_line_table">
+                    <thead>
+                        <tr class="bg-lightgrey">
+                            <th class="text-left">
+                                <span class="text-bold">Supplier</span>
+                            </th>
+                            <th class="text-left">
+                                <span class="text-bold">Ship to</span>
+                            </th>
+                            <th class="text-left">
+                                <span class="text-bold">AG Reference No:</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="address_tbody">
+                        <tr>
+                            <td class="text-left">
+                                <t t-if="o.partner_id">
+                                    <h6 t-field="o.partner_id.name"/>
+                                    <p>
+                                        <span t-if="o.partner_id.street">
+                                            <t t-esc="o.partner_id.street"/>
+                                        </span>
+                                        <span t-if="o.partner_id.street2">
+                                            <t t-esc="o.partner_id.street2"/>
+                                        </span>
+                                        <span t-if="o.partner_id.city">
+                                            <t t-esc="o.partner_id.city"/>
+                                        </span>
+                                        <span t-if="o.partner_id.zip">
+                                            <t t-esc="o.partner_id.zip"/>
+                                        </span>
+                                        <span t-if="o.partner_id.country_id">
+                                            <t t-esc="o.partner_id.country_id.name"/>
+                                        </span>
+                                    </p>
+                                </t>
+                                <t t-else="">
+                                    <h6>-</h6>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="o.company_id">
+                                    <h6 t-field="o.company_id.name"/>
+                                    <p>
+                                        <span t-if="o.company_id.street">
+                                            <t t-esc="o.company_id.street"/>
+                                        </span>
+                                        <span t-if="o.company_id.street2">
+                                            <t t-esc="o.company_id.street2"/>
+                                        </span>
+                                        <span t-if="o.company_id.city">
+                                            <t t-esc="o.company_id.city"/>
+                                        </span>
+                                        <span t-if="o.company_id.zip">
+                                            <t t-esc="o.company_id.zip"/>
+                                        </span>
+                                        <span t-if="o.company_id.country_id">
+                                            <t t-esc="o.company_id.country_id.name"/>
+                                        </span>
+                                    </p>
+                                </t>
+                                <t t-else="">
+                                    <h6>-</h6>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <t t-if="is_pro_forma">
+                                    <span t-field="o.proforma_invoice_number"/>
+                                </t>
+                                <t t-elif="o.name">
+                                    <span t-field="o.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <h6>Purchase Representative:</h6>
+                                <t t-if="o.user_id">
+                                    <span t-field="o.user_id"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Date Required:</h6>
+                                <t t-if="o.date_order">
+                                    <span t-esc="o.date_order.date()"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Date</h6>
+                                <t t-if="o.create_date">
+                                    <span t-esc="o.create_date.date()"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <h6>Customers Purchase Order Number:</h6>
+                                <t t-if="o.partner_ref">
+                                    <span t-field="o.partner_ref"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Incoterm</h6>
+                                <t t-if="o.incoterm_id">
+                                    <span t-field="o.incoterm_id"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                            <td class="text-left">
+                                <h6>Payment terms:</h6>
+                                <t t-if="o.payment_term_id">
+                                    <span t-field="o.payment_term_id"/>
+                                </t>
+                                <t t-else="">
+                                    <span>-</span>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table table-sm o_main_table product_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr class="bg-lightgrey">
+                            <th name="th_index" class="text-center">
+                                <span>No.</span>
+                            </th>
+                            <th name="th_description" class="text-left">Description</th>
+                            <th name="th_quantity" class="text-center">Quantity</th>
+                            <th name="th_priceunit" class="text-center">Unit Price</th>
+                            <th name="th_taxes" class="text-center">Tax %</th>
+                            <th name="th_subtotal" class="text-center">
+                                <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                                <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-set="index" t-value="1"/>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t t-foreach="doc.order_line" t-as="line">
+
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                               groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                               groups="account.group_show_line_subtotals_tax_included"/>
+
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <td class="text-center" name="product_index" style="vertical-align: middle;">
+                                        <span t-esc="index"/>
+                                    </td>
+                                    <td name="td_name">
+                                        <span class="py-2" t-field="line.product_id.default_code"
+                                              t-options="{'widget': 'text'}"/>
+                                        <br/>
+                                        <p class="bold_font">
+                                            <t t-esc="line.name"/>
+                                            <t t-if="line.product_tmpl_notes">
+                                                <br/>
+                                                <t t-esc="line.product_tmpl_notes"/>
+                                            </t>
+                                        </p>
+                                        <span class="pb-1" t-field="line.product_id.x_studio_additional_description"
+                                              t-options="{'widget': 'text'}"/>
+                                        <br/>
+                                        <t t-if="line.product_id.volume_sp">
+                                            Volume[<span class="pb-1" t-field="line.product_id.volume_sp"
+                                                         t-options="{'widget': 'text'}"/>]
+                                        </t>
+                                        <t t-if="line.product_id.pressure">
+                                            Pressure[<span t-field="line.product_id.pressure"
+                                                           t-options="{'widget': 'text'}"/>]
+                                        </t>
+                                        <t t-if="line.product_id.x_studio_shelf_life_months">
+                                            Shelf Life[<span class="pb-1" t-field="line.product_id.x_studio_shelf_life_months"
+                                                             t-options="{'widget': 'text'}"/>]
+                                        </t>
+                                        <t t-if="line.product_id.valve">
+                                            Valve[<span t-field="line.product_id.valve"
+                                                        t-options="{'widget': 'text'}"/>]
+                                        </t>
+                                        <t t-if="line.product_id.size">
+                                            Size[<span t-field="line.product_id.size"
+                                                       t-options="{'widget': 'text'}"/>]
+                                        </t>
+
+                                    </td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="line.product_uom_qty"/>
+                                    </td>
+                                    <td name="td_priceunit" class="text-center">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td name="td_taxes" class="text-center">
+                                        <span t-esc="', '.join(map(lambda x: str(x.amount)+'%', line.taxes_id))"/>
+                                    </td>
+                                    <td name="td_subtotal" class="text-center o_price_total">
+                                        <span t-field="line.price_subtotal"
+                                              groups="account.group_show_line_subtotals_tax_excluded"/>
+                                        <span t-field="line.price_total"
+                                              groups="account.group_show_line_subtotals_tax_included"/>
+                                    </td>
+                                </t>
+                                <t t-if="line.display_type == 'line_section'">
+                                    <td name="td_section_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-if="line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+
+                            <t t-set="index" t-value="index + 1"/>
+
+                            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section')">
+                                <tr class="is-subtotal text-right">
+                                    <td name="td_section_subtotal" colspan="99">
+                                        <strong class="mr16">Subtotal</strong>
+                                        <span
+                                                t-esc="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="clearfix" name="so_total_summary">
+                    <div id="total" class="row border-dark border mx-0" style="border-width: 2px !important;"
+                         name="total">
+                        <div class="col-8">
+                            <t t-if="special_requirements">
+                                <div class="special_details_box" name="special_details">
+                                    <b>
+                                        <u>Special Requirements</u>
+                                    </b>
+                                    <br/>
+                                    <p t-field="o.special_requirements"/>
+                                </div>
+                            </t>
+                            <p class="payment_details py-2">
+                                <span class="font_bold">
+                                    <u>Payment details</u>
+                                </span>
+                                <br/>
+                                <t>
+                                    <span>AG Gases &amp; Equipment LTD</span>
+                                    <br/>
+                                    <span>Sort Code: 204545</span>
+                                    <br/>
+                                    <span>Account No: 80345598</span>
+                                    <br/>
+                                    <span>IBAN: GB70BUKB20454580345598</span>
+                                    <br/>
+                                    <span>SWIFTBIC: BUKBGB22</span>
+                                </t>
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <table class="table table-sm"  style="page-break-inside: avoid;color: black;font-weight: bold;">
+                                <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                <t t-call="account.document_tax_totals"/>
+<!--                                <tr class="border-black o_subtotal">-->
+<!--                                    <td>-->
+<!--                                        <strong>-->
+<!--                                            Excluding Tax-->
+<!--                                        </strong>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="o.amount_untaxed"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--&lt;!&ndash;                                &ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-foreach="tax_totals['subtotals']" t-as="subtotal">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-set="subtotal_to_show" t-value="subtotal['name']"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-call="account.tax_groups_totals"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </t>&ndash;&gt;-->
+<!--                                <tr class="border-black o_total">-->
+<!--                                    <td>-->
+<!--                                        <strong>-->
+<!--                                            Total-->
+<!--                                        </strong>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span class="text-nowrap" t-field="o.amount_total"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <p class="terms mt-1">
+                    <span class="font_bold">
+                        <u>Terms and Conditions</u>
+                    </span>
+                    <br/>
+                    <br/>
+                    <span>This documentation has been produced wholly and exclusively with reference to AG Gases and
+                        Equipment Ltd terms and conditions. A copy of which can be ordered from our sales team.
+                    </span>
+                    <br/>
+                    <span>Opening hours for deliveries; Mon‐Thur 8am‐4pm, Friday 8am‐2pm (closed Weekends and Bank
+                        Holidays)
+                    </span>
+                </p>
+
+                <div class="oe_structure"/>
+                <p t-field="doc.notes"/>
+
+            </div>
+        </t>
+
+    </template>
+
+    <!-- https://spantech.odoo.com/web#id=623&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+    <template id="report_purchasequotation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!-- AG Gases & Equipment Ltd -->
+                <t t-if="o.company_id.report_format == 'ag_gases_report'">
+                    <t t-call="pdf_report.ag_gases_report_purchase_order" t-lang="o.partner_id.lang"/>
+                </t>
+                <!-- Spantech Products Ltd -->
+                <t t-if="o.company_id.report_format in ['spantech_report', 'mjs_report']">
+                    <t t-call="pdf_report.spantech_report_purchase_order" t-lang="o.partner_id.lang"/>
+                </t>
+                <t t-else="">
+                    <t t-call="purchase.report_purchasequotation_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_purchaseorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!-- AG Gases & Equipment Ltd -->
+                <t t-if="o.company_id.report_format == 'ag_gases_report'">
+                    <t t-call="pdf_report.ag_gases_report_purchase_order" t-lang="o.partner_id.lang"/>
+                </t>
+                <!-- Spantech Products Ltd -->
+                <t t-if="o.company_id.report_format in ['spantech_report', 'mjs_report']">
+                    <t t-call="pdf_report.spantech_report_purchase_order" t-lang="o.partner_id.lang"/>
+                </t>
+                <t t-else="">
+                    <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

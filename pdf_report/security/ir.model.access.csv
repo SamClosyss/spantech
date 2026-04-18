@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_components,access_mrp_components,model_mrp_components,,1,1,1,1
+access_product_components,access_product_components,model_product_components,,1,1,1,1
+access_mrp_cylinder,access_mrp_cylinder,model_mrp_cylinder,,1,1,1,1

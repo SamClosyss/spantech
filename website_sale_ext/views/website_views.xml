@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_website_sale_payment_error_msg" model="ir.ui.view">
+        <field name="name">website_sale.payment.error.msg</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Payment Error Message" groups="base.group_no_one">
+                    <group>
+                        <field name="custom_error_message" context="{'default_website_id': active_id}"></field>
+                        <field name="payment_error_message" invisible="custom_error_message == False"></field>
+                    </group>
+                </page>
+            </xpath>
+            <field name="language_ids" position="after">
+                <field name="stock_in_custom_msg"/>
+            </field> 
+        </field>
+    </record>
+</odoo>

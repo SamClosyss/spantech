@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- studio_customization.odoo_studio_res_user_6731e377-14cb-4dad-8774-90eada324192 -->
+    <record id="view_users_tree_inherit_x_studio" model="ir.ui.view">
+        <field name="name">res.users.tree.inherit.x_studio</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <field name="employee_ids" optional="show"/>
+<!--                <field name="sel_groups_54_55" optional="show"/>-->
+<!--                <field name="sel_groups_41_42" optional="show"/>-->
+<!--                <field name="sel_groups_21_22_23" optional="show"/>-->
+<!--                <field name="sel_groups_89_90" optional="show"/>-->
+<!--                <field name="sel_groups_86_87_88" optional="show"/>-->
+<!--                <field name="sel_groups_96_97_98" optional="show"/>-->
+                <field name="accesses_count" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

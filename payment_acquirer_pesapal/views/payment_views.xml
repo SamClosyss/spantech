@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">Pesapal Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form" />
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group attrs="{'invisible': [('code', '!=', 'pesapal')]}">
+                    <field name="pesapal_consumer_key" />
+                    <field name="pesapal_consumer_secret" password="True" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

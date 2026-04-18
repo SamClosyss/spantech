@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="payment_acquirer_revolut" model="payment.provider">
+            <field name="name">Revolut</field>
+            <field name="display_as">Online Revolut (powered by revolut)</field>
+            <field name="image_128" type="base64" file="deltatech_payment_revolut/static/src/img/revolut_icon.png" />
+            <field name="code">revolut</field>
+            <field name="company_id" ref="base.main_company" />
+<!--            <field name="redirect_form_view_id" ref="revolut_form" />-->
+            <field name="inline_form_view_id" ref="inline_form" />
+            <field name="module_id" ref="base.module_deltatech_payment_revolut" />
+
+            <field
+                name="pre_msg"
+            ><![CDATA[
+<p>You will be redirected to the Revolut website after clicking on the payment button.</p>]]></field>
+
+        </record>
+    </data>
+
+
+    <record id="payment_method_revolut" model="account.payment.method">
+        <field name="name">Revolut</field>
+        <field name="code">revolut</field>
+        <field name="payment_type">inbound</field>
+    </record>
+
+</odoo>

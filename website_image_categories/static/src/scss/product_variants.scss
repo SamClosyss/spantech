@@ -1,0 +1,15 @@
+.css_attribute_color input {
+    height: 50px !important;
+    width: 50px !important;
+}
+.css_attribute_color {
+    border-radius: 5%;
+        border: 2px solid #DEE2E6;
+    &:before{
+        border: none !important;
+        box-shadow: none;
+    }
+    &.active {
+        border: 2px solid #366CB0;
+    }
+}

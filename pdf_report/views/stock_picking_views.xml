@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- https://spantech.odoo.com/web?debug=1#id=721&cids=7%2C4%2C3%2C2%2C1&menu_id=554&action=806&model=project.task&view_type=form -->
+    <record id="view_picking_form_inherit_x_studio" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit.x_studio</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- Button only for AG Gases Company -->
+            <xpath expr="//button[@name='do_print_picking']" position="after">
+                <button name="do_print_shipping_invoice" string="Print Shipping Invoice" type="object"
+                         data-hotkey="o" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+            </xpath>
+             <xpath expr="//field[@name='carrier_id']" position="after">
+                 <field name="packages_number" />
+             </xpath>
+        </field>
+    </record>
+
+</odoo>

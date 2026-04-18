@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cac_nkd_label_report_pdf" name="A5 - 3 Rows, Side by Side Labels">
+        <t t-call="web.basic_layout">
+            <t t-set="doc" t-value="docs[0]" />
+            <style>
+                .o_report_layout_standard {
+                  padding: 0 !important;
+                  margin: 0 !important;
+                }
+        
+                .label-sheet {
+                  width: 100%;
+                  height: 100%;
+                  margin: 0;
+                  padding: 0;
+                }
+        
+                .label-table {
+                  width: 100%;
+                  table-layout: fixed;
+                  border-collapse: collapse;
+                }
+        
+                .label-row {
+                  height: 52mm;
+                }
+        
+                .label-cell {
+                  width: 45%;
+                  <!--border: 1px solid #000;-->
+                  vertical-align: top;
+                  padding: 2mm;
+                  box-sizing: border-box;
+                }
+                .ghs_logo{
+                    <!--width: 10%;-->
+                    overflow: visible !important;
+                    white-space: nowrap;
+                }
+        
+                .label-content {
+                  font-size: 12px;
+                  height: 100%;
+                }
+                .border0{
+                    border:0px solid #ffffff!important;
+                }
+            </style>
+
+            <div class="label-sheet">
+                <table class="label-table border0">
+                    <tr class="label-row">
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div style="width: 100%; clear: both;">
+                                    <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                    <span style="float: right;" t-esc="docs.name + '-1'"/>
+                                </div>
+                                <div style="width: 100%; clear: both; text-align: right; margin-top: 20px; margin-bottom: 2px;">
+                                    <t t-if="docs.get_valid_until_date_dateformat()">
+                                        Valid Until: 
+                                        <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                    </t>
+                                    <t t-else="">
+                                        Valid Until: <span class="ml4">-</span>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="label-content">
+                                <table class="border0" style="width: 100%;">
+                                    <tr>
+                                        <td style="text-align: left; vertical-align: top; width: 100%;">
+                                            <t t-foreach="docs.components_ids" t-as="components">
+                                                <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                    <span t-esc="components.requested_value"/>
+                                                    <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <!--<td class="ghs_logo" style="width: 10%; text-align: center; vertical-align: middle;">
+                            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png" style="max-width: 100%; height: auto;" />
+                                </t>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                    <div style="display: flex; gap: 2mm; justify-content: center; align-items: center;">
+                                        <img src="/pdf_report/static/src/imgs/nrc5_1.png" style="max-width: 48%; height: auto;" />
+                                        <img src="/pdf_report/static/src/imgs/nrc5_2.png" style="max-width: 48%; height: auto;" />
+                                    </div>
+                                </t>
+                            </div>
+                        </td>-->
+                        <!--<td class="ghs_logo" style="width: 10%; text-align: center; vertical-align: middle;">
+                            <div style="display: flex; text-align: center;">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png"
+                                         style="width: 100%;" />
+                                </t>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png"
+                                         style="width: 100%; margin-right: 1mm; margin-left: -120%;" />
+                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png"
+                                         style="width: 100%;" />
+                                </t>
+                            </div>
+                        </td>-->
+                        <td class="ghs_logo" style="width: 10%; text-align: center;">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png"
+                                         style="width: 100%; height: auto; margin-top:50px; " />
+                                </t>
+                                <t t-if="docs.product_id.nrc_imgs in ['nrc5', 'nrc3']">
+                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png"
+                                         style="width: 100%; margin-right: 1mm; margin-left: -120%; margin-top:50px;" />
+                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png"
+                                         style="width: 100%; margin-top:50px;" />
+                                </t>
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">WARNING</p>
+                                            <p>Contains gas under pressure; may explode if heated. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>Extremely flammable gas. Contains gas under pressure; may explode if heated. Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc3'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>
+                                                May cause or intensify fire; oxidiser, Contains gas under pressure; may explode if heated. Keep away from combustible materials, Keep valves and fittings free from oil and grease, In case of fire: Stop leak if safe to do so, Store in a well-ventilated place.
+                                            </p> 
+                                        </div>
+                                    </t>
+                                </div>
+                                <div style="text-align: left;">
+                                    <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="label-row">
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div style="width: 100%; clear: both;">
+                                    <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                    <span style="float: right;" t-esc="docs.name + '-1'"/>
+                                </div>
+                                <div style="width: 100%; clear: both; text-align: right; margin-top: 20px; margin-bottom: 2px;">
+                                    <t t-if="docs.get_valid_until_date_dateformat()">
+                                        Valid Until: 
+                                        <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                    </t>
+                                    <t t-else="">
+                                        Valid Until: <span class="ml4">-</span>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="label-content">
+                                <table class="border0" style="width: 100%;">
+                                    <tr>
+                                        <td style="text-align: left; vertical-align: top; width: 100%;">
+                                            <t t-foreach="docs.components_ids" t-as="components">
+                                                <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                    <span t-esc="components.requested_value"/>
+                                                    <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="ghs_logo" style="width: 10%; text-align: center;">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png"
+                                         style="width: 100%; height: auto; margin-top:50px; " />
+                                </t>
+                                <t t-if="docs.product_id.nrc_imgs in ['nrc5', 'nrc3']">
+                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png"
+                                         style="width: 100%; margin-right: 1mm; margin-left: -120%; margin-top:50px;" />
+                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png"
+                                         style="width: 100%; margin-top:50px;" />
+                                </t>
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">WARNING</p>
+                                            <p>Contains gas under pressure; may explode if heated. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>Extremely flammable gas. Contains gas under pressure; may explode if heated. Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc3'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>
+                                                May cause or intensify fire; oxidiser, Contains gas under pressure; may explode if heated. Keep away from combustible materials, Keep valves and fittings free from oil and grease, In case of fire: Stop leak if safe to do so, Store in a well-ventilated place.
+                                            </p> 
+                                        </div>
+                                    </t>
+                                </div>
+                                <div style="text-align: left;">
+                                    <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="label-row">
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div style="width: 100%; clear: both;">
+                                    <span style="float: left;" t-esc="docs.product_id.default_code"/>
+                                    <span style="float: right;" t-esc="docs.name + '-1'"/>
+                                </div>
+                                <div style="width: 100%; clear: both; text-align: right; margin-top: 20px; margin-bottom: 2px;">
+                                    <t t-if="docs.get_valid_until_date_dateformat()">
+                                        Valid Until: 
+                                        <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                    </t>
+                                    <t t-else="">
+                                        Valid Until: <span class="ml4">-</span>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="label-content">
+                                <table class="border0" style="width: 100%;">
+                                    <tr>
+                                        <td style="text-align: left; vertical-align: top; width: 100%;">
+                                            <t t-foreach="docs.components_ids" t-as="components">
+                                                <div style="line-height: 10px; margin: 0; padding: 0;">
+                                                    <span t-esc="components.requested_value"/>
+                                                    <span style="margin-left: 4px;" t-esc="components.component"/>
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="ghs_logo" style="width: 10%; text-align: center;">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                    <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/compressed_gas_diamond.png"
+                                         style="width: 100%; height: auto; margin-top:50px; " />
+                                </t>
+                                <t t-if="docs.product_id.nrc_imgs in ['nrc5', 'nrc3']">
+                                    <img src="/pdf_report/static/src/imgs/nrc5_1.png"
+                                         style="width: 100%; margin-right: 1mm; margin-left: -120%; margin-top:50px;" />
+                                    <img src="/pdf_report/static/src/imgs/nrc5_2.png"
+                                         style="width: 100%; margin-top:50px;" />
+                                </t>
+                            </div>
+                        </td>
+                        <td class="label-cell">
+                            <div class="label-content">
+                                <div>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc1'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">WARNING</p>
+                                            <p>Contains gas under pressure; may explode if heated. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc5'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>Extremely flammable gas. Contains gas under pressure; may explode if heated. Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.</p> 
+                                        </div>
+                                    </t>
+                                    <t t-if="docs.product_id.nrc_imgs == 'nrc3'">
+                                        <div>
+                                            <p style="font-weight: bold; text-align:center; color:#FF0000;">DANGER</p>
+                                            <p>
+                                                May cause or intensify fire; oxidiser, Contains gas under pressure; may explode if heated. Keep away from combustible materials, Keep valves and fittings free from oil and grease, In case of fire: Stop leak if safe to do so, Store in a well-ventilated place.
+                                            </p> 
+                                        </div>
+                                    </t>
+                                </div>
+                                <div style="text-align: left;">
+                                    <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

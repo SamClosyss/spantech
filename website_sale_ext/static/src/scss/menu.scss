@@ -1,0 +1,9 @@
+header {
+    @include media-breakpoint-up(lg) {
+        .navbar .dropdown-menu {
+            max-height: inherit !important;
+            overflow-y: inherit !important;
+            overflow-x: inherit !important;
+        }
+    }
+}

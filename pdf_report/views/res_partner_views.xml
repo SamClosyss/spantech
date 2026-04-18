@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_partner_form_extended" model="ir.ui.view">
+        <field name="name">res.partner.form.extended</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="eori_number" placeholder="e.g. BE0477472701"/>
+                <field name="company_reg_number"/>
+            </xpath>
+        </field>
+    </record>
+
+     <record id="view_partner_form_extend_requirement" model="ir.ui.view">
+        <field name="name">res.partner.form.extend.x_studio</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='x_studio_contact_telephone_number']" position="after">
+                <field name="requirement" string="Customer Special Requirements"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

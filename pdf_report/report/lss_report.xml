@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- need to add in comapny -->
+	<!--  ('lss_serbia_report', 'LSS-Serbia')] --> 
+    <template id="external_layout_boxed_extended" inherit_id="web.external_layout_standard">
+        <xpath expr="//img[@t-if='company.logo']" position="replace">
+<!--             <t t-esc="company.report_format" /> -->
+            <img width="100px" height="100px" t-if="company.logo and company.report_format == 'lss_serbia_report'"
+                 t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+            <img width="100px" height="100px" t-if="company.logo and not company.report_format == 'lss_serbia_report'"
+                 t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+        </xpath>
+    </template>
+
+     <template id="document_account_tax_totals_extended">
+        <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+            <tr class="border-black o_subtotal">
+                <td>
+                    <strong t-esc="subtotal['name']"/>
+                </td>
+
+                <td class="text-end">
+                    <span t-att-class="oe_subtotal_footer_separator" t-esc="subtotal['formatted_amount']"/>
+                </td>
+            </tr>
+
+            <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+
+        </t>
+
+        <t t-set="has_rounding" t-value="'formatted_amount_total_rounded' in tax_totals"/>
+        <!--Total amount with all taxes-->
+        <tr class="border-black o_total">
+            <t t-if="has_rounding">
+                <td>Total</td>
+            </t>
+            <t t-else="">
+                <td>
+                    <strong>Total</strong>
+                </td>
+            </t>
+            <td class="text-end">
+                <span t-esc="tax_totals['formatted_amount_total']"/>
+            </td>
+        </tr>
+        <tr t-if="has_rounding">
+            <td>
+                <strong>Total Rounded</strong>
+            </td>
+            <td class="text-end">
+                <span t-esc="tax_totals['formatted_amount_total_rounded']"/>
+            </td>
+        </tr>
+    </template>
+
+    <template id="document_sale_tax_totals_extended" priority="99" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+            <t t-if="doc.company_id.report_format == 'lss_serbia_report'" t-call="pdf_report.document_account_tax_totals_extended"/>
+            <t t-if="not doc.company_id.report_format == 'lss_serbia_report'" t-call="account.document_tax_totals"/>
+        </xpath>
+    </template>
+
+
+
+
+
+</odoo>

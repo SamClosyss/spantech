@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- https://spantech.odoo.com/web?debug=1#id=1020&menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form -->
+    <record id="product_normal_form_view_ext" model="ir.ui.view">
+        <field name="name">product.product.form.ext</field>
+        <field name="model">product.product</field>
+        <field eval="8" name="priority"/>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="product_display_name"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_normal_tree_view_ext" model="ir.ui.view">
+        <field name="name">product.product.tree.ext</field>
+        <field name="model">product.product</field>
+        <field eval="8" name="priority"/>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="product_display_name"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_variant_easy_edit_view_extended_tr" model="ir.ui.view">
+        <field name="name">product.variant.easy.edit.view.extended.tr</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='additional_product_tag_ids']" position="after">
+                <field name="product_display_name"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="NZ_safety_blackwoods_report_pdf" name="NZ Safety Blackwoods Labels">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <style>
+                    @font-face {
+                        font-family: 'Franklin';
+                        src: url('/pdf_report/static/src/fonts/Franklin_Gothic_Demi_Cond_Regular.ttf') format('truetype');
+                        font-style: normal;
+                    }
+                    .franklin_font {
+                        font-family: 'Franklin';
+                        color: #005A8B;
+                    }
+                    @font-face {
+                        font-family: 'Roboto';
+                        src: url('/pdf_report/static/src/fonts/Roboto-Regular.ttf') format('truetype');
+                        font-style: normal;
+                    }
+                    .roboto_font {
+                        font-family: 'Roboto';
+                        color: #000000;
+                    }
+                    
+                    .font_justify{
+                        text-align: justify;
+                    }
+                    .bg_blue{
+                        background-color:#23408E;
+                    }
+                </style>
+            
+                <div class="report_gasalarm"
+                     style="page-break-after: always;
+                            position: relative;
+                            width: 100%;
+                            min-height: 610px;
+                            overflow: hidden;
+                            box-sizing: border-box;
+                            margin: 0 auto;">
+                    <img src="/pdf_report/static/src/imgs/nz_safety/blackwoods_bg.png"
+                         alt="Background Frame"
+                         style="position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            z-index: -1;
+                            margin: 0;
+                            padding: 0;" />
+                    <div style="position: relative;
+                            width: 100%;
+                            height: 100%;
+                            box-sizing: border-box;
+                            overflow: hidden;">
+                                
+                        <div style="float:left; width:45%; text-align:left; line-height:1.4; padding-left:8mm;">
+                            <div style="display:inline-block; font-size:12px; margin-top:16px;">
+                                <div>
+                                    <h6 class="franklin_font">
+                                        <strong>OPERATING INSTRUCTIONS</strong>
+                                    </h6>
+                                    <p class="roboto_font font_justify">
+                                        Read and understand the Safety Data Sheet (SDS) before use.
+                                        Ensure that the regulator is clean and compatible with the cylinder.
+                                        <br/>
+                                        Turn regulator flow on before connecting to the cylinder. Hold regulator in one hand with the gauge 
+                                        pointing away from body and other personnel. With your other hand, turn the cylinder on to the regulator
+                                        until pressure is registered on the gauge, and gas will begin to flow. Turn regulator flow off and on as required.
+                                        <br/>
+                                        To remove regulator, follow this process in reverse. Always remove the regulator after use. This cylinder will re-seal after the 
+                                        regulator is removed. There may be a slight "hiss" of gas upon removal.
+                                    </p>
+                                </div>
+                            </div>
+                            <div style="margin-top:36px;">
+                                <h6 class="franklin_font">
+                                    <strong>APC TECHSAFE BY NZ SAFETY BLACKWOODS</strong>
+                                </h6>
+                            </div>
+                        </div>
+                        <div style="float:right; width:50%; text-align:right; margin-top:155px; padding-left:4mm; padding-right:4mm;">
+                            <table class="roboto_font" style="width:100%; font-size:13px; border:0px solid #ffffff; border-collapse:collapse;">
+                                <tr>
+                                    <td style="width:50%; vertical-align:top;">
+                                        <table style="width:100%; border:0px solid #ffffff; border-collapse:collapse;">
+                                            <tr>
+                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                    <b>Part No:</b>
+                                                </td>
+                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                    <span t-esc="docs.product_id.part_code"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width:50%; vertical-align:top;">
+                                        <table style="width:100%; border:0px solid #ffffff; border-collapse:collapse;">
+                                            <tr>
+                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                    <b>Lot No.:</b>
+                                                </td>
+                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                    <span t-esc="docs.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                    <b>Valid Until:</b>
+                                                </td>
+                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                    <t t-if="docs.get_valid_until_date()">
+                                                        <t t-set="d" t-value="docs.get_valid_until_date().split('-')"/>
+                                                        <t t-set="month_names" t-value="['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']"/>
+                                                        <span t-esc="d[0]"/>
+                                                        <span t-esc="month_names[int(d[1]) - 1]"/> 
+                                                        <span t-esc="int(d[2])"/>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="margin-top:8px;">
+                                <table style="width:100%; font-size:13px; border:0px solid #ffffff; border-collapse:collapse;">
+                                    <tbody>
+                                        <tr t-foreach="docs.components_ids" t-as="components" style="line-height:1.3;">
+                                            <td style="padding:0 8px; text-align:left; vertical-align:top;">
+                                                <t t-esc="components.component"/>
+                                            </td>
+                                            <td style="padding:0 8px; text-align:right; vertical-align:top;">
+                                                <t t-esc="components.requested_value"/>
+                                            </td>
+                                            <td style="padding:0 8px; text-align:left; vertical-align:top;">
+                                                <t t-esc="components.accuracy"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="width:100%; height:100%; margin-top:8px;">
+                                <table style="width:100%; height:100%; border:0px solid #ffffff; border-collapse:collapse;">
+                                    <tr>
+                                        <td style="vertical-align:bottom; padding:0; border:0px solid #ffffff;">
+                                            <table style="width:100%; font-size:13px; border:0px solid #ffffff; border-collapse:collapse;">
+                                                <tr>
+                                                    <td style="width:45%; vertical-align:top; padding:0 8px;">
+                                                        <table style="width:100%; border:0px solid #ffffff; border-collapse:collapse;">
+                                                            <tr>
+                                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                                    <b>Volume:</b>
+                                                                </td>
+                                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                                    <span t-esc="docs.product_id.volume_sp"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                                    <b>Pressure:</b>
+                                                                </td>
+                                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                                    <span t-esc="docs.product_id.pressure"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="width:10%;"></td>
+                                                    <td style="width:45%; vertical-align:top; padding:0 8px;">
+                                                        <table style="width:100%; border:0px solid #ffffff; border-collapse:collapse;">
+                                                            <tr>
+                                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                                    <b>SDS No:</b>
+                                                                </td>
+                                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                                    <span t-esc="docs.product_id.sds_number"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:left; border:0px solid #ffffff;">
+                                                                    <b>Valve:</b>
+                                                                </td>
+                                                                <td style="text-align:right; border:0px solid #ffffff;">
+                                                                    <span t-esc="docs.product_id.valve"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div style="width:100%; margin-left:8px;">
+                                    <table style="width:100%; height:100%; border:0px solid #ffffff; border-collapse:collapse; font-size:13px; text-align:left;">
+                                        <tr>
+                                            <td style="border:0px solid #ffffff; vertical-align:top; text-align:left;">
+                                                <t t-esc="docs.product_id.shipping_name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0px solid #ffffff; vertical-align:top; text-align:left;">
+                                                <t t-esc="docs.product_id.un_number"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0px solid #ffffff; vertical-align:bottom; text-align:left;">
+                                                <span style="margin:0; padding:0;">Net Wt:
+                                                    <t t-esc="docs.product_id.net_weight"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="position: relative; padding-left:8mm; padding-right:8mm;">
+                    <div style="position: absolute;bottom:10mm; z-index:-1;text-align:left;width:100%;">
+                        <table style="border:0px dashed #ffffff !important;padding: 0px;"
+                                   class="table roboto_font">
+                            <tbody>
+                                <tr style="border:0px dashed #D3D3D3 !important;font-size:12px; color:#383838!important;">
+                                    <td style="width:45%; vertical-align:top; border:0px solid #ffffff; padding-left:0; margin-left:0;">
+                                        <div class="roboto_font" style="font-size:12px;">
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2']">
+                                                <div style="margin-top:10px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        WARNING
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Contains gas under pressure; may explode if heated. Store in a well-ventilated place.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc3']">
+                                                <div>
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        May cause or intensify fire; oxidiser, Contains gas under pressure; may explode if heated. Keep away from combustible materials, Keep valves and fittings free from oil and grease, In case of fire: Stop leak if safe to do so, Store in a well-ventilated place.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6']">
+                                                <div style="font-size:10px; margin-top:5px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Extremely flammable gas. Contains gas under pressure; may explode if heated. Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking. IF exposed or concerned: Get medical advice. Store in a well-ventilated place.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc7']">
+                                                <div style="font-size:9px; margin-top:5px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Contains gas under pressure; may explode if heated. May damage fertility. May damage the unborn child. (inhalation). May cause damage to organs (blood) through prolonged or repeated exposure (inhalation). Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours. IF exposed or concerned: Get medical advice. Wear protective gloves, protective clothing, eye protection. Do not handle until all safety precautions have been read and understood. Do not breathe gas, vapours.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc8','nrc9']">
+                                                <div style="font-size:10px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Flammable gas, Contains gas under pressure; may explode if heated, Harmful if inhaled, May damage the unborn child. Suspected of damaging fertility. (if inhaled), Causes damage to organs through prolonged or repeated exposure (inhalation). Wear protective gloves, protective clothing, eye protection, Do not handle until all safety precautions have been read and understood, Do not breathe gas, vapours, Keep away from heat, hot surfaces, sparks, open flames and other ignition sources. No smoking.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc11']">
+                                                <div style="font-size:10px; margin-top:5px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Flammable gas. Contains gas under pressure; may explode if heated. Harmful if inhaled. May damage the unborn child. Suspected of damaging fertility(if inhaled). Cause damage to organs through prolonged or repeated exposure (inhalation). Wear protective gloves, protective clothing eye protection. Do not handle untill all safety precautions have been read and understood. Do not breathe gas, vapours. Keep away from heat, hot surface, sparks, open flames and other ignition sources. No Smoking.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc12']">
+                                                <div style="font-size:9px; margin-top:5px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Extremely flammable gas. Contains gas under pressure; may explode if heated. Toxic if inhaled. May form explosive mixtures with air. Symptoms may be delayed. Extended exposure to gas reduces the ability to smell sulfides. May cause frostbite. Do not handle until all safety precautions have been read and understood. Keep away from Heat, Open flames, Sparks, Hot surfaces. - No smoking. Do not breathe gas/vapors. Use and store only outdoors or in a well-ventilated place. Wear protective gloves, protective clothing, eye protection, respiratory protection.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <t t-if="docs.product_id.nrc_imgs in ['nrc13']">
+                                                <div style="font-size:9px; margin-top:5px;">
+                                                    <h6 style="color:#FF0000;" class="text-center franklin_font">
+                                                        DANGER
+                                                    </h6>
+                                                    <p class="roboto_font font_justify">
+                                                        Contains gas under pressure; may explode if heated. Causes severe skin burns and eye damage. Harmful if inhaled. Do not breathe gas, vapours. Wear protective gloves, protective clothing, eye protection, face protection. Use only outdoors or in a well-ventilated area. IF ON SKIN : (or hair) Take off immediately all contaminated clothing. Rinse skin with water or shower. Get immediate medical advice. IF INHALED : Remove person to fresh air and keep comfortable for breathing. Get immediate medical advice. IF IN EYES : Rinse cautiously with water for several minutes. Remove contact lenses, if present and easy to do. Continue rinsing. Store in a well-ventilated place.
+                                                    </p>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </td>
+                                    <td style="border:0px dashed #ccc !important; width:40%;">
+                                        <div style="display: inline-block;">
+                                            <table class="table border0" style="table-layout: fixed; border-collapse: collapse;">
+                                                <tr>
+                                                    <td style="border:0px dashed #ccc !important; width:60%; text-align:center; vertical-align:middle;">
+                                                        <div style="display:inline-block; width:100%; white-space:nowrap;">
+                                                    
+                                                            <!-- NRC1 / NRC2 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC3 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc3']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/white_fire.png"
+                                                                     style="width:75px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:75px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC4 / NRC5 / NRC6 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/white_fire.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC7 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc7']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/coshh_person.jpg"
+                                                                     style="width:80px; display:inline-block; margin-top:24px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:80px; display:inline-block; margin-top:24px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC8 / NRC9 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc8','nrc9']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/coshh_person.jpg"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/white_fire.png"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/coshh_exclamation.jpg"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC11 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc11']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/white_fire.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC12 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc12']">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/toxic-gas-2-.png"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/skull_nrc12.jpeg"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/white_fire.png"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:70px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                            <!-- NRC13 -->
+                                                            <t t-if="docs.product_id.nrc_imgs in ['nrc13']" style="">
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/corrosive.jpg"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/coshh_exclamation.jpg"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                                <img src="/pdf_report/static/src/imgs/all_GHS_labels/compressed_gas_diamond.png"
+                                                                     style="width:80px; display:inline-block; margin-top:32px;"/>
+                                                            </t>
+                                                    
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td style="position:relative; width:15%!important; vertical-align:middle; border:0; color:#005A8B!important;">
+                                        <div class="franklin_font"
+                                             style="position:absolute; left:-25%; top:23%; transform:translateY(-50%); line-height:1.2;
+                                                    font-weight:900; text-transform:uppercase; font-size:22px;">
+                                            <div style="text-align:right;">CALIBRATION</div>
+                                            <div style="text-align:right;">GAS</div>
+                                            <div style="text-align:right;">MIXTURE</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top:-30px; padding-left:8mm; padding-right:8mm;">
+                    <span style="font-size:12px;" t-esc="docs.product_id.part_code"/>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

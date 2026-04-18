@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="swara_header" inherit_id="website.layout" name="swara Hader" active="False">
+        <xpath expr="//header//nav" position="replace">
+            <t t-call="website.navbar">
+                <t t-set="_navbar_classes" t-valuef="swara_header"/>
+                <div id="top_menu_container" class="container-fluid justify-content-start justify-content-lg-between">
+                    <!-- Brand -->
+                    <t t-call="website.placeholder_header_brand">
+                        <t t-set="_link_class" t-value="'mr-0'"/>
+                    </t>
+                    <!-- Navbar Collapse -->
+                    <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0">
+                        <t t-call="website.navbar_nav">
+                            <t t-set="_nav_class" t-valuef="flex-grow-1 justify-content-center"/>
+                            <!-- Menu -->
+                            <div class="d-lg-flex justify-content-center w-lg-50 flex-wrap ">
+                                <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                    <t t-call="website.submenu">
+                                        <t t-set="item_class" t-valuef="nav-item"/>
+                                        <t t-set="link_class" t-valuef="nav-link"/>
+                                    </t>
+                                </t>
+
+                                <t t-set="collections" t-value="request.env['swara.collections'].sudo().search([])"/>
+                                <t t-foreach="collections.sorted('sequence')" t-as="collection">
+                                    <li class="nav-item">
+                                        <a t-att-href="collection.clean_url()"
+                                           t-attf-class="#{'nav-link' or ''} #{'active' if collection.clean_url() and unslug_url(request.httprequest.path) == unslug_url(collection.clean_url()) else ''}"
+                                           role="menuitem">
+                                            <span t-field="collection.name"/>
+                                            <span class="d-none" t-esc="unslug_url(request.httprequest.path)"/>
+                                            <span class="d-none" t-esc="unslug_url(collection.clean_url())"/>
+                                        </a>
+                                    </li>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="swara_search_container">
+                        <div class="swara_search_popover" tabindex="-1">
+                            <t t-call="website.website_search_box_input">
+                                <t t-set="_form_classes" t-valuef="o_wsale_products_searchbar_form swara_form"/>
+                                <t t-set="_classes" t-valuef=" "/>
+                                <t t-set="search_type" t-valuef="products"/>
+                                <t t-set="action" t-value="'/shop'"/>
+                                <t t-set="display_image" t-valuef="true"/>
+                                <t t-set="display_description" t-valuef="true"/>
+                                <t t-set="display_extra_link" t-valuef="true"/>
+                                <t t-set="display_detail" t-valuef="true"/>
+                                <t t-if="attrib_values">
+                                    <t t-foreach="attrib_values" t-as="a">
+                                        <input type="hidden" name="attrib" t-att-value="'%s-%s' % (a[0], a[1])"/>
+                                    </t>
+                                </t>
+                            </t>
+                            <a href="#" class="nav-link swara_searchbar_close">
+                                <i class="fa fa-close"/>
+                            </a>
+                        </div>
+                    </div>
+                    <li class="nav-item ml-auto list-unstyled">
+                        <a href="#" class="nav-link swara_searchbar_action">
+                            <svg focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 37 40">
+                                <path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path>
+                            </svg>
+                        </a>
+                    </li>
+
+                    <!-- Sign In -->
+                    <li groups="base.group_public" class="nav-item ml-lg-auto o_no_autohide_item list-unstyled">
+                        <a href="/web/login" class="nav-link font-weight-bold user_login_popup">
+                            <svg focusable="false" role="presentation" class="icon icon-login"
+                                 viewBox="0 0 28.33 37.68">
+                                <path d="M14.17 14.9a7.45 7.45 0 1 0-7.5-7.45 7.46 7.46 0 0 0 7.5 7.45zm0-10.91a3.45 3.45 0 1 1-3.5 3.46A3.46 3.46 0 0 1 14.17 4zM14.17 16.47A14.18 14.18 0 0 0 0 30.68c0 1.41.66 4 5.11 5.66a27.17 27.17 0 0 0 9.06 1.34c6.54 0 14.17-1.84 14.17-7a14.18 14.18 0 0 0-14.17-14.21zm0 17.21c-6.3 0-10.17-1.77-10.17-3a10.17 10.17 0 1 1 20.33 0c.01 1.23-3.86 3-10.16 3z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <!-- User Dropdown -->
+                    <ul style="margin:0px !important;">
+                    <t t-call="portal.user_dropdown">
+                        <t t-set="_avatar" t-value="true"/>
+                        <t t-set="_item_class" t-valuef="nav-item dropdown list-unstyled"/>
+                        <t t-set="_link_class" t-valuef="nav-link font-weight-bold"/>
+                    </t>
+                    </ul>
+
+                    <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+                    <li t-attf-class="#{_item_class} divider d-none"/> <!-- Make sure the cart and related menus are not folded (see autohideMenu) -->
+                    <li class="o_wsale_my_cart nav-item list-unstyled">
+                        <a href="/shop/cart"
+                           class="nav-link position-relative o_wsale_my_cart align-self-md-start nav-item swara-cart-popover">
+                            <svg focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 37 40">
+                                <path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path>
+                            </svg>
+                            <sup class="my_cart_quantity badge badge-primary"
+                                 t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                                 t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                        </a>
+                    </li>
+                    <!-- Navbar Toggler -->
+                    <t t-call="website.navbar_toggler">
+                        <t t-set="_toggler_class" t-valuef="ml-2"/>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+
+    <template id="swara_header_options" inherit_id="website.snippet_options">
+        <xpath expr="//we-select[@data-variable='header-template']" position="inside">
+            <we-button title="swara-Header"
+                       data-customize-website-views="swara_web.swara_header"
+                       data-customize-website-variable="'swara-Header'"
+                       data-img="/swara_web/static/src/images/swara_header.png"/>
+        </xpath>
+    </template>
+</odoo>

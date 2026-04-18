@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_crm_lead_97117f2f-cb71-48e1-bac8-1bae06b63e0c -->
+    <record id="crm_lead_view_form_extended" model="ir.ui.view">
+        <field name="name">crm.lead.form.extended</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[@name='opportunity_partner']/field[@name='partner_id']"
+                   position="after">
+                <field name="x_studio_area"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='tag_ids']" position="after">
+                <field name="x_studio_percent_funds"/>
+                <field name="x_studio_percent_mml"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web?debug=1#menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&id=1001&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Sales Tags</attribute>
+            </xpath>
+            <xpath expr="//group[@name='lead_priority']/field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Sales Tags</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_crm_lead_e89c9925-2a88-4e26-8081-e73cfeb9266a -->
+    <record id="crm_case_tree_view_oppor_extended" model="ir.ui.view">
+        <field name="name">crm.case.tree.view.oppor.extended</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='my_activity_date_deadline']" position="after">
+                <field optional="show" name="x_studio_area" string="Area"/>
+                <field optional="show" name="x_studio_percent_funds" string="Percent funds"/>
+                <field optional="show" name="x_studio_percent_mml" string="Percent MML"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

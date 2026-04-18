@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="mml_header">
+        <div class="header o_company_1_layout border-dark border-bottom">
+            <div class="row">
+                <!-- Spantech Products Ltd -->
+                <t t-if="o.company_id.report_format == 'MML_report'">
+                    <div class="content col-7">
+                        <h4 style="text-transform: uppercase;font-weight:bolder;font-family: 'Roboto-Medium';padding-bottom:5px;"
+                            class="border-bottom">
+                            <t t-esc="o.company_id.name"/>
+                        </h4>
+                        <p style="margin-bottom: 0px;font-size:12px;line-height:17px;padding-bottom:10px;">
+                            <br/>
+                            <span>Registered an England and Wales No 2330005 VAT No. GB530743313</span>
+                            <br/>
+                            <span>Willow House, Yale Business Village, Elice Way Wrexham LL13 7VL, United Kingdom</span>
+                            <br/>
+                            <span>Tel: +44 (0)1342-893239</span>
+                            <br/>
+                            <span>E-mail: admin@micromaterials.co.uk &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; https://www.micromaterials.co.uk/</span>
+                            <br/>
+                        </p>
+                    </div>
+                    <div class="content col-1 pl-0 pt-4"><span/></div>
+                    <div class="content col-4 pl-0 pt-4">
+                        <img alt="Logo" class="w-100" t-att-src="'/logo?company=%d' % (o.company_id)"/>
+                    </div>
+                </t>
+                <!-- Spancan n Equipment Ltd -->
+                <t t-if="o.company_id.report_format == 'spancan_n_equipment_report'">
+                    <div class="content col-7">
+                        <h4 style="text-transform: uppercase;font-weight:bolder;font-family: 'Roboto-Medium';padding-bottom:-5%;"
+                            class="border-bottom">
+                            <t t-esc="o.company_id.name"/>
+                        </h4>
+                        <p style="margin-bottom: 0px;font-size:12px;line-height:17px;padding-bottom:-30%;">
+                            <span style="font-weight:bolder;font-family: 'Roboto-Medium';">Spancan n Equipment</span>
+                            <br/>
+                            <span>28-B Rowland Road</span>
+                            <br/>
+                            <span>700 020 - Kolkata</span>
+                            <br/>
+                            <span>West Bengal (IN)</span>
+                            <br/>
+                            <span>India</span>
+                            <br/>
+                            <span>GSTIN:  GST. NO. 19ALHPS3415M1ZM</span>
+                            <br/>
+                        </p>
+                    </div>
+                    <div class="content col-4 pl-0 pt-4">
+                        <img alt="Logo" class="w-100" t-att-src="'/logo?company=%d' % (o.company_id)"/>
+                    </div>
+                    <!--<div class="col-2 mb4">-->
+                        <!--<img alt="Logo" class="max-height: 4px;" t-att-src="'/logo?company=%d' % (o.company_id)"/>-->
+                    <!--</div>-->
+                </t>
+                <!-- Header for AG Gases-->
+                <t t-if="o.company_id.report_format == 'ag_gases_report'">
+                    <div class="content col-7">
+                        <h4 style="text-transform: uppercase;font-weight:bolder;font-family: 'Roboto-Medium';padding-bottom:-5%;"
+                            class="border-bottom">
+                            <t t-esc="o.company_id.name"/>
+                        </h4>
+                        <t t-if="o._name != 'mrp.production'">
+                            <p style="margin-bottom: 0px;font-size:12px;line-height:17px;padding-bottom:-30%;">
+                                <span style="font-weight:bolder;font-family: 'Roboto-Medium';">Unit 1A Britannic Works,
+                                    Broom Street, Hanley,
+                                </span>
+                                <br/>
+                                <span>Stoke-on-Trent, England, ST1 2ER</span>
+                                <br/>
+                                <span>Office: +44(0)1782 616611</span>
+                                <br/>
+                                <span>Company Reg Number 10667218</span>
+                                <br/>
+                                <span>Vat Reg Number 313 2118 57</span>
+                                <br/>
+                                <span>EORI Number: GB 313 2118 57000</span>
+                                <br/>
+                                <span>Email: sales@agequip.co.uk</span>
+                                <br/>
+                                <span>www.agequip.co.uk</span>
+                                <br/>
+                            </p>
+                        </t>
+                    </div>
+                    <div class="col-2 mb4">
+                        <img alt="Logo" class="max-height: 4px;" src="pdf_report/static/description/AG_GASES_Logo.png"/>
+                    </div>
+                    <div class="col-2 mb4">
+                        <!--<div class="col-3 mb4">-->
+                        <!--<img alt="Logo" class="w-100" t-att-src="'/logo?company=%d' % (o.company_id)"/>-->
+                        <img alt="Logo" class="max-height: 4px;" t-att-src="'/logo?company=%d' % (o.company_id)"/>
+                    </div>
+                </t>
+            </div>
+            <div class="row">
+                <div class="col-12 mx-0">
+                    <h4 class="invoice pull-right"
+                        style="margin-top:-3.5%;text-transform: uppercase;font-weight:bolder;font-family: 'Roboto-Medium';margin-bottom: 0px;">
+                        <t t-if="o._name == 'account.move' and not is_shipping_invoice">
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                            <span t-if="o.move_type == 'out_refund'">Credit Note</span>
+                            <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
+                            <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                        </t>
+                        <t t-if="o._name == 'account.move' and is_shipping_invoice">
+                            <!--<span>Shipping Invoice</span>-->
+                            <span>Commercial Invoice</span>
+                        </t>
+                        <t t-elif="o._name == 'sale.order'">
+                            <t t-if="env.context.get('confirmation', False) or is_order_conformation">
+                                <span>Order Acknowledgement</span>
+                            </t>
+                            <t t-else="">
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <span t-if="o.state not in ['draft','sent']">Order</span>
+                                    <span t-if="o.state in ['draft','sent']">Quotation</span>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <span>Pro-Forma Invoice</span>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-elif="o._name == 'stock.picking'">
+                            <t t-if="o.picking_type_id.name == 'Delivery Orders'">
+                                <span>Delivery Note</span>
+                            </t>
+                            <t t-else="">
+                                <span t-field="o.picking_type_id.name"/>
+                            </t>
+                        </t>
+                        <t t-elif="o._name == 'purchase.order'">
+                            <span t-if="o.state not in ['draft','sent']">Purchase Order</span>
+                            <span t-if="o.state in ['draft','sent']">Request for Quotation</span>
+                        </t>
+                        <t t-else="">
+                            <span/>
+                        </t>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="mml_footer">
+        <div class="footer o_standard_footer">
+            <a style="display:inline-block;font-weight:bolder;font-family: 'Roboto-Medium';color:#000;"
+               t-att-href="company.website">
+                <t t-esc="company.website"/>
+            </a>
+            <div t-if="report_type == 'pdf'" class="text-muted d-inline-block pull-right">
+                Page:
+                <span class="page"/>
+                /
+                <span class="topage"/>
+            </div>
+        </div>
+
+    </template>
+
+    <template id="mml_layout_standard">
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-set="company" t-value="company.with_context(lang='en_US')"/>
+
+        <t t-call="pdf_report.mml_header"/>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <t t-call="pdf_report.mml_footer"/>
+    </template>
+
+</odoo>

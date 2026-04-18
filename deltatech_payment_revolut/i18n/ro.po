@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* deltatech_payment_revolut
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-11 10:42+0000\n"
+"PO-Revision-Date: 2024-07-11 10:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: deltatech_payment_revolut
+#: model:ir.model.fields,field_description:deltatech_payment_revolut.field_marketplace_payment_provider__code
+#: model:ir.model.fields,field_description:deltatech_payment_revolut.field_payment_provider__code
+msgid "Code"
+msgstr "Cod"
+
+#. module: deltatech_payment_revolut
+#. odoo-python
+#: code:addons/deltatech_payment_revolut/models/payment_transaction.py:0
+#, python-format
+msgid "Missing API Key"
+msgstr "Lipsește cheia API"
+
+#. module: deltatech_payment_revolut
+#. odoo-python
+#: code:addons/deltatech_payment_revolut/models/payment_transaction.py:0
+#, python-format
+msgid "No transaction found matching reference %s."
+msgstr "Nu s-a găsit nicio tranzacție care să corespundă referinței %s."
+
+#. module: deltatech_payment_revolut
+#: model:payment.provider,display_as:deltatech_payment_revolut.payment_acquirer_revolut
+msgid "Online Revolut (powered by revolut)"
+msgstr "Revolut online (furnizat de revolut)"
+
+#. module: deltatech_payment_revolut
+#: model:ir.model,name:deltatech_payment_revolut.model_account_payment_method
+msgid "Payment Methods"
+msgstr "Metode plată"
+
+#. module: deltatech_payment_revolut
+#: model:ir.model,name:deltatech_payment_revolut.model_payment_provider
+msgid "Payment Provider"
+msgstr "Furnizor plată"
+
+#. module: deltatech_payment_revolut
+#: model:ir.model,name:deltatech_payment_revolut.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Tranzacție plată"
+
+#. module: deltatech_payment_revolut
+#: model:account.payment.method,name:deltatech_payment_revolut.payment_method_revolut
+#: model:ir.model.fields.selection,name:deltatech_payment_revolut.selection__payment_provider__code__revolut
+#: model:payment.provider,name:deltatech_payment_revolut.payment_acquirer_revolut
+msgid "Revolut"
+msgstr ""
+
+#. module: deltatech_payment_revolut
+#: model:ir.model.fields,field_description:deltatech_payment_revolut.field_marketplace_payment_provider__revolut_api_key
+#: model:ir.model.fields,field_description:deltatech_payment_revolut.field_payment_provider__revolut_api_key
+msgid "Revolut Api Key"
+msgstr "Cheie API Revolut"
+
+#. module: deltatech_payment_revolut
+#: model:ir.model.fields,help:deltatech_payment_revolut.field_marketplace_payment_provider__code
+#: model:ir.model.fields,help:deltatech_payment_revolut.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr "Codul tehnic al acestui furnizor de plăți."
+
+#. module: deltatech_payment_revolut
+#: model_terms:payment.provider,pre_msg:deltatech_payment_revolut.payment_acquirer_revolut
+msgid ""
+"You will be redirected to the Revolut website after clicking on the payment "
+"button."
+msgstr ""
+"Veți fi redirecționat către site-ul Revolut după ce faceți clic pe butonul "
+"de plată."
+
+#. module: deltatech_payment_revolut
+#: model_terms:payment.provider,auth_msg:deltatech_payment_revolut.payment_acquirer_revolut
+msgid "Your payment has been authorized."
+msgstr "Plata dvs. a fost autorizată."
+
+#. module: deltatech_payment_revolut
+#: model_terms:payment.provider,cancel_msg:deltatech_payment_revolut.payment_acquirer_revolut
+msgid "Your payment has been cancelled."
+msgstr "Plata dvs. a fost anulată."
+
+#. module: deltatech_payment_revolut
+#: model_terms:payment.provider,pending_msg:deltatech_payment_revolut.payment_acquirer_revolut
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr ""
+"Plata dvs. a fost procesată cu succes, dar așteaptă aprobarea."
+
+#. module: deltatech_payment_revolut
+#: model_terms:payment.provider,done_msg:deltatech_payment_revolut.payment_acquirer_revolut
+msgid "Your payment has been successfully processed. Thank you!"
+msgstr "Plata dvs. a fost procesată cu succes. Mulțumim!"

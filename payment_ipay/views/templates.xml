@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <template id="payment_ipay.redirect_form" name="iPay Africa Redirect Form">
+            <form t-att-action="checkout_url" method="post">
+                <input type="hidden" id="live" name="live" t-att-value="live"/>
+                <input type="hidden" id="ttl" name="ttl" t-att-value="amount"/>
+                <input type="hidden" id="oid" name="oid" t-att-value="reference"/>
+                <input type="hidden" id="vid" name="vid" t-att-value="vendor"/>
+                <input type="hidden" id="hsh" name="hsh"  t-att-value="hash_key"/>
+                <input type="hidden" id="curr" name="curr" t-att-value="currency_name"/>
+                <input type="hidden" id="tel" name="tel" t-att-value="partner_phone"/>
+                <input type="hidden" id="eml" name="eml" t-att-value="partner_email"/>
+                <input type="hidden" id="cbk" name="cbk" t-att-value="callback_url"/>
+                <input type="hidden" id="crl" name="crl" t-att-value="crl"/>
+            </form>
+        </template>
+    </data>
+</odoo>
+

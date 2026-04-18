@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="qrcode_report_pdf">
+        <t t-call="web.basic_layout">
+            <style>
+                table{
+                    height:370px;
+                    width:370px;
+                }
+            </style>
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div class="qrcode_report" style="page-break-after: always;"> <!--style="page-break-after: always;"-->
+                    <center>
+                        <table>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <span t-field="cylinder.cylinder_qrcode" t-options="{'widget': 'image'}"/>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

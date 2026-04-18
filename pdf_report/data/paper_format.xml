@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- QWeb Reports -->
+        <record id="spantech_paperformat" model="report.paperformat">
+            <field name="name">Spantech Receipt</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">37</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="sspzoo_paperformat" model="report.paperformat">
+            <field name="name">sspzoo Invoice Receipt</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">68.00</field>
+            <field name="margin_bottom">75</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">65</field>
+            <field name="dpi">90</field>
+        </record>
+
+         <record id="aggased_certificate_paperformat" model="report.paperformat">
+            <field name="name">Ag Gases Certificate Receipt</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">3</field>
+             <field name="margin_top">5.00</field>
+             <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="aggased_bottle_label_paperformat" model="report.paperformat">
+            <field name="name">Ag Gases Bottle Label</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">1.00</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="aggased_wip_paperformat" model="report.paperformat">
+            <field name="name">WIP Label</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">75</field>
+            <field name="page_width">35</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_top">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <record id="aggases_cac_label_paperformat" model="report.paperformat">
+            <field name="name">Ag Gases CAC Label</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">1.00</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- CAC NRC Certificate -->
+        <record id="cac_nrc_certificate_paperformat" model="report.paperformat">
+            <field name="name">Ag Gases CAC NRC Certificate Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">10</field>
+             <field name="margin_top">10.00</field>
+             <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!-- CAC HPC Certificate -->
+        <record id="cac_hpc_certificate_paperformat" model="report.paperformat">
+            <field name="name">Ag Gases CAC HPC Certificate Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">10</field>
+             <field name="margin_top">10.00</field>
+             <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- QR Code Report paperformat -->
+        <record id="qrcode_report_paperformat" model="report.paperformat">
+            <field name="name">QR Code Report</field>
+            <field name="default" eval="False" />
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">80</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!-- All In Gas Label -->
+        <record id="all_in_gas_label_paperformat" model="report.paperformat">
+            <field name="name">All In Gas Label Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">2</field>
+             <field name="margin_top">2.00</field>
+             <field name="margin_left">1</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!-- CAC Box Label -->
+        <record id="cac_box_label_paperformat" model="report.paperformat">
+            <field name="name">CAC Box Label Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">23.00</field>
+             <field name="margin_top">25.90</field>
+             <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!--Kimessa-->
+        <record id="kimessa_label_paperformat" model="report.paperformat">
+            <field name="name">Kimessa Label</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">1</field>
+             <field name="margin_top">2.00</field>
+             <field name="margin_left">1</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!--All in Gas Certificate-->
+        <record id="all_in_gas_certificate_paperformat" model="report.paperformat">
+            <field name="name">All in Gas Certificate Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_top">5.00</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!--CAC NKD LABEL-->
+        <record id="cac_nkd_label_paperformat" model="report.paperformat">
+            <field name="name">CAC NKD Label Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">7</field>
+            <field name="margin_top">8</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- All In Gas Label Krapp -->
+        <record id="all_in_gas_label_krapp_paperformat" model="report.paperformat">
+            <field name="name">All In Gas Label Report - Krapp</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_top">2.00</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <!--9 new reports A5 paperformat-->
+        <record id="a5_paperformat" model="report.paperformat">
+            <field name="name">Size A5 Custom Reports</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_top">2</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">1</field>
+            <field name="dpi">90</field>
+        </record>
+    </data>
+</odoo>

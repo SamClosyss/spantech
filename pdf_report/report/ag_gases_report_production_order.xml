@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="ag_gases_report_mrporder_document">
+        <t t-call="pdf_report.spantech_layout_standard">
+            <t t-set="o" t-value="o.with_context(lang=o.user_id.lang)"/>
+            <br/>
+            <div>
+                <div class="oe_structure"/>
+                <table style="width:100%;border:none !important;" border="0">
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;padding:0px;margin:0px;">
+                            <div style="padding:0px;margin:0px;border: 2px solid">
+                                <b>Work Order Reference:</b>
+                                <br/>
+                                <span t-field="o.name"/>
+                            </div>
+                        </td>
+                        <td style="width:33%;border:none !important;">
+                            <div t-field="o.name"
+                                 t-options="{'widget': 'barcode', 'width': 400, 'height': 100, 'img_style': 'width:100%;height:35px'}"/>
+                        </td>
+                        <td style="width:33%;border:none !important;padding:0px;margin:0px;">
+                            <div style="padding:0px;margin:0px;border: 2px solid;">
+                                <b>Deadline:</b>
+                                <br/>
+                                <span t-field="o.date_deadline"/>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="border:none !important;" colspan="3">
+                            <p class="mt2 mb2"></p>
+                        </td>
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;">
+                            <b>Part code &amp; Description:</b>
+                            <br/>
+                            <span t-field="o.product_id.default_code"/>
+                        </td>
+                        <td style="width:33%;border:none !important;" rowspan="2">
+                            <div class="mt2 mb2">
+                                <p></p>
+                            </div>
+                        </td>
+                        <td valign="top"
+                            style="padding:0px;margin:0px;width:33%;border:none !important;text-align:center"
+                            rowspan="2">
+                            <div style="padding:0px;margin:0px;border: 2px solid;text-align:center">
+                                Gas mixer to confirm that mix is made in<br/>accordance with WIN-006<br/>Sign
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;">
+                            <b>Customer:</b>
+                            <br/>
+                            <span t-field="o.sale_id.partner_id.name" />
+                        </td>
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;">
+                            <b>AG Order Number:</b>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </td>
+
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;">
+                            <b>Quantity:</b>
+                            <br/>
+                            <span t-field="o.product_qty"/>
+                            <span t-field="o.product_uom_id.name" groups="uom.group_uom"/>
+                        </td>
+                        <td rowspan="3" style="width:30%;border: 2px solid;text-align:center" valign="top">
+                            <b>Premix used:</b>
+                            <br/>
+                        </td>
+                        <td rowspan="3" style="width:30%;border:2px solid;text-align:center" valign="top">
+                            <b>Can mixture sign:</b>
+                            <br/>
+                        </td>
+
+                    </tr>
+                    <tr style="border:none !important;">
+                        <td style="width:33%;border:none !important;">
+                            <b>PO Number:</b>
+                            <br/>
+                            <span t-field="o.origin"/>
+                        </td>
+
+                    </tr>
+                </table>
+                <br/>
+                <div class="mt2 mb2">
+                    <p></p>
+                </div>
+                <div class="mt2 mb2" style="width:100%;border: 2px solid;">
+                    <p>
+                        <b>Customer Special Requirement:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.requirement"/>
+                    </p>
+                </div>
+                <div class="mt2 mb2">
+                    <p></p>
+                </div>
+                 <table style="width:100%;border:2px solid !important">
+                    <tr style="border:none !important">
+                        <td style="width:40%;border:none !important">
+                            <b>
+                                <u>Components</u>
+                            </b>
+                        </td>
+                        <td style="width:20%;border:none !important">
+                            <b>
+                                <u>Requested Value</u>
+                            </b>
+                        </td>
+                        <td style="width:20%;border:none !important">
+                            <b>
+                                <u>Actual Value</u>
+                            </b>
+                        </td>
+                        <td style="width:20%;border:none !important">
+                            <b>
+                                <u>Lab Test Result</u>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr style="border:none !important">
+                        <td colspan="4" style="border:none !important;text-align:center">
+                            <p class="mt4 mb4"></p>
+                        </td>
+                    </tr>
+                    <t t-foreach="o.move_raw_ids" t-as="move_raw_id">
+                        <tr style="border:none !important">
+                            <td style="width:40%;border:none !important;">
+                                <span t-field="move_raw_id.product_id.display_name"/>
+                            </td>
+                            <td style="width:20%;border:none !important;">____________</td>
+                            <td style="width:20%;border:none !important;">____________</td>
+                            <td style="width:20%;border:none !important;">____________</td>
+                        </tr>
+                        <tr style="border:none !important">
+                            <td colspan="4" style="border:none !important;text-align:center">
+                                <p class="mt4 mb4"></p>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                <div class="mt2 mb2">
+                    <p></p>
+                </div>
+                <br/>
+                <table style="width:100%;border:none !important" border="0">
+                    <tr style="border:none !important">
+                        <td style="width:1000%;border:none !important">
+                        <!--<td style="width:40%;border: 2px solid;">-->
+                            <b>Bill of Material:</b>
+                            <br/>
+                            <!--<span t-field="o.product_id.display_name"/>-->
+                            <span t-field="o.bom_id.display_name"/>
+                        </td>
+                        <!--<td style="width:60%;border:none !important" valign="top"></td>-->
+                    </tr>
+                </table>
+                <div class="mt2 mb2">
+                    <p></p>
+                </div>
+                <br/>
+
+                <div class="mt2 mb2" style="width:100%;border: 2px solid;">
+                    <p>
+                        Bom Details:
+                    </p>
+                    <!--<p>-->
+                    <!--Size:____________Pressure:____________Volume:____________SSD:____________Net-->
+                    <!--Wight:____________Gross Wight:____________-->
+                    <!--<br/>-->
+                    <!--UN NO:_________Shipping Name:____________________________________Class:_________Label-->
+                    <!--Template:_________-->
+                    <!--</p>-->
+                    <p>
+                        <b>Size:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.size"/>
+                        <b>Pressure:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.pressure"/>
+                        <b>Volume:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.volume_sp"/>
+                        <b>SDS:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.sds_number"/>
+                        <b>Net Weight:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.net_weight"/>
+                        <b>Gross Weight:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.gross_weight"/>
+                        <br/>
+                        <b>UN NO:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.un_number"/>
+                        <b>Shipping Name:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.shipping_name"/>
+                        <b>Class:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.product_class"/>
+                        <b>Label Template:</b>
+                        <span style="padding-right: 5px;padding-left: 5px;" t-field="o.product_id.label_template"/>
+                    </p>
+                </div>
+                <br/>
+                <table style="width:100%;border:none !important;">
+                    <tr style="border:none !important;">
+                        <td style="width:55%;border: 2px solid;text-align:left">
+                            Additional Comments:
+                            <span style="color:red">Any special requirements for customer EG label, special shipping
+                                days
+                            </span>
+                            <br/>
+                            <span style="padding-right: 5px;padding-left: 5px;"
+                                  t-field="o.sale_id.internal_note"/>
+                        </td>
+                        <td style="width:5%;border:none !important;text-align:center">
+
+                        </td>
+                        <td style="width:40%;border: 2px solid;text-align:center">
+                            QC Checked:
+                        </td>
+                    </tr>
+                </table>
+                <div class="mt2 mb2">
+                    <p></p>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table style="width:100%;border:none !important;">
+                    <h3>Can Numbers</h3>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">1:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">2:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">3:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">4:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">5:<br/>-
+                        </td>
+                    </tr>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">6:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">7:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">8:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">9:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">10:<br/>-
+                        </td>
+                    </tr>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">11:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">12:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">13:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">14:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">15:<br/>-
+                        </td>
+                    </tr>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">16:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">17:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">18:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">19:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">20:<br/>-
+                        </td>
+                    </tr>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">21:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">22:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">23:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">24:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">25:<br/>-
+                        </td>
+                    </tr>
+                    <tr style="width:100%;border: 1px solid;padding:0px;margin:0px">
+                        <td style="width:20%;border: 1px solid;">26:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">27:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">28:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">29:<br/>-
+                        </td>
+                        <td style="width:20%;border: 1px solid;">30:<br/>-
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_mrporder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!-- AG Gases & Equipment Ltd -->
+                <t t-if="o.company_id.report_format == 'ag_gases_report'">
+                    <t t-call="pdf_report.ag_gases_report_mrporder_document" t-lang="o.user_id.lang"/>
+                </t>
+                <t t-else="">
+                    <t t-call="mrp.report_mrporder" t-lang="o.user_id.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

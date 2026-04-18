@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cac_label_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div class="cac_certificate_report" style="page-break-after: always;">
+                    <div style="display:block;">
+                        <div style="float:left;width:45%; text-align:center">
+                            <img t-if="docs.logo_use != 'custom'" alt="Logo" style="height:120px;"
+                                 src="/pdf_report/static/src/imgs/cac_label_address.png"/>
+                            <img t-if="docs.logo_use == 'custom'" t-attf-src="data:image/png;base64,{{docs.logo}}"
+                                 style="height:120px;"></img>
+                        </div>
+                        <div style="float:right;width:55%; text-align:center">
+                            <img t-if="docs.logo_use != 'custom'" alt="Logo" style="height:120px;"
+                                 src="/pdf_report/static/src/imgs/cac_label_logo.png"/>
+                            <img t-if="docs.logo_use == 'custom'" t-attf-src="data:image/png;base64,{{docs.logo}}"
+                                 style="height:120px;"></img>
+                        </div>
+                        
+                    </div>
+                    <table style="border:1px dashed #FFF !important;padding: 0px;margin: 0px; color:#383838!important;" class="table borderless"
+                           width="100%">
+                        <tbody>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px !important;font-size:12px!important" width="45%">
+                                    <div>
+                                        <h6>
+                                            <strong>Operating Instructions</strong>
+                                        </h6>
+                                        <p>
+                                            Read and understand the Safety Data Sheet (SDS) before use.
+											Ensure that the regulator is clean and compatible with the cylinder.
+											Turn regulator flow on before connecting to the cylinder. Hold regulator in one hand with the guage 
+											pointing away from body and other personnel. With your hand, turn the cylinder on to the regulator
+											until pressure is registered on the gauge, and gas will begin to flow. Turn regulator flow off and on as required.
+											To remove regulator, follow this process in reverse. Always remove the regulator after use. This cylinder will re-seal after the 
+											regulator is removed. There may be a slight "hiss" of gas upon removal.
+                                        </p>
+                                    </div>
+                                </td>
+                                <td style="border:0px !important;text-align:left;color:#383838!important;" width="55%">
+                                    <h4 class="text-center"><strong>Calibration Gas Mixture</strong></h4>
+                                    <div style="width:100%; margin-top:10px;" class="row">
+                                        <div style="width:50%;">
+		                                    <table style="font-size:13px; line-height: 1px; border:0px dashed #fff;"
+				                                class="table" width="100%">
+				                                <tr>
+				                                    <td style="border:0px dashed #fff !important; padding: 0; padding-left: 8px;">
+				                                        <span><b>Part No: </b></span>
+				                                        <span t-esc="docs.product_id.default_code"/>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td style="border:0px dashed #fff !important; padding: 0; padding-left: 8px;">
+				                                        <span><b>Cylinder No: </b></span>
+				                                        <span><t t-esc="cylinder.name"/></span>
+				                                    </td>
+				                                </tr>
+				                            </table>
+	                                    </div>
+	                                    <div style="width:50%;">
+	                                       <table style="font-size:13px; line-height: 1px; border:0px dashed #fff;"
+                                                class="table" width="100%">
+                                                <tr>
+                                                    <td style="border:0px dashed #fff !important; padding: 0; padding-left: 8px;">
+                                                        <span><b>Lot No: </b></span>
+                                                        <span t-esc="docs.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:0px dashed #fff !important; padding: 0; padding-left: 8px;">
+                                                        <span><b>Valid until: </b></span>
+                                                        <span t-esc="docs.get_valid_until_date()"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+	                                    </div>
+                                    </div>
+                                    <div style="margin-top:10px;">
+	                                    <table style="border:1px dashed #FFF !important;padding: 0px;margin: 0px; font-size:13px;"
+	                                           class="table borderless" width="100%">
+	                                        <tbody>
+	                                            <tr t-foreach="docs.components_ids" t-as="components"
+	                                                style="border:0px dashed #ccc !important; line-height:6px;">
+	                                                <td style="border:0px dashed #ccc !important;">
+	                                                    <t t-esc="components.component"/>
+	                                                </td>
+	                                                <td style="border:0px dashed #ccc !important; text-align:right;">
+	                                                    <t t-esc="components.requested_value"/>
+	                                                </td>
+	                                                <td style="border:0px dashed #ccc !important;">
+	                                                    <t t-esc="components.accuracy"/>
+	                                                </td>
+	                                            </tr>
+	                                        </tbody>
+	                                    </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container" style="">
+                        <div class="row align-items-center">
+                            <div class="o_colored_level" t-att-style="'font-size:12px;width:45%;color:#383838!important;'">
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1_cac" style="margin-top:32px;"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc4'" t-out="docs.product_id.nrc4_cac"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc5'" t-out="docs.product_id.nrc5_cac"/>
+                                <t t-if="docs.product_id.nrc_imgs == 'nrc3'" t-out="docs.product_id.nrc3_cac"/>
+                            </div>
+                            <div style="margin-top: 90px; width:55%; margin-left:15px;">
+	                            <table style="border:0px dashed #ffffff !important;padding: 0px; bottom:0; color:#383838!important;"
+                                   class="table">
+                                    <tbody>
+                                        <tr style="border:0px dashed #D3D3D3 !important;font-size:13px; line-height: 1px;">
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Volume:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <t t-esc="docs.product_id.volume_sp"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>SDS No:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <t t-esc="docs.product_id.sds_number"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:0px dashed #D3D3D3 !important;font-size:13px; line-height: 1px;">
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Pressure:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <t t-esc="docs.product_id.pressure"/>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <b>Valve:</b>
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important;">
+                                                <t t-esc="docs.product_id.valve"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="position: relative;">
+                    <div style="position: absolute;bottom:0; z-index:-1;text-align:left;width:100%;">
+                    <table style="border:0px dashed #ffffff !important;padding: 0px; bottom:0; background-color:#F1F1F1!important;"
+                                   class="table">
+                                    <tbody>
+                                        <tr style="border:0px dashed #D3D3D3 !important;font-size:12px; color:#383838!important;">
+                                            <td style="border:0px dashed #ccc !important; width:25%!important;">
+		                                        <t t-esc="docs.product_id.un_number"/>
+		                                        <t t-esc="docs.product_id.shipping_name"/>
+		                                        <br/>
+		                                        <t t-esc="docs.product_id.net_weight"/>
+		                                    </td>
+                                            <td style="border:0px dashed #D3D3D3 !important; width:10%!important;">
+                                                <img src="/pdf_report/static/src/imgs/compressed_gas_diamond.png" style="width:100%;"/>
+                                            </td>
+                                            <td t-if="docs.product_id.nrc_imgs in ['nrc3','nrc4','nrc5']" style="border:0px dashed #D3D3D3 !important; width:10%!important;">
+                                                <img src="/pdf_report/static/src/imgs/nrc4_cac_certificate.png" style="width:100%;"/>
+                                            </td>
+                                            <td style="border:0px dashed #ccc !important; width:35%!important; font-style: italic; color:#383838!important;">
+                                                The cylinder above referenced was produced from cylinders prepared by gravimetric methods and then analysed by comparison to primary gravimetric standards,
+traceable via SI to the mole. All expressions for amount of substance are for gas phase, and are by mol percent unless otherwise noted. 'Air' is defined as 
+20.9% oxygen relative to the overall mixture, with the remainder as nitrogen.
+                                            </td>
+                                            <td style="border:0px dashed #D3D3D3 !important; text-align:right; width:20%!important;">
+                                                <img src="/pdf_report/static/src/imgs/sci_qual_logo.png" style="width:100%;"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                    </table>
+                  </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

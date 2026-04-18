@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_production_assign_serial_number" model="ir.ui.view">
+            <field name="name">mrp.production.assign.form</field>
+            <field name="model">mrp.production.assign</field>
+            <field name="arch" type="xml">
+                <form string="Assign Mass Serial Number">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="to_serial_number_generator" widget="radio"/>
+                                <field name="product_id"/>
+                                <field name="assign_serial_number" attrs="{'invisible': [('to_serial_number_generator', '!=', 'manually')],'required': [('to_serial_number_generator', '=', 'manually')]}"/>
+                                <field name="product_qty" attrs="{'invisible': [('to_serial_number_generator', '!=', 'manually')],'required': [('to_serial_number_generator', '=', 'manually')]}"/>
+                                <field name="next_qty" attrs="{'invisible': [('to_serial_number_generator', '!=', 'manually')]}"/>
+                                <field name="to_serial_number" attrs="{'invisible': [('to_serial_number_generator', '!=', 'manually')]}"/>
+                                 <field name="import_file" filename="file_name" attrs="{'invisible': [('to_serial_number_generator', '!=', 'import_file')]}"/>
+                                 <field name="file_name" invisible = "1"/> 
+                                 <button name="import_xls_file" type="object" string="Import" class="oe_highlight" attrs="{'invisible': [('to_serial_number_generator', '!=', 'import_file')]}"/>
+                            </group>     
+                        </group>                           
+                        <group attrs="{'invisible': [('to_serial_number_generator', '!=', 'manually')]}">
+                            <button name="click_generate" string="Generate" type="object" class="oe_highlight"/>
+                        </group>
+                        <notebook>
+                            <page string = "Lot list">
+                            <field name="lot_line_ids" nolabel ="1">
+                                <tree editable="botttom">
+                                    <field name = "name"/>
+                                </tree>
+                            </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button name="create_serial_number" type="object" string="Create Serial Number" class="btn-primary" />
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

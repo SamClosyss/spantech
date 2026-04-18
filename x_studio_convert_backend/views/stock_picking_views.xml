@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_stock_pi_fc7b1d9f-58e0-4147-93a0-32bb4c536b2f -->
+    <record id="view_picking_form_inherit_x_studio" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit.x_studio</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//field[@name='location_id']" position="after">-->
+                <!--<field widget="pdf_viewer" name="x_studio_delivery_note" string="Delivery Note Attachment"/>-->
+            <!--</xpath>-->
+
+            <!-- https://spantech.odoo.com/web#menu_id=554&cids=2%2C1&id=255&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="delivery_notes"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web#id=280&menu_id=554&cids=2%2C1%2C3&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='move_ids']/list/field[@name='product_id']" position="after">
+                <field name="product_tmpl_notes"/>
+                <field name="product_tmpl_hs_code"/>
+                <field name="product_tmpl_country_of_origin"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web?debug=1#id=330&cids=1%2C2%2C3%2C4&menu_id=554&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='carrier_tracking_ref']" position="attributes">
+                <attribute name="readonly">carrier_id != False and state in ('done', 'cancel')</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

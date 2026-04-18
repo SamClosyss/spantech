@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_sale_ord_56d08536-e53b-4a13-b644-9deec76493b8 -->
+    <record id="view_order_form_extended_x_studio" model="ir.ui.view">
+        <field name="name">sale.order.form.extended.x_studio</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='validity_date']" position="before">
+                <field name="x_studio_project_name" string="Project Name"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web#id=255&menu_id=554&cids=2%2C1&action=806&model=project.task&view_type=form -->
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="product_tmpl_additional_description"/>
+                <field name="product_tmpl_notes"/>
+                <field name="product_tmpl_hs_code"/>
+                <field name="product_tmpl_country_of_origin"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web?debug=1#menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&id=1001&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Sales Tags</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_sale_ord_26612ec4-b960-409a-89b8-c48f15ed9994 -->
+    <record id="view_order_tree_extended_x_studio" model="ir.ui.view">
+        <field name="name">sale.order.tree.extended.x_studio</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='create_date']" position="after">
+                <!--<field optional="show" name="x_studio_html_field_0VmmT"/>-->
+                <field name="x_studio_project_name" string="Project Name" optional="show"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web#id=282&menu_id=554&cids=2%2C1%2C3&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="client_order_ref" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_order_tree_extended_spantech" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.spantech</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <!-- https://spantech.odoo.com/web#id=282&menu_id=554&cids=2%2C1%2C3&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="client_order_ref" optional="show"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web?debug=1#id=318&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="x_studio_project_name" string="Project Name" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

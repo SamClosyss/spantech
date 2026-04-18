@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_employee_form_extended" model="ir.ui.view">
+        <field name="name">hr.employee.form.extended</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']/group" position="inside">
+                <group string="Kenyan Details">
+                    <field name="national_health_insurance_number"/>
+                    <field name="social_security_number"/>
+                    <field name="kenyan_tax_pin"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

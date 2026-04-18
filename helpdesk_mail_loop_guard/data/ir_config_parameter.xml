@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Default relay domains for loop prevention -->
+        <record id="param_helpdesk_relay_domains" model="ir.config_parameter">
+            <field name="key">helpdesk.relay_domains</field>
+            <field name="value">accuspan.co.uk, sendinblue.com, smtp-relay</field>
+        </record>
+    </data>
+</odoo>

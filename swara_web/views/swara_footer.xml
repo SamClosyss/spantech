@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="swara_footer" inherit_id="website.layout" name="Swara Footer" active="False">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                    <section class="s_text_block pt40 pb16" data-snippet="s_text_block" data-name="Text">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-2 pt24 pb24">
+                                    <h5 class="mb-3">Quick links</h5>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="https://swara-acacia-brand.myshopify.com/policies/shipping-policy">Shipping Policy</a>
+                                        </li>
+                                        <li>
+                                            <a href="/policies/refund-policy">Refund Policy</a>
+                                        </li>
+                                        <li>
+                                            <a href="/policies/terms-of-service">Terms of Service</a>
+                                        </li>
+                                        <li>
+                                            <a href="/policies/privacy-policy">Privacy Policy</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-5 pt24 pb24">
+                                    <h5 class="mb-3">About us</h5>
+                                    <t t-snippet-call="website_mass_mailing.s_newsletter_subscribe_form"/>
+                                </div>
+                                <div id="connect" class="col-lg-4 offset-lg-1 pt24 pb24">
+                                    <h5 class="mb-3">Talk about your business</h5>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span>
+                                                <a href="mailto:shop@swaraacacia.com">
+                                                    shop@swaraacacia.com
+                                                </a>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="o_force_ltr">
+                                                <a href="tel:+1 (650) 555-0111">+230 5 254 1596</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="swara_footer_copyright" inherit_id="website.layout" name="Swara Footer copyright">
+            <xpath expr="//div[@data-name='Copyright']" position="replace">
+                <div class="swara_footer_copyright container py-3">
+                    <div class="row">
+                        <div class="col text-muted text-center">
+                            <span class="o_footer_copyright_name mr-2">© 2022, Little <a href="https://swara-acacia-brand.myshopify.com/">Swara Shop Kenya</a> Покреће Схопифи</span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="swara_footer_options" inherit_id="website.snippet_options">
+            <xpath expr="//we-select[@data-variable='footer-template']" position="inside">
+                <we-button title="Swara-Footer"
+                           data-customize-website-views="swara_web.swara_footer"
+                           data-customize-website-variable="'swara Footer'"
+                           data-img="/swara_web/static/src/images/swara_footer.png"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

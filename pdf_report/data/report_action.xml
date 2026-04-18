@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+
+        <!-- Invoices Report -->
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="name">Invoices</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.custom_report_invoice_with_payments</field>
+            <field name="report_file">pdf_report.custom_report_invoice_with_payments</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')
+            </field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id"
+                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>
+            <field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>
+        </record>
+
+        <record id="sszooaccount_invoices" model="ir.actions.report">
+            <field name="name">SSZOO Invoices Document</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.sspzoo_invoice_document</field>
+            <field name="report_file">pdf_report.sspzoo_invoice_document</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')
+            </field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id"
+                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>
+            <field name="paperformat_id" ref="pdf_report.sspzoo_paperformat"/>
+        </record>
+
+        <!-- invoices without payment Report -->
+        <record id="account.account_invoices_without_payment" model="ir.actions.report">
+            <field name="name">Invoices without Payment</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.custom_report_invoice</field>
+            <field name="report_file">pdf_report.custom_report_invoice</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')
+            </field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>
+        </record>
+
+        <!-- Pro forma invoice Report -->
+        <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+            <field name="name">Proforma Invoice</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sale.report_saleorder_pro_forma</field>
+            <field name="report_file">sale.report_saleorder_pro_forma</field>
+            <field name="print_report_name">'PRO-FORMA - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/>
+            <!--<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>-->
+        </record>
+
+        <!-- Quotation / Sale Order Report -->
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <!--<field name="name">Spantech Quotation</field>-->
+            <field name="name">Quotation</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_saleorder</field>
+            <field name="report_file">pdf_report.report_saleorder</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' %
+                (object.name)) or 'Order - %s' % (object.name)
+            </field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+            <!--<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>-->
+        </record>
+
+        <!-- Order Conformation Report -->
+        <record id="action_report_confirm_saleorder" model="ir.actions.report">
+            <field name="name">Order Confirmation</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_saleorder_confirmation</field>
+            <field name="report_file">pdf_report.report_saleorder_confirmation</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation Acknowledgement - %s' %
+                (object.name)) or 'Order Acknowledgement - %s' % (object.name)
+            </field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+            <!--<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>-->
+        </record>
+
+        <!-- Delivery Slip Report -->
+        <record id="stock.action_report_delivery" model="ir.actions.report">
+            <field name="name">Delivery Slip</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_deliveryslip</field>
+            <field name="report_file">pdf_report.report_deliveryslip</field>
+            <field name="print_report_name">'Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)
+            </field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <!--<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>-->
+        </record>
+
+        <!-- MML Purchase Order -->
+        <record id="mml_action_report_purchase_order" model="ir.actions.report">
+            <field name="name">MML Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.mml_report_purchaseorder</field>
+            <field name="report_file">pdf_report.mml_report_purchaseorder</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Request for Quotation - %s' %
+                (object.name) or 'MML Purchase Order - %s' % (object.name))
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- SSPZOO Purchase Order -->
+        <record id="sspzoo_action_report_purchase_order" model="ir.actions.report">
+            <field name="name">SSPZOO Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.sspzoo_report_purchaseorder</field>
+            <field name="report_file">pdf_report.sspzoo_report_purchaseorder</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Request for Quotation - %s' %
+                (object.name) or 'MML Purchase Order - %s' % (object.name))
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+             <field name="paperformat_id" ref="pdf_report.sspzoo_paperformat"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- MML Request for Quotation -->
+        <record id="mml_report_purchase_quotation" model="ir.actions.report">
+            <field name="name">MML Request for Quotation</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.mml_report_purchasequotation</field>
+            <field name="report_file">pdf_report.mml_report_purchasequotation</field>
+            <field name="print_report_name">'MML Request for Quotation - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- https://spantech.odoo.com/web#id=623&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+        <!-- Purchase Order Report -->
+        <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+            <field name="name">Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_purchaseorder</field>
+            <field name="report_file">pdf_report.report_purchaseorder</field>
+            <field name="print_report_name">
+                (object.state in ('draft', 'sent') and 'Request for Quotation - %s' %
+                (object.name) or 'Purchase Order - %s' % (object.name))
+            </field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Request for Quotatoion Report -->
+        <record id="purchase.report_purchase_quotation" model="ir.actions.report">
+            <field name="name">Request for Quotation</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_purchasequotation</field>
+            <field name="report_file">pdf_report.report_purchasequotation</field>
+            <field name="print_report_name">'Request for Quotation - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Request for Production Order Report-->
+         <record id="mrp.action_report_production_order" model="ir.actions.report">
+             <field name="name">Production Order</field>
+             <field name="model">mrp.production</field>
+             <field name="report_type">qweb-pdf</field>
+             <field name="report_name">pdf_report.report_mrporder</field>
+             <field name="report_file">pdf_report.report_mrporder</field>
+             <field name="print_report_name">'Production Order - %s' % object.name</field>
+             <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+             <field name="binding_type">report</field>
+         </record>
+
+
+        <!-- https://spantech.odoo.com/web?debug=1#id=721&cids=7%2C4%2C3%2C2%2C1&menu_id=554&action=806&model=project.task&view_type=form -->
+        <!-- Invoices Report -->
+        <!--<record id="ag_shipping_invoice" model="ir.actions.report">-->
+        <!--<field name="name">Shipping Invoices</field>-->
+        <!--<field name="model">account.move</field>-->
+        <!--<field name="report_type">qweb-pdf</field>-->
+        <!--<field name="report_name">pdf_report.report_shipping_invoice</field>-->
+        <!--<field name="report_file">pdf_report.report_shipping_invoice</field>-->
+        <!--<field name="print_report_name">'Shipping Invoice - %s' % (object.name)</field>-->
+        <!--&lt;!&ndash;<field name="print_report_name">(object._get_report_base_filename())</field>&ndash;&gt;-->
+        <!--&lt;!&ndash;<field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>&ndash;&gt;-->
+        <!--<field name="binding_model_id" ref="stock.model_stock_picking"/>-->
+        <!--<field name="binding_type">report</field>-->
+        <!--<field name="groups_id"-->
+        <!--eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>-->
+        <!--&lt;!&ndash;<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>&ndash;&gt;-->
+        <!--<field name="invisible">1</field>-->
+        <!--</record>-->
+        <!-- TODO: -> DeprecationWarning: The <report> tag is deprecated, use a <record> tag for 'ag_shipping_invoice'.-->
+<!--        <report id="ag_shipping_invoice"-->
+<!--                model="account.move"-->
+<!--                file="pdf_report.report_shipping_invoice"-->
+<!--                name="pdf_report.report_shipping_invoice"-->
+<!--                report_type="qweb-pdf"-->
+<!--                string="Shipping Invoices"-->
+<!--                print_report_name="'Shipping Invoice - %s' % (object.name)"-->
+<!--                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"-->
+<!--                menu="False"/>-->
+
+        <record id="ag_shipping_invoice" model="ir.actions.report">
+            <field name="name">Shipping Invoices</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.report_shipping_invoice</field>
+            <field name="report_file">pdf_report.report_shipping_invoice</field>
+            <field name="print_report_name">'Shipping Invoice - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <record id="action_report_finished_product_wip" model="ir.actions.report">
+            <field name="name">WIP Label</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pdf_report.label_wip_label_pdf</field>
+            <field name="report_file">pdf_report.label_wip_label_pdf</field>
+            <!--<field name="paperformat_id" ref="product.paperformat_label_sheet"/>-->
+            <field name="paperformat_id" ref="pdf_report.aggased_wip_paperformat"/>
+            <field name="print_report_name">'WIP Label- %s' % object.name</field>
+            <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

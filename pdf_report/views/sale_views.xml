@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.view.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="before">
+                <button name="action_order_confirmation_send" type="object" invisible="1"
+                        string="Send Order Confirmation by Email" context="{'confirmation': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='analytic_account_id']" position="after">
+                <field name="shipping_info"/>
+                <field name="wo_incoterm"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_reporting']" position="after">
+                <group name="mml_proform_info" string="Proforma Invoice"
+                       attrs="{'invisible': [('is_mml_report_format', '==', 'MML_report')]}">
+                    <field name="is_mml_report_format" invisible="1"/>
+                    <field name="proforma_inv_prices"/>
+                    <field name="proforma_inv_delivery"/>
+                    <field name="proforma_inv_delivery_days"/>
+                </group>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web#id=591&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='client_order_ref']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='client_order_ref']" position="after">
+                <field name="client_order_rfq" required="1"/>
+                <field name="reason_for_export" />
+            </xpath>
+
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                <field name="lead_time_sp"/>
+                <!-- https://spantech.odoo.com/web#id=857&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+                <field name="partner_requirement" string="Customer Special Requirements"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web#id=623&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+            <xpath expr="//page[@name='other_information']" position="inside">
+                <group name="note_group" col="6" class="mt-2 mt-md-0" string="Special Requirements">
+                    <group colspan="4">
+                        <field name="special_requirements" nolabel="1" placeholder="Special Requirements..."/>
+                    </group>
+                    <div class="oe_clear"/>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='partner_details']" position="replace">
+                <group name="partner_details">
+                    <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+                    <field name="partner_invoice_id" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice'}" options='{"always_reload": True}'/>
+                    <field name="partner_shipping_id" widget="res_partner_many2one" groups="account.group_delivery_invoice_address" context="{'default_type':'delivery', 'show_address': 1,}" options='{"always_reload": True}'/>
+                    <!-- <field name="partner_id"/> -->
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

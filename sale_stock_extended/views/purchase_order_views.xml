@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- https://spantech.odoo.com/web?debug=1#id=314&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+    <record id="purchase_order_kpis_tree_extended_sp" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree.extended.sp</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="purchase_order_sent"
+                       widget="badge"
+                       optional="show"
+                       decoration-danger="purchase_order_sent == 'no'"
+                       decoration-success="purchase_order_sent == 'yes'"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web?debug=1#id=748&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='activity_ids']" position="after">
+                <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- https://spantech.odoo.com/web?debug=1#id=314&menu_id=554&cids=1%2C2%2C3%2C4&action=806&model=project.task&view_type=form -->
+    <record id="purchase_order_view_tree_extended_sp" model="ir.ui.view">
+        <field name="name">purchase.order.tree.extended.sp</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_status']" position="after">
+                <field name="purchase_order_sent"
+                       widget="badge"
+                       optional="show"
+                       decoration-danger="purchase_order_sent == 'no'"
+                       decoration-success="purchase_order_sent == 'yes'"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web?debug=1#id=748&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='activity_ids']" position="after">
+                <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- https://spantech.odoo.com/web?debug=1#id=748&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+    <record id="purchase_order_form_extended_tag" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.extended.tag</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fiscal_position_id']" position="after">
+                <field name="tag_ids" widget="many2many_tags"
+                       options="{'color_field': 'color', 'no_create_edit': True}"/>
+            </xpath>
+
+            <!-- https://spantech.odoo.com/web?debug=1#id=391&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

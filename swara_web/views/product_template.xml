@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <!--        product.product_template_form_view-->
+        <field name="inherit_id" ref="website_sale.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='product_template_images']" position="before">
+                <group string="Product Collection" name="collection">
+                    <field name="collection_id"/>
+                    <field name="website_label"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="all_in_gas_certificate_report_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+            
+                <div class="certificate_report" style="page-break-after: always;">
+                    <div style="display: block; width: 100%;">
+                        <!-- <div style="width: 100%; font-size: 14px; text-align: center; display: table;">
+                            <div style="display: table-cell; width: 40%; vertical-align: middle; border: 1px solid #007dc6; padding: 10px; box-sizing: border-box;">
+                                <p style="margin: 0.3em 0 0 0; color: #007dc6; font-weight: bold;">All-in-Gas GmbH</p>
+                                <p style="margin: 0.1em 0 0 0; font-weight: bold;">Gautinger Str.84, Starnberg</p>
+                                <p style="margin: 0.1em 0 0 0; font-weight: bold;">82319 Germany</p>
+                            </div>
+                            <div style="display: table-cell; width: 40%; text-align: center; vertical-align: middle;">
+                                <img 
+                                    t-if="docs.logo_use != 'custom'" 
+                                    src="/pdf_report/static/src/imgs/all_in_gas_logo_only.jpeg" 
+                                    alt="Logo"
+                                    style="max-height: 120px; height: auto; width: auto;" />
+                            </div>
+                        </div> -->
+                        <div style="text-align: center; width: 100%;">
+                            <img 
+                                    t-if="docs.logo_use != 'custom'" 
+                                    src="/pdf_report/static/src/imgs/accuspan_gases_logo.jpg" 
+                                    alt="Logo"
+                                    style="max-height: 120px; height: auto; width: auto;" />
+                        </div>
+                        <div t-if="docs.logo_use == 'custom'" style="text-align: center; width: 100%;">
+                            <img t-if="docs.logo_use == 'custom'" 
+                                 t-attf-src="data:image/png;base64,{{docs.logo}}" 
+                                 style="max-width: 100%; height: auto; max-height: 120px;" />
+                        </div>
+                    </div>
+                    <div class="row" style="width:100%; text-align: center; margin-top:16px;">
+                        <p class="text-center" style="text-align: center; font-size:18px;">Certificate of Composition</p>
+                    </div>
+                    <div style="width:100%; margin-top:-10px;" class="row">
+                        
+                        <div style="width:65%;">
+                            <table style="font-size:12px; border:1px dashed #FFF !important; line-height: 4px;"
+                                class="table borderless" width="100%">
+	                            <tr>
+	                                <td><b>Customer</b></td>
+	                                <td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+	                                    <t t-if="docs.sale_id" t-esc="docs.sale_id.partner_id.name"/>
+	                                </td>
+	                            </tr>
+	                            <tr>
+                                    <td style="white-space:nowrap;"><b>Order No</b></td>
+                                    <td style="white-space:nowrap;"><t t-if="docs.sale_id" t-esc="docs.sale_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Customer PO</b></td>
+                                    <td><t t-if="docs.sale_id" t-esc="docs.sale_id.client_order_ref"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="white-space:nowrap;"><b>Prodn Date</b></td>
+                                    <td style="white-space:nowrap;">
+                                        <t t-if="docs.mark_done_date" t-esc="docs.mark_done_date.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Valid Until</b></td>
+                                    <td><t t-esc="docs.valid_date.strftime('%d-%m-%Y')"/></td>
+                                </tr>
+	                        </table>
+                        </div>
+                        <div style="width:35%;">
+                            <table style="font-size:12px; border:1px dashed #FFF !important;line-height: 4px;"
+                                class="table borderless" width="100%">
+	                            <tr>
+                                    <td><t t-esc="docs.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder No</b></td>
+                                    <td><t t-esc="cylinder.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cylinder Size</b></td>
+                                    <td><t t-esc="docs.product_id.x_studio_cylinder_size"/></td>
+                                </tr>
+	                            <tr>
+                                    <td><b>Cylinder Valve</b></td>
+                                    <td><t t-esc="docs.product_id.valve"/></td>
+                                </tr>
+	                            <tr>
+	                                <td><b>Net(KG)</b></td>
+	                                <td><t t-esc="docs.product_id.net_weight"/></td>
+	                            </tr>
+	                            <tr>
+	                                <td><b>Gross(KG)</b></td>
+	                                <td><t t-esc="docs.product_id.gross_weight"/></td>
+	                            </tr>
+	                        </table>
+                        </div>
+                    </div>
+                    <p style="padding:1px"></p>
+                    <table style="font-size:12px; margin-top:-10px; border:1px dashed #fff !important; line-height: 4px;" class="table borderless" width="100%">
+                        <tbody>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Component</b>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Requested Value</b>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Certified Value</b>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Accuracy</b>
+                                </td>
+                            </tr>
+                            <tr t-foreach="docs.components_ids" t-as="components"
+                                style="border:0px dashed #ccc !important;">
+                                <td style="border:0px dashed #ccc !important;">
+                                    <t t-esc="components.component"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <t t-esc="components.requested_value"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <t t-esc="components.certified_value"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <t t-esc="components.accuracy"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="font-size:12px; border:1px dashed #fff !important; margin-top:-15px;" class="table borderless" width="100%">
+                        <tbody>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Pressure :</b>
+                                    <span t-esc="docs.product_id.pressure"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Volume :</b>
+                                    <span t-esc="docs.product_id.volume_sp"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Certified by :</b>
+                                    <span t-if="docs.user_id" t-esc="docs.user_id.name"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Class :</b>
+                                    <span t-esc="docs.product_id.product_class"/>
+                                </td>
+                            </tr>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px dashed #ccc !important;" colspan="2">
+                                    <t t-esc="docs.product_id.un_number"/>
+                                    <t t-esc="docs.product_id.shipping_name"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="padding:2px; border:solid 1px; font-size:12px; margin-top:-15px;">
+                        Please note all units are in mol%. Mixture uncertainty is +/-1%. Relative mixtures are certified
+                        gravimetrically adhering to ISO9001:2015 procedures. The weights used to calibrate the balances
+                        are traceable to the National Physical Laboratory (NPL). High purity raw materials supplied
+                        under a Certificate of Conformity are used to ensure the final gravimetric filling accuracy.
+                    </p>
+                    <table style="font-size:12px; border:1px dashed #fff !important; margin-top:-15px;" class="table borderless" width="100%">
+                        <tbody>
+                            <tr style="border:0px dashed #ccc !important;">
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>Default Code :</b>
+                                    <span t-if="docs.product_id.default_code" t-esc="docs.product_id.default_code"/>
+                                </td>
+                                <td style="border:0px dashed #ccc !important;">
+                                    <b>SDS Number :</b>
+                                    <span t-esc="docs.product_id.sds_number"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="display:inline-block;justify-content: center;width:70%;font-size:11px;margin-top:-15px;">
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc1'" t-out="docs.product_id.nrc1"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc2'" t-out="docs.product_id.nrc2"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc3'" t-out="docs.product_id.nrc3"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc4'" t-out="docs.product_id.nrc4"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc5'" t-out="docs.product_id.nrc5"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc6'" t-out="docs.product_id.nrc6"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc7'" t-out="docs.product_id.nrc7"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc8'" t-out="docs.product_id.nrc8"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc9'" t-out="docs.product_id.nrc9"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc11'" t-out="docs.product_id.nrc11"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc12'" t-out="docs.product_id.nrc12"/>
+                        <t t-if="docs.product_id.nrc_imgs == 'nrc13'" t-out="docs.product_id.nrc13"/>
+                    </div>
+                    <div style="width:95%; right:0!important; text-align:right;">
+                        <img t-if="docs.product_id.nrc_imgs not in ['nrc12','nrc13']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh cylinder.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc3']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6','nrc8','nrc9','nrc11']"
+                             src="/pdf_report/static/src/imgs/nrc4_cac_certificate.png"
+                             style="max-width: 100%;width:11%;bottom:0;"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc3']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser yellow.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc4','nrc5','nrc6','nrc8','nrc9','nrc11']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh oxidiser red.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc7','nrc8','nrc9']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh person.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc8','nrc9']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh exclamation.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2','nrc3','nrc7']"
+                             src="/pdf_report/static/src/imgs/fwdlogos/coshh green cylinder.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                             src="/pdf_report/static/src/imgs/nrc12/compressed_gas_diamond_nrc12.png"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                             src="/pdf_report/static/src/imgs/nrc12/flammable_gas_diamond_nrc12.png"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                             src="/pdf_report/static/src/imgs/nrc12/skull_nrc12.jpeg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                             src="/pdf_report/static/src/imgs/nrc12/flammable _gas_nrc12.gif"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc12']"
+                             src="/pdf_report/static/src/imgs/nrc12/toxic-gas-2-.png"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                             src="/pdf_report/static/src/imgs/nrc13/coshh_cylinder.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                             src="/pdf_report/static/src/imgs/nrc13/coshh_exclamation.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                             src="/pdf_report/static/src/imgs/nrc13/corrosive.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                        <img t-if="docs.product_id.nrc_imgs in ['nrc13']"
+                             src="/pdf_report/static/src/imgs/nrc13/non_flammable_compressed_gas_2.jpg"
+                             style="max-width: 100%;height: auto;width:11%"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- https://spantech.odoo.com/web?debug=1#id=1114&menu_id=554&cids=4%2C3%2C1%2C7%2C8%2C6%2C5%2C10%2C9%2C2&action=806&model=project.task&view_type=form -->
+    <template id="report_rental_order_document_ext" inherit_id="sale_renting.report_rental_order_document">
+        <xpath expr="//h2/t/span" position="replace">
+            <span t-if="doc.state not in ['draft','sent']">Delivery Note #</span>
+        </xpath>
+        <!-- <xpath expr="//table[hasclass('o_main_table')]/thead/tr/th[3]" position="replace"/>
+        <xpath expr="//tbody[hasclass('sale_tbody')]/t/tr/td[3]" position="replace"/> -->
+        <xpath expr="//table[hasclass('o_main_table')]" position="replace">
+            <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th class="text-start">Description</th>
+                            <th class="text-start">Delivery Date</th>
+                            <th class="text-end">Delivered</th>
+                            <th class="text-end">Returned</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody" t-if="doc.is_rental_order">
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <tr t-if="line.qty_delivered > 0">
+                                <td><span t-field="line.product_id.name"/><span t-if="line.product_id.part_code"> - </span><span t-field="line.product_id.part_code"></span></td>
+                                <td class="text-start"><span t-field="line.start_date"/></td>
+                                <td class="text-end"><span t-field="line.qty_delivered"/></td>
+                                <td class="text-end"><span t-field="line.qty_returned"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+        </xpath>
+        <xpath expr="//div[@id='informations']/div[1]" position="after">
+            <div t-if="doc.user_id.name" class="col-auto mw-100 mb-2">
+                <strong>PO Number:</strong>
+                <p class="m-0" t-field="doc.client_order_ref"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

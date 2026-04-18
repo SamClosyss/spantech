@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_invoice_form_inherit_bank_charges" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.bank.charges</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="bank_charges" />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_payment_form_inherit_bank_charges" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.bank_charges</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="bank_charges" invisible="payment_type != 'outbound' or amount == 0.0"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_account_journal_form_inherit_bank_charges" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.bank.charges</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="default_bank_charge_account_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

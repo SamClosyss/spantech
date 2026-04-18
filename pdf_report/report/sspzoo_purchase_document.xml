@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sspzoo_report_purchaseorder">
+        <t t-call="web.html_container">
+            <t t-set="o" t-value="docs"/>
+
+            <div class="header">
+                <div style="width: 45%;float:left;border: 2px solid #000000;box-shadow: 2px 2px #000000;">
+                    <img style="padding:5px;max-width: 225px; max-height:225px;" alt="Logo"
+                         t-attf-src="/pdf_report/static/description/sspzoo_icon.png"/>
+                    <p style="text-align:left;padding-left: 10px;font-size: 12px;">
+                        <b>Seller:</b>(Sprzedawca):
+                        <br/>
+                        SPANTECH SPÓŁKA Z OGRANICZONĄ
+                        <br/>
+                        <span>ODPOWIEDZIALNOŚCIĄ</span>
+                        <br/>
+                        <br/>
+                        <span>Aleja Krakowska 1</span>
+                        <span>|</span>
+                        <span>05-552 Wola Mrokowska</span>
+                        <span>|</span>
+                        <span>Poland Reg No:</span>
+                        <span>0000622244</span>
+                        <span>|</span>
+                        <span>VAT No:</span>
+                        <span>PL1231319498</span>
+                        <span>EORI No:</span>
+                        <span>PL123131949800000</span>
+                        <span>|</span>
+                        <span>BDO No:</span>
+                        <span>000107016</span>
+                        <br/>
+                        <br/>
+                        <span>Tel:</span>+48 22 487 98 44
+                        <span>|</span>
+                        <span>Mob:</span>+48 519 150 515
+                        <br/>
+                        <span>E-mail:</span>
+                        info@spantech.pl
+                    </p>
+                </div>
+                <div style="width: 54%;float:left;">
+                    <div style="margin: 0px 16px 16px 16px;border:1px solid #FFFFFF !important">
+                        <table style="border:1px solid #FFFFFF !important" border="0" width="100%">
+                            <tr style="border:0px;background:#a9a6a6;font-size:28px;" align="center" height="20px">
+                                <th style="border:0px;" colspan="2">Purchase Order</th>
+                            </tr>
+                            <tr style="font-size:20px;border:0px;" align="center" height="20px">
+                                <td style="border:0px;" colspan="2">
+                                    NO:
+                                    <b>
+                                        <span t-esc="o.name"/>
+                                    </b>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;font-size: 16px;">
+                                <td style="border:0px;" width="50%" align="left">
+                                    <p/>
+                                </td>
+                                <td style="border:0px;" width="50%" align="right">
+                                    Date&amp;nbsp;&amp;nbsp;:&amp;nbsp;&amp;nbsp;2022-07-28
+                                    <div style="margin:10px 0px"/>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;background:#a9a6a6;font-size:18px;">
+                                <td style="border:0px;" width="50%" align="left">
+                                    <b>&amp;nbsp;&amp;nbsp;ORIGINAL</b>
+                                </td>
+                                <td style="border:0px;" width="50%" align="right">
+                                    Page:<span class="page"/>&amp;nbsp;&amp;nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <table class="table" width="100%">
+                <thead>
+                    <tr class="bg-lightgrey">
+                        <td class="text-left">
+                            <h4 style="padding:0px;margin:0px;">Supplier:</h4>
+                        </td>
+                        <td style="width:10%">
+                        </td>
+                        <td class="text-left">
+                            <h4 style="padding:0px;margin:0px;">Delivery Place:</h4>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">
+                            <t t-if="o.partner_id">
+                                <span t-field="o.partner_id.name"/>
+                                <br/>
+                                <span t-if="o.partner_id.street">
+                                    <t t-esc="o.partner_id.street"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.partner_id.street2">
+                                    <t t-esc="o.partner_id.street2"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.partner_id.city">
+                                    <t t-esc="o.partner_id.city"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.partner_id.zip">
+                                    <t t-esc="o.partner_id.zip"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.partner_id.country_id">
+                                    <t t-esc="o.partner_id.country_id.name"/>
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-else="">
+                                <h6>-</h6>
+                            </t>
+                        </td>
+                        <td style="width:10%">
+                        </td>
+                        <td class="text-left">
+                            <t t-if="o.company_id">
+                                <span t-field="o.company_id.name"/>
+                                <br/>
+                                <span t-if="o.company_id.street">
+                                    <t t-esc="o.company_id.street"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.company_id.street2">
+                                    <t t-esc="o.company_id.street2"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.company_id.city">
+                                    <t t-esc="o.company_id.city"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.company_id.zip">
+                                    <t t-esc="o.company_id.zip"/>
+                                </span>
+                                <br/>
+                                <span t-if="o.company_id.country_id">
+                                    <t t-esc="o.company_id.country_id.name"/>
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-else="">
+                                <h6>-</h6>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr style="height:2em">
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="width:10%">
+                        </td>
+                        <td class="text-left">
+                            <h4 style="padding:0px;margin:0px;">Attn:</h4>
+                            Artur Kulińczak
+                            <br/>
+                            tel.: +48 519 150 515
+                            <br/>
+                            e-mail: artur.kulinczak@spantech.pl
+                        </td>
+                    </tr>
+                    <tr style="height:2em">
+                        <td colspan="3">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="100%" class="table">
+                <tr style="font-size:18px;font-weight:100;border: 2px solid #000000 !important;">
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-left:1px solid #000 !important;vertical-align: top;padding-left:4px;">
+                        No.
+                    </td>
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                        Description
+                    </td>
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                        Quantity
+                    </td>
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                        UOM
+                    </td>
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                        Price GBP
+                    </td>
+                    <td align="left"
+                        style="border-top:1px solid #000 !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;;border-left:1px solid #FFFFFF !important;vertical-align: top;padding-left:4px;">
+                        Amount GBP
+                    </td>
+                </tr>
+                <tbody>
+                    <t t-set="current_count" t-value="1"/>
+                    <t t-foreach="o.order_line" t-as="line">
+                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <td>
+                                <t t-esc="current_count"/>
+                            </td>
+                            <t t-if="not line.display_type">
+                                <td id="product">
+                                    <t t-esc="line.name"/>
+                                    <t t-if="line.product_tmpl_notes">
+                                        <br/>
+                                        <t t-esc="line.product_tmpl_notes"/>
+                                    </t>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.product_qty"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_subtotal"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <div style="background:#a9a6a6;">
+                <div class="col-6"></div>
+                 <div class="col-6"></div>
+            </div>
+             <div>
+                <div class="col-6"></div>
+                 <div class="col-6"></div>
+            </div>
+            <table style="border:1px solid #FFFFFF !important" width="100%" class="table">
+                <tr style="padding:0px !important;margin:0px !important;background:#a9a6a6;border:1px solid #a9a6a6 !important">
+                    <th width="50%"
+                        style="padding:0px !important;margin:0px !important;border:1px solid #a9a6a6 !important;border-right:1px solid #a9a6a6;"
+                        align="left">
+                    </th>
+                    <th style="padding:0px !important;margin:0px !important;border:1px solid #a9a6a6 !important" align="right">
+                        <span style="font-size:16px;padding-right: 6px;">Amount GBP</span>
+                    </th>
+                </tr>
+                <tr style="background:#a9a6a6;border:1px solid #a9a6a6 !important">
+                    <th width="50%"
+                        style="background:#FFF;border:1px solid #a9a6a6 !important;border-right:1px solid #a9a6a6;"
+                        align="left">
+                    </th>
+                    <th style="border:1px solid #a9a6a6 !important" align="right">
+                        <t t-set="tax_totals" t-value="o.tax_totals"/>
+                        <span style="font-size:16px;padding-right: 6px;">Total :  <span t-esc="tax_totals['formatted_amount_total']"/></span>
+                    </th>
+                </tr>
+            </table>
+            <div t-attf-class="footer o_standard_footer">
+                <div style="width: 100%;height: 100%; float:right">
+                    <div style="margin: 0px 16px 16px 0px;">
+                        <table style="border:1px solid #FFFFFF !important" width="100%" class="table">
+                            <tr style="background:#a9a6a6;border:1px solid #FFFFFF !important">
+                                <th width="50%"
+                                    style="border:1px solid #FFFFFF !important;border-right:1px solid #a9a6a6;"
+                                    align="left">
+                                    <span style="font-size:16px;">Total</span>
+                                </th>
+                                <th style="border:1px solid #FFFFFF !important" align="right">
+                                    <span style="font-size:16px;padding-right: 6px;">1 990,00 EUR</span>
+                                </th>
+                            </tr>
+                        </table>
+
+                        <table style="border:1px solid #FFF" width="100%">
+                            <tr style="border:1px solid #FFFFFF !importantfont-size: 20px;">
+                                <td width="30%" align="center" style="border-bottom: 3px solid #000;">
+                                    <b style="font-size: 18px;">Artur Kulińczak</b>
+                                </td>
+                                <td width="5%"/>
+                                <td width="15%" align="center" style="border-bottom: 3px solid #000;">
+
+                                </td>
+                                <td width="5%"/>
+                                <td width="30%" align="center" style="border-bottom: 3px solid #000;">
+                                </td>
+                            </tr>
+                            <tr style="border:1px solid #FFFFFF !importantfont-size: 18px;">
+                                <td width="30%" align="center" style="border:1px solid #FFFFFF !important">
+                                    <span style="font-size: 18px;">The person authorized to issue the document</span>
+                                </td>
+                                <td width="5%"/>
+                                <td width="15%" align="center">
+                                    Date of receipt
+                                </td>
+                                <td width="5%"/>
+                                <td width="30%" align="center">
+                                    <span style="font-size: 16px;border:1px solid #FFFFFF !important">
+                                        The person authorized to receive the document
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr style="font-size: 16px;border:1px solid #FFFFFF !important">
+                                <td width="100%" align="right" colspan="5">
+                                    Comarch ERP Optima, v. 2021.3.1.1015, nr klucza 5000183430s
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

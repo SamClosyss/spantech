@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_purchase_79538dbd-88f0-4df6-9aa7-5f596deb7ab4 -->
+    <record id="purchase_order_form_inherit_x_studio" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.x_studio</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='currency_id']" position="after">
+                <field name="x_studio_r_d_expense" string="R &amp; D Expense"/>
+                <field name="x_studio_selection_field_v8tWq" string="Credit card used?"/>
+                <field name="x_studio_selection_field_KBmMT" string="Purchased for?"/>
+                <field name="x_studio_char_field_tfa4O" string="Purchase order sent by"/>
+            </xpath>
+            <!-- https://spantech.odoo.com/web#id=255&menu_id=554&cids=2%2C1&action=806&model=project.task&view_type=form -->
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="product_tmpl_notes"/>
+                <field name="product_tmpl_hs_code"/>
+                <field name="product_tmpl_country_of_origin"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_purchase_8be62de9-0b71-48d8-a3bb-7fea0868f5fd -->
+    <record id="purchase_order_tree_inherit_x_studio" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inherit.x_studio</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="x_studio_r_d_expense" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_purchase_88f14796-0e7b-4db9-9ebf-e3126725ab64 -->
+    <record id="purchase_order_kpis_tree_inherit_x_studio" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree.inherit.x_studio</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list[1]/field[@name='name']" position="after">
+                <field name="x_studio_char_field_tfa4O" optional="show"/>
+                <field name="create_date" optional="show"/>
+                <field name="x_studio_r_d_expense" optional="show"/>
+                <field name="x_studio_selection_field_v8tWq" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

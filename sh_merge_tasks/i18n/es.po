@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sh_merge_tasks
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-12 12:12+0000\n"
+"PO-Revision-Date: 2021-07-12 12:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_merge_tasks
+#: model:ir.model.fields,field_description:sh_merge_tasks.field_project_task__child_merge_task_ids
+msgid "Merge Task"
+msgstr "Fusión de la tarea"
+
+#. module: sh_merge_tasks
+#: model:ir.model.fields,field_description:sh_merge_tasks.field_project_task__child_merge_task_id
+msgid "Merge Task one"
+msgstr "Fusión tarea uno"
+
+#. module: sh_merge_tasks
+#: model:ir.actions.server,name:sh_merge_tasks.sh_crete_single_task_multi_action
+msgid "Merge Tasks"
+msgstr "Combinar tareas"
+
+#. module: sh_merge_tasks
+#: model:ir.model.fields,field_description:sh_merge_tasks.field_project_task__task_count
+msgid "Merged Task Count"
+msgstr "Recuento de tareas fusionadas"
+
+#. module: sh_merge_tasks
+#: model_terms:ir.ui.view,arch_db:sh_merge_tasks.merge_project_task_form_views_custom
+msgid "Merged Tasks"
+msgstr "Tareas fusionadas"
+
+#. module: sh_merge_tasks
+#: code:addons/sh_merge_tasks/models/sh_merge_task.py:51
+#, python-format
+msgid "Not allow to merge task which contain Sales Order Item !"
+msgstr "¡No permita fusionar la tarea que contiene el artículo de pedido de venta!"
+
+#. module: sh_merge_tasks
+#: code:addons/sh_merge_tasks/models/sh_merge_task.py:95
+#, python-format
+msgid "Please Select at least two Tasks for perform merge operation."
+msgstr "Seleccione al menos dos tareas para realizar una operación de combinación."
+
+#. module: sh_merge_tasks
+#: code:addons/sh_merge_tasks/models/sh_merge_task.py:55
+#: code:addons/sh_merge_tasks/models/sh_merge_task.py:65
+#, python-format
+msgid "Project Must be Same !"
+msgstr "El proyecto debe ser el mismo!"
+
+#. module: sh_merge_tasks
+#: model:ir.model,name:sh_merge_tasks.model_project_task
+msgid "Task"
+msgstr "Tarea"
+

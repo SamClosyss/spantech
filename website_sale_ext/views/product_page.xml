@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_attribute_layout" inherit_id="sale.variants">
+        <xpath expr="//li[contains(@t-attf-class, 'o_variant_pills')]" position="attributes">
+            <attribute name="style">border: 1px solid #333;border-radius: 5%;box-shadow: 1px 1px 0.5px 0px
+                #ccc;padding:4px;
+            </attribute>
+        </xpath>
+        <xpath expr="//li[contains(@t-attf-class, 'o_variant_pills')]/input" position="attributes">
+            <attribute name="style">appearance: auto;width: 0px;</attribute>
+        </xpath>
+    </template>
+</odoo>
+

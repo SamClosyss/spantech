@@ -1,0 +1,202 @@
+.pull-right {
+  float: right;
+}
+
+.invoice-receipt, .sale-receipt, .purchase-receipt, .delivery-slip, .mrporder-slip {
+  p {
+    margin-bottom: 0;
+  }
+
+  h2, h6 {
+    font-family: ('Roboto', sans-serif);
+    font-weight: bolder;
+    margin-bottom: 0;
+  }
+
+  .bg-lightgrey {
+    background-color: lightgrey;
+  }
+
+  .extra_details_box {
+    //background-color: lightgrey;
+    width: 800px;
+    //border: 15px solid lightgrey;
+    padding: 50px;
+    margin: 20px;
+  }
+
+  .special_details_box {
+    //background-color: lightgrey;
+    width: 500px;
+    //border: 2px solid black;
+    padding: 00px;
+    margin: 0px;
+  }
+
+  table {
+    margin-bottom: 0;
+    //address Table
+      &.table_doc_no_1 {
+    tr {
+      border: 2px solid #000;
+
+      th {
+        border-top: 1px solid #FFF;
+        border-bottom: 1px solid #FFF;
+        border-right: 1px solid #FFF;
+      }
+
+      td {
+        border-top: 1px solid #FFF;
+        border-bottom: 1px solid #FFF;
+        border-right: 1px solid #FFF;
+      }
+    }
+  }
+
+    &.address_table {
+      table-layout: fixed;
+
+      tr {
+        th, td {
+          border: 2px solid #000;
+          width: 39%;
+
+          &:last-child {
+            width: 22%;
+          }
+        }
+
+        th, th > span {
+          font-family: ('Roboto', sans-serif);
+          font-weight: bolder;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // Product table
+    &.product_table_1 {
+      tr {
+        border: 2px solid #000;
+
+        th {
+          border-top: 1px solid #d3d3d3;
+          border-bottom: 1px solid #d3d3d3;
+          border-right: 1px solid #d3d3d3;
+        }
+
+        td {
+          border-top: 1px solid #FFF;
+          border-bottom: 1px solid #FFF;
+          border-right: 1px solid #FFF;
+        }
+
+        td {
+          p.bold_font {
+            font-family: ('Roboto', sans-serif);
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+
+    &.product_table {
+      tr {
+        border: 2px solid #000;
+
+        th, td {
+          border-top: 2px solid #000;
+          border-bottom: 2px solid #000;
+          border-right: 2px solid #000;
+        }
+
+        td {
+          p.bold_font {
+            font-family: ('Roboto', sans-serif);
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+
+    &.total_table {
+      tr {
+        &:not(.o_total) {
+          td:first-child {
+            span {
+              font-family: ('Roboto', sans-serif);
+              font-weight: bolder;
+              color: lightgrey !important;
+            }
+          }
+        }
+
+        &.o_total {
+          font-family: ('Roboto', sans-serif);
+          font-weight: bolder;
+
+          td {
+            background-color: lightgrey !important;
+          }
+        }
+      }
+
+      td {
+        border-top: 0px;
+      }
+    }
+  }
+
+  .payment_details, .terms {
+    margin-bottom: 0px;
+    font-size: 16px;
+    line-height: 20px;
+
+    span {
+      &.font_bold {
+        font-family: ('Roboto', sans-serif);
+        font-weight: bolder;
+      }
+    }
+  }
+
+}
+
+
+.borderless {
+  border: none !important;
+}
+
+.borderless tr .borderless td, .borderless th {
+  border: none !important;
+  padding: 1% !important;
+}
+
+.exporter_table {
+  border: none !important;
+
+  tr {
+    //border:none !important;
+    td {
+      //border:none !important;
+      padding: 2% !important;
+      width: 50%;
+    }
+  }
+}
+
+.exporter_table2 {
+  border: none !important;
+
+  tr {
+    border: none !important;
+
+    td {
+      border: none !important;
+      padding: 2% !important;
+      width: 50%;
+    }
+  }
+}
+

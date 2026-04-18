@@ -1,0 +1,127 @@
+<odoo>
+	<template id="footer_custom" inherit_id="website.layout" name="Default" active="True">
+      	<xpath expr="//footer[@id='bottom']" position="replace">
+        	<footer class="mt-5">
+        		<style>
+        			ul li a{
+        				text-decoration: none !important;
+        			}
+        			p a{
+        				text-decoration: none !important;
+        			}
+        		</style>
+		        <div class="container custom-container">
+		            <div class="row">
+		                <div class="col-lg-3 col-md-12 col-sm-12 col-12 mb-lg-0 mb-md-4 mb-4">
+		                    <h4 class="f-heading">Quick links</h4>
+		                    <ul>
+		                        <li>
+		                            <a href="/shipping/policy">
+		                                Shipping Policy
+		                            </a>
+		                        </li>
+		                        <li>
+		                            <a href="/refund/policy">
+		                                Refund Policy
+		                            </a>
+		                        </li>
+		                        <li>
+		                            <a href="/term_of_service/policy">
+		                                Terms of Service
+		                            </a>
+		                        </li>
+		                        
+		                        <li>
+		                            <a href="/privacy/policy">
+		                                Privacy Policy
+		                            </a>
+		                        </li>
+		                    </ul>
+		                </div>
+		                <div class="col-lg-6 col-md-12 col-sm-12 col-12 mb-lg-0 mb-md-4 mb-4">
+		                    <h4 class="f-heading">Newsletter</h4>
+		                    <div class="newsletter">
+		                        <input type="text" placeholder="Адреса Е-поште"/>
+		                        <button>претплатити се</button>
+		                    </div>
+		                </div>
+		                <div class="col-lg-3 col-md-12 col-sm-12 col-12 ps-3">
+		                    <h4 class="f-heading">Talk about your business</h4>
+		                    <p>shop@swaraacacia.com</p>
+		                    <p class="mb-0">+230 5 254 1596</p>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="bottom-footer">
+		            <div class="container custom-container">
+		                <p>© 2022, <a href="javascript:;">Little Swara Shop Kenya</a> Покреће Схопифи</p>
+		            </div>
+		        </div>
+		    </footer>
+
+		    <!-- Modal -->
+		  	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"               aria-hidden="true">
+		    	<div class="modal-dialog modal-fullscreen">
+		      		<div class="modal-content">
+		        <!-- <div class="modal-header">
+		          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div> -->
+		        <div class="modal-body">
+		            <div class="search-bar">
+		                <div class="input-box">
+		                    <input type="text" id="fname" name="fname" />
+		                    <span>
+		                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
+		                    </span>
+		                </div>
+		                <a href="javascript:;" data-bs-dismiss="modal" class="dismis">
+		                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40"><path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"></path></svg>
+		                </a>
+		            </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		    <script src="/swara_shop_kenya/static/src/js/jquery-3.6.0.js"></script>
+		    <script src="/swara_shop_kenya/static/src/js/bootstrap.min.js"></script>
+		    <script src="/swara_shop_kenya/static/src/js/owl.carousel.min.js"></script>
+		    <script src="/swara_shop_kenya/static/src/js/custom.js"></script>
+
+		    <script>
+		        $(document).ready(function(){
+		            $(".toggle").click(function(){
+		                $(this).toggleClass("change-icon");
+		            });
+		        });
+		        $(document).ready(function(){
+		            $(".toggle").click(function(){
+		                $('.menu').toggleClass("open-menu");
+		            });
+		        });
+		        $(document).ready(function(){
+		            $(".toggle").click(function(){
+		                $('.col-disp').toggleClass("h-100");
+		            });
+		        });
+		    </script>
+		    <script>
+		        $('.review-slider .owl-carousel').owlCarousel({
+		            loop:false,
+		            margin:10,
+		            nav:false,
+		            responsive:{
+		                0:{
+		                    items:1
+		                },
+		                600:{
+		                    items:2
+		                },
+		                1000:{
+		                    items:3
+		                }
+		            }
+		        })
+		    </script>
+		</xpath>
+    </template>
+</odoo>

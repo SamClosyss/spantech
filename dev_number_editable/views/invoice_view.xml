@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="invoice_view_edit_name" model="ir.ui.view">
+	 <field name="name">invoice.view.edit.name</field>
+	 <field name="model">account.move</field>
+	 <field name="inherit_id" ref="account.view_move_form"/>
+	 <field name="arch" type="xml">
+	    <xpath expr="//field[@name='name']" position="replace">
+	           <field name="name" attrs="{'readonly': ['|', ('cop_name' , '=', False), ('state', 'in', ('draft','cancel'))]}"/>
+	            <field name="cop_name" invisible="1"  />
+	    </xpath>
+	    
+	</field>
+ </record>
+</odoo>
+
+
+
+
+
+

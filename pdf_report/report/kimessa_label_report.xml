@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="kimessa_label_report_pdf">
+        <t t-call="web.basic_layout">
+            <style>
+            .margin_left_32 {
+                margin-left: 32px;
+                color:#079eff;
+            }
+            .between_space_p {
+                margin: 4px 0;
+            }
+            .color_blue{
+                color:#079eff;
+            }
+            .between_space_p_top {
+                margin-top: 10px;
+                color:#079eff;
+            }
+            .font_i {
+                font-style: italic;
+            }
+            .info-line {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+            }
+            .info-item {
+                margin-right: 80px;
+            }
+            .info-item2{
+                margin-right: 30px;
+            }
+            .info-item3{
+                margin-left: 50px;
+            }
+            .margintop8{
+                margin-top:8px;
+            }
+            .margintop16{
+                margin-top:16px;
+            }
+            .margintop32{
+                margin-top:32px;
+            }
+            .border0{
+                border:0px solid #ffffff!important;
+            }
+        </style>
+            <t t-foreach="docs.cylinder_ids" t-as="cylinder">
+                <div>
+                    <div style="width:100%;">
+                         <img alt="Logo" style="height:120px;"
+                             src="/pdf_report/static/src/imgs/Kimessa_header_1477_171.jpg"/>
+                    </div>
+                </div>
+                <div class="cac_certificate_report" style="page-break-after: always; position: relative;">
+                    <table class="table borderless border0" width="100%">
+                        <tbody>
+                            <tr class="border0">
+                                <td width="25%">
+                                    <div style="font-size:10px;">
+                                        <p class="margin_left_32 margintop16"><b>OPERATING INSTRUCTIONS</b></p>
+                                        <p class="between_space_p color_blue">Do not handle the cylinder or use the contents until you have read and understood the Material Safety Data Sheet.</p>
+                                        <p class="between_space_p color_blue">Ensure that the regulator is clean and compatible with the cylinder.</p>
+                                        <p class="between_space_p color_blue">Screw the regulator onto the valve outlet, point away from body and other personnel until pressure is registered on the gauge (if fitted).</p>
+                                        <p class="between_space_p color_blue">Use on/off knob to release gas at preset flow rate as indicated on the regulator.</p>
+                                        <p class="between_space_p color_blue">Use PPE as directed by the MSDS.</p>
+                                        <p class="between_space_p_top margin_left_32 margintop32"><b>WARNINGS</b></p>
+                                        <p class="between_space_p color_blue">Pressurised container - do not puncture, incinerate, or store above 50'c (120'f). Always use and store in areas with adequate ventilation.</p>
+                                        <p class="between_space_p color_blue">Do not inhale gas directly from the cylinder.</p>
+                                        <p class="between_space_p color_blue">Dispose responsibly in accordance with local regulations or return to the address above for recycling.</p>
+                                        <p class="between_space_p_top margintop32"><b>DO NOT REFILL.</b></p>
+                                        <div style="width:100%;">
+                                            <img alt="Do Not Refill" 
+                                            src="/pdf_report/static/src/imgs/all-in-gas-cloud-logo.png" style="width: 90%; height: auto;"/>
+                                         </div>
+                                    </div>
+                                </td>
+                                <td class="border0" width="25%">
+                                    <div style="font-size:10px;">
+                                        <p class="font_i margin_left_32 margintop16"><b>HANDHABUNGSHINWEISE</b></p>
+                                        <p class="between_space_p font_i color_blue">Die Prüfgasflasche und deren Inhalt nur dann verwenden, wenn das Sicherheitsdatenblatt und dessen Inhalt bekannt ist.</p>
+                                        <p class="between_space_p font_i color_blue">Sicher stellen dass die Entnahmeeinrichtung sauber und mit der Prüfgasflasche kompatibel ist.</p>
+                                        <p class="between_space_p font_i color_blue">Die Entnahmeeinrichtung entfernt vom Körper und anderen Personen auf das Flaschenventil aufschrauben bis am Manometer (falls vorhanden) ein Druck angezeigt wird.</p>
+                                        <p class="between_space_p font_i color_blue">Entnahmeeinrichtung öffnen bzw. Prüfgasfluss am Flussmesser auf gewünschten Wert einstellen.</p>
+                                        <p class="between_space_p font_i color_blue">Entnahmeeinrichtung nach Gebrauch abschrauben. Hierbei schließt das Flaschenventil. Beim Abschrauben der Entnahmeeinrichtung ist ein kurzes „Zischen“ zu hören.</p>
+                                        <p class="font_i margin_left_32 margintop16"><b>WARNUNGEN</b></p>
+                                        <p class="between_space_p font_i color_blue">Druckbehälter nicht durchbohren, entzünden oder bei Temperaturen größer 50° C lagern.</p>
+                                        <p class="between_space_p font_i color_blue">Verwendung und Lagerung nur bei ausreichender Belüftung.</p>
+                                        <p class="between_space_p font_i color_blue">Prüfgas nicht einatmen. Falls Prüfgas eingeatmet wird oder Verdacht darauf besteht sich an frische Luft begeben. Falls Atmung aussetzt, künstliche Beatmung vornehmen. Falls Atmung erschwert ist, Atem-Sauerstoff anwenden. Arzt hinzuziehen auch wenn keine Symptome vorliegen. Unter medizinischer Beobachtung verbleiben; Symptome können verzögert auftreten.</p>
+                                        <p class="between_space_p font_i color_blue">Entsorgung von völlig entleerten Prüfgasflaschen nach gültigen Vorschriften oder Rücklieferung für die Wiederverwertung an die obige Adresse.</p>
+                                        <p class="font_i between_space_p_top margintop16"><b>NICHT WIEDERBEFÜLLEN.</b></p>
+                                    </div>
+                                </td>
+                                <td class="border0" style="text-align:left;" width="3%"/>
+                                <td class="border0" style="text-align:left;" width="47%">
+                                    <div style="width:100%; margin-top:10px;" class="row">
+                                        <div style="width:50%;">
+                                            <table style="line-height: 1px;"
+                                                class="table border0" width="100%">
+                                                <tr>
+                                                    <td style="padding: 0;">
+                                                        <span><b>Part Code: </b></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0;">
+                                                        <span> <t t-esc="docs.product_id.default_code"/></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div style="width:50%;">
+                                           <table class="table border0" width="100%">
+                                                <tr>
+                                                    <td style="padding: 0;">
+                                                        <span><b><t t-esc="docs.name"/></b></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="margintop16">
+                                        <table 
+                                               class="table borderless border0" width="100%">
+                                            <tbody>
+                                                <tr t-foreach="docs.components_ids" t-as="components" style="line-height:12px;">
+                                                    <td>
+                                                        <t t-esc="components.component"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="components.requested_value"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="margintop32" style="position: absolute; bottom: 0px;">
+                                    <div class="info-line">
+                                        <span class="info-item"><strong>Valid Until:</strong>
+                                            <span class="ml4">
+                                                <t t-if="docs.get_valid_until_date_dateformat()">
+                                                    <span class="ml4" t-esc="docs.get_valid_until_date_dateformat()"/>
+                                                </t>
+                                                <t t-else="">
+                                                   <span class="ml4">-</span>
+                                                </t>
+                                            </span>
+                                        </span>
+                                        <span class="info-item"><strong>SDS</strong><span class="ml8"><t t-esc="docs.product_id.sds_number"/></span></span>
+                                    </div>
+                                    <div class="info-line margintop8">
+                                        <span class="info-item2"><strong>Pressure:</strong><span class="ml8"><t t-esc="docs.product_id.pressure"/></span></span>
+                                        <span class="info-item2"><strong>Size:</strong><span class="ml8"><t t-esc="docs.product_id.x_studio_cylinder_size"/></span></span>
+                                        <span class="info-item3"><strong>Accuracy:</strong><span class="ml8"><t t-esc="docs.product_id.accuracy"/></span></span>
+                                    </div>
+                                    <div class="margintop32">
+                                        <h1><t t-esc="docs.product_id.un_number"/></h1>
+                                    </div>
+                                    <div style="width:100%; margin-top:10px;" class="row">
+                                        <div style="width:45%;">
+                                            <table style="line-height: 1px; border:0px dashed #fff;"
+                                                class="table border0" width="100%">
+                                                <tr>
+                                                    <td style="padding: 0;">
+                                                        <span><t t-esc="docs.product_id.shipping_name"/></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!--<div style="width: 55%;">
+                                            <table class="table border0" width="100%" style="table-layout: fixed; border-collapse: collapse;">
+                                                <tr>
+                                                    <td style="width: 33%; padding: 0;">
+                                                        <img src="/pdf_report/static/src/imgs/compressed_gas_diamond.png" style="width: 100%; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2']" style="width: 33%; padding: 0;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/coshh_green_cylinder.jpg" style="width: 100%; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc5']" style="width: 33%; padding: 0;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC5/2.png" style="width: 100%; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc5']" style="width: 33%; padding: 0;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC5/3.jpg" style="width: 100%; display: block;" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>-->
+                                        
+                                        <!--EQUAL Width option-->
+                                        <div style="display: inline-block;">
+                                            <table class="table border0" style="table-layout: fixed; border-collapse: collapse;">
+                                                <tr>
+                                                    <td style="padding: 0; width: 80px; text-align: center;">
+                                                        <img src="/pdf_report/static/src/imgs/compressed_gas_diamond.png" style="width: 80px; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc1','nrc2']" style="padding: 0; width: 80px; text-align: center;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC1_2/coshh_green_cylinder.jpg" style="width: 80px; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc5']" style="padding: 0; width: 80px; text-align: center;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC5/2.png" style="width: 80px; display: block;" />
+                                                    </td>
+                                                    <td t-if="docs.product_id.nrc_imgs in ['nrc5']" style="padding: 0; width: 80px; text-align: center;">
+                                                        <img src="/pdf_report/static/src/imgs/all-in-gas-nrc/NRC5/3.jpg" style="width: 80px; display: block;" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

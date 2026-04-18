@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mrp_production_form_view_sale_extended_sp" model="ir.ui.view">
+            <field name="name">mrp.production.inherited.form.sale.extended.sp</field>
+            <field name="model">mrp.production</field>
+            <field name="priority">64</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='lot_producing_id']" position="before">
+                    <field name="requirement" string="Customer Special Requirements"/>
+                </xpath>
+
+                <!-- AG Gases Company Only -->
+                <!-- https://spantech.odoo.com/web?debug=1#id=1002&menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form -->
+                <xpath expr="//page[@name='miscellaneous']" position="after">
+                    <page string="Certified Values" name="certified_values"
+                          attrs="{'invisible': [('company_id', '!=', 7), ('state', 'in', ['draft', 'cancel'])]}">
+                        <field name="components_ids" mode="tree" context="{'default_mo_id': active_id}">
+                            <tree editable="top">
+                                <field name="component"/>
+                                <field name="requested_value"/>
+                                <field name="accuracy"/>
+                                <field name="certified_value"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Cylinder Values" name="cylinder_values"
+                          attrs="{'invisible': [('company_id', '!=', 7), ('state', 'in', ['draft', 'cancel'])]}">
+                        <field name="cylinder_ids" mode="tree" context="{'default_mo_id': active_id}">
+                            <tree editable="top">
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//group[@name='group_extra_info']/field[@name='company_id']" position="after">
+                    <field name="valid_date" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+                    <field name="logo_use" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+                    <field name="logo" attrs="{'invisible': [('logo_use', '!=', 'custom')]}"/>
+                    <field name="all_in_gas_label_custom_logo" attrs="{'invisible': [('logo_use', '!=', 'all_in_gas')]}"/>
+                </xpath>
+                
+                <xpath expr="//header" position="inside">
+                    <button name="print_bottle_label_pdf" type="object"
+                            string="Bottle Label"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['cac_label', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/> <!--attrs="{'invisible': [('company_id', '!=', 7), ('state', 'in', ['draft', 'cancel'])]}"-->
+                    <button name="print_certificate_pdf" type="object"
+                            string="Certificate"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <!-- CAC -->
+                    <button name="print_cac_label_pdf" type="object"
+                            string="CAC Label"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <field name="is_ag_backorder_of_cylinders" invisible="1"/>
+                    <button name="button_mark_done_all_backorders" type="object"
+                            string="Mark As Done Backorders"
+                            attrs="{'invisible': [('is_ag_backorder_of_cylinders', '!=', True), ('state', '!=', ['done'])]}"/>
+                    <!-- QR Code  -->
+                    <button name="print_qr_code" type="object"
+                            string="Print QR"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7), ('logo_use', 'in', ['kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <!-- CAC NRC CERTIFICATE -->
+                    <button name="print_cac_nrc_certificate" type="object"
+                            string="CAC NRC Certificate"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <!-- CAC HPC Certificate -->
+                    <button name="print_cac_hpc_certificate" type="object"
+                            string="CAC HPC Certificate"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <!-- All-In-Gas -->
+                    <button name="print_all_in_gas" type="object"
+                        string="All In Gas Label"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <button name="print_cac_box_label" type="object"
+                        string="CAC Box Label"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <button name="print_kimessa_pdf" type="object"
+                            string="Kimessa"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['cac_label', 'custom', 'all_in_gas', 'AGGlabel', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <button name="print_all_in_gas_certificate_pdf" type="object"
+                            string="All in Gas Certificate"
+                            attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['cac_label', 'custom', 'AGGlabel', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                    <button name="print_cac_nkd_label" type="object"
+                        string="CAC NKD Label"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'all_in_gas', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+                
+                     <!-- All-In-Gas Krapp -->
+                    <button name="print_all_in_gas_krapp" type="object"
+                        string="All In Gas Label (Krapp)"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety'])]}"/>
+			
+					<!--1 GasTech-->
+					<button name="print_gas_tech" type="object"
+                        string="Gas Tech"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--2 GasAlarm-->
+					<button name="print_gas_alarm" type="object"
+                        string="Gas Alarm"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--3 Encore Monitoring-->
+					<button name="print_encore_monitoring" type="object"
+                        string="Encore Monitoring"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--4 CAC Gas Asia-->
+					<button name="print_CAC_gas_asia" type="object"
+                        string="CAC Gas Asia"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--5 CAC Gas Instrumentation-->
+					<button name="print_CAC_gas_instrumentation" type="object"
+                        string="CAC Gas Instrumentation"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--6 NZ Safety Blackwoods-->
+					<button name="print_NZ_safety_blackwoods" type="object"
+                        string="NZ Safety Blackwoods"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'mine_safety', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--7 Mine Safety-->
+					<button name="print_mine_safety" type="object"
+                        string="Mine Safety"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'skill_pro', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--8 Skillpro-->
+					<button name="print_skillpro" type="object"
+                        string="Skillpro"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'alliance_safety', 'all_in_gas'])]}"/>
+					
+					<!--9 Alliance Safety-->	
+					<button name="print_alliance_safety" type="object"
+                        string="Alliance Safety"
+                        attrs="{'invisible': ['|',('company_id', '!=', 7),('logo_use', 'in', ['custom', 'AGGlabel', 'cac_label', 'kimessa_label', 'gas_tech', 'gas_alarm', 'encore_monitoring', 'CAC_gas_asia', 'CAC_gas_instrumentation', 'NZ_safety_blackwoods', 'mine_safety', 'skill_pro', 'all_in_gas'])]}"/>
+				</xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

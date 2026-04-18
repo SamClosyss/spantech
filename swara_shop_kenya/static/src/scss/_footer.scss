@@ -1,0 +1,85 @@
+footer{
+    padding: 45px  0 35px;
+    background-color: #f6f6f6;
+    .f-heading{
+        margin-bottom: 25px;
+        color: #333232;
+        font-size: 1.13333em;
+    }
+    ul{
+        li{
+            padding: 0 30px 5px 0;
+            a{
+                color: #333232;
+                &:hover{
+                    color: #5a5858;
+                    border-bottom: 1px solid #5a5858;
+                }
+            }
+        }
+    }
+    p{
+        color: #333232;
+        margin-bottom: 19px;
+    }
+    .newsletter{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        input{
+            padding: 10px 45px 10px 20px;
+            width: 100%;
+            min-height: 46px;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border: 1px solid #cccccc;
+        }
+        button{
+            appearance: none;
+            display: inline-block;
+            min-width: 170px;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            padding: 5px;
+            height: 46px;
+            background-color: #3a3a3a;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-size: 13px;
+            &:hover{
+                background-color: #606060;
+            }
+        }
+    }
+    .bottom-footer{
+        border-top: 1px solid #dddddd;
+        margin-top: 45px;
+        padding: 20px 0 0;
+        p{
+            text-align: end;
+            margin-bottom: 15px;
+            font-size: .8em;
+            padding-bottom: 28px;
+        }
+        a{
+            &:hover{
+                color: #5a5858;
+                border-bottom: 1px solid #5a5858;
+            }
+        }
+    }
+}
+
+@include for-480{
+    footer .newsletter{
+        flex-wrap: wrap;
+        row-gap: 20px;
+    }
+}

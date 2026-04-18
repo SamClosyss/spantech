@@ -1,0 +1,177 @@
+<odoo>
+    <template id="homepage_inherit" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+          <div id="wrap" class="oe_structure oe_empty">
+             <div class="banner-wrap position-relative">
+              <div class="container-fluid position-relative">
+                  <div class="banner-cont">
+                      <h1 class="text-center">Little Swara Shop </h1>
+                      <h4 class="text-center">bringing safari charm to your life</h4>
+                  </div>
+              </div>
+          </div>
+          <!-- banner section end -->
+
+
+          <!-- living life section start-->
+          <div class="safari-life-wrap oe_structure oe_empty">
+              <div class="container custom-container">
+                  <div class="row align-items-center">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                          <img src="/swara_shop_kenya/static/src/images/safari-life.avif" alt="life" class="w-100"/>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="cont">
+                              <h3>Living a safari life</h3>
+                              <p>Bring the warmth of an African setting to your home and live a safari life every day. Karibu!</p>
+                          </div>
+                      </div>  
+                  </div>
+              </div>
+          </div>
+          <!-- living life section end-->
+
+          <!-- kenya section start -->
+          <div class="kenya-main-wrap oe_structure oe_empty">
+              <div class="container custom-container">
+                  <h2 class="section-heading">OUT OF KENYA</h2>
+                  <div class="row">
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12 oe_structure oe_empty">
+                          <div class="kenya-box">
+                              <img src="/swara_shop_kenya/static/src/images/kenya-img1.jpg" alt="kenya" class="w-100"/>
+                              <h5>From the land of Maasai</h5>
+                              <p>There are 42 tribes in Kenya, however just several have been widely known due to nature programs and movies. We have paired with artisans from many different tribes to combine their ancient artworks with modern day life. Let's enrich our lives with color, texture and the famous safari charm.</p>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12 oe_structure oe_empty">
+                          <div class="kenya-box">
+                              <img src="/swara_shop_kenya/static/src/images/kenya-img2.jpg" alt="kenya" class="w-100"/>
+                              <h5>Nature inspired</h5>
+                              <p>Our workshop is nested within a wildlife sanctuary in Kenya. We are inspired by over 3000 wild animals roaming freely around us, hence we liberally use animal print throughout our handmade accessories.  From timeless zebra to painted cotton fabrics, we bring wild nature to your home. </p>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12 oe_structure oe_empty">
+                          <div class="kenya-box">
+                              <img src="/swara_shop_kenya/static/src/images/kenya-img3.jpg" alt="kenya" class="w-100"/>
+                              <h5>Community engaged</h5>
+                              <p>Our artisans are often single supporters of large families, handmaking our safari accessories often with very basic tools and old machinery. Some of our paintings are made by impoverished artists, talented youngsters whose school fees are paid by proceeds from their artwork. By purchasing our products you are directly contributing toward wellbeing of a large number of people and families in Kenya.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- kenya section end -->
+
+          <!-- kenya section start -->
+          <div class="kenya-main-wrap feature-main-wrap mb-75 oe_structure oe_empty">
+              <div class="container custom-container position-relative">
+                  <h2 class="section-heading">FEATURED COLLECTION</h2>
+                  <div class="row">
+                    <t t-foreach="featured_products" t-as="product">
+                      <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                            <a t-attf-href="{{product.website_url}}" class="mb-35">
+                            <!-- <a href="product.website_url" class="mb-35"> -->
+                              <img t-attf-src="data:image/jpg;base64,{{product.image_1920}}" style="height: 300px;" class="w-100"/>
+                                <span><t t-esc="product.name"/></span>
+                                <small><t t-esc="product.lst_price"/> <t t-esc="product.currency_id.symbol"/></small>
+                            </a>
+                        </div>
+                      </t>
+                  </div>
+              </div>
+          </div>
+          <!-- kenya section end -->
+
+          <!-- handmade section start -->
+          <div class="handmade-wrapper oe_structure oe_empty">
+              <div class="container custom-container position-relative">
+                 <div class="cont">
+                  <h2>Handmade in Kenya</h2>
+                 <p>All our products are locally sourced, hand-made everyday essentials, often made with old-fashioned and simple tools. </p>
+                 </div>
+              </div>
+          </div>
+          <!-- handmade section end -->
+
+          <!-- review section start -->
+          <div class="review-main-wrap oe_structure oe_empty">
+              <div class="container custom-container">
+                  <div class="review-slider">
+                      <div class="owl-carousel owl-theme">
+                          <div class="item">
+                              <div class="review-box">
+                                  <span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"></path></svg></span>
+                                  <p>When you follow the path of your father, you learn to walk like him.</p>
+                                  <small>- African proverb</small>
+                              </div>
+                          </div>
+                          <div class="item">
+                              <div class="review-box">
+                                  <span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"></path></svg></span>
+                                  <p>You must judge the man by the work of  his hands.</p>
+                                  <small>- African proverb</small>
+                              </div>
+                          </div>
+                          <div class="item">
+                              <div class="review-box">
+                                  <span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"></path></svg></span>
+                                  <p>Life is like a shadow and a mist; it passes quickly by, and is no more. </p>
+                                  <small>- African proverb</small>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+                  <!-- <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-lg-0 mb-md-3 mb-3">
+
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-lg-0 mb-md-3 mb-3">
+                          <div class="review-box">
+                              <span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"></path></svg></span>
+                              <p>You must judge the man by the work of  his hands.</p>
+                              <small>- African proverb</small>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-lg-0 mb-md-3 mb-3">
+                          <div class="review-box">
+                              <span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"></path></svg></span>
+                              <p>Life is like a shadow and a mist; it passes quickly by, and is no more. </p>
+                              <small>- African proverb</small>
+                          </div>
+                      </div>
+                  </div> -->
+              </div>
+          </div>
+          <!-- review section end -->
+
+          <!-- items section start -->
+          <div class="item-wrapper oe_structure oe_empty">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 px-0">
+                          <a class="item-box" href="javascript:;">
+                              <img src="/swara_shop_kenya/static/src/images/items1.webp" alt="" class="w-100"/>
+                              <span>Tribal jewellery</span>
+                          </a>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 px-0">
+                          <a class="item-box" href="javascript:;">
+                              <img src="/swara_shop_kenya/static/src/images/items2.webp" alt="" class="w-100"/>
+                              <span>Maasai shoes</span>
+                          </a>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-12 col-12 px-0">
+                          <a class="item-box" href="javascript:;">
+                              <img src="/swara_shop_kenya/static/src/images/items3.webp" alt="" class="w-100"/>
+                              <span>Safari style</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </xpath>
+    </template>
+</odoo>
+

@@ -1,0 +1,13 @@
+<odoo>
+	<record model="ir.ui.view" id="product_form_view_inherit">
+      <field name="name">product.product.form.inherit</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_normal_form_view"/>
+      <field name="arch" type="xml">
+        <div name="options" position="after">
+            <field name="featured"/>
+            <label for="featured"/>
+        </div>
+      </field>
+    </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="helpdesk_team_view_form_follower" model="ir.ui.view">
+        <field name="name">helpdesk.team.view.form.follower</field>
+        <field name="model">helpdesk.team</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='productivity']/div/div" position="after">
+                <div class="o_setting_right_pane">
+                    <label for="restrict_partner_ids"/>
+                    <div class="text-muted">
+                        List users restricted from being added as followers on this team's helpdesk tickets.
+                    </div>
+                    <div class="mt16">
+                        <span><b>Followers </b></span>
+                        <field name="restrict_partner_ids" string="Restrict Team's Ticket Followers" widget="many2many_tags_email" domain="[('type', '!=', 'private')]"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

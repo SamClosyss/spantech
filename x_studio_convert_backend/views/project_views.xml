@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- studio_customization.odoo_studio_project__7eb64ba7-9aee-4323-9bf2-5c2a14ba27a8 -->
+    <record id="edit_project_form_inherit_x_studio" model="ir.ui.view">
+        <field name="name">project.project.view.inherit.x_studio</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='label_tasks']" position="after">
+                <field name="x_studio_project_code"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- studio_customization.odoo_studio_project__580df57c-29fd-4fe9-89c7-dd6b6b3dcfa5 -->
+    <record id="view_project_tree_inherit_x_studio" model="ir.ui.view">
+        <field name="name">project.project.tree.inherit.x_studio</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field optional="show" name="x_studio_project_code" string="Project Code"/>
+                <field name="task_ids" optional="show"/>
+<!--                <field name="allow_subtasks" optional="show"/>-->
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
