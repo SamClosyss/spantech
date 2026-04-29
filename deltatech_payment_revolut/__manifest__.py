@@ -11,7 +11,10 @@
     "depends": [
         "payment",
     ],
-    "data": ["views/payment_templates.xml", "views/payment_views.xml", "data/payment_acquirer_data.xml"],
+    "data": ["views/payment_templates.xml",
+             "views/payment_views.xml",
+             # "data/payment_acquirer_data.xml"
+             ],
     "assets": {
         "web.assets_frontend": [
             "deltatech_payment_revolut/static/src/js/payment_form.js",

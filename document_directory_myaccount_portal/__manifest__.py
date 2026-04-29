@@ -107,7 +107,7 @@ website portal share document
     #'live_test_url': 'https://youtu.be/724k9z6BbGc',
     'live_test_url': 'https://probuseappdemo.com/probuse_apps/document_directory_myaccount_portal/821',#'https://youtu.be/8fxbDzrPz0Y',
     'data': [
-        'data/data.xml',
+        # 'data/data.xml',
         'views/my_document_portal_templates.xml',
         'views/attachment_directory.xml',
     ],

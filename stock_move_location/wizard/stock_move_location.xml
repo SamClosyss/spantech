@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record
         id="view_wiz_stock_move_location_form_stock_move_location"
@@ -28,23 +28,21 @@
                     <group name="main">
                         <field name="origin_location_disable" invisible="True" />
                         <field
-                            name="origin_location_id"
-                            attrs="{'readonly': [('origin_location_disable', '=', True)]}"
+                            name="origin_location_id" readonly="origin_location_disable != False"
                         />
                         <field name="destination_location_disable" invisible="True" />
                         <field
-                            name="destination_location_id"
-                            attrs="{'readonly': [('destination_location_disable', '=', True)]}"
+                            name="destination_location_id" readonly="destination_location_disable != False"
                         />
                     </group>
                     <group name="lines">
                         <field
                             name="stock_move_location_line_ids"
                             nolabel="1"
-                            mode="tree,kanban"
+                            mode="list,kanban"
                             colspan="2"
                         >
-                            <tree
+                            <list
                                 editable="bottom"
                                 decoration-info="move_quantity != max_quantity"
                                 decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)"
@@ -76,17 +74,16 @@
                                     groups="stock.group_production_lot"
                                     options="{'no_create': True}"
                                 />
-                                <field
-                                    name="package_id"
-                                    domain="[('location_id', '=', origin_location_id)]"
-                                    options="{'no_create': True}"
-                                />
+<!--                                <field-->
+<!--                                    name="package_id"-->
+<!--                                    domain="[('location_id', '=', origin_location_id)]"-->
+<!--                                    options="{'no_create': True}"-->
+<!--                                />-->
                                 <field name="owner_id" options="{'no_create': True}" />
                                 <field name="move_quantity" />
                                 <field name="custom" invisible="1" />
                                 <field
-                                    name="max_quantity"
-                                    attrs="{'readonly': [('custom', '!=', True)]}"
+                                    name="max_quantity" readonly="custom == False"
                                     force_save="1"
                                 />
                                 <field
@@ -94,7 +91,7 @@
                                     readonly="1"
                                     force_save="1"
                                 />
-                            </tree>
+                            </list>
                             <kanban class="o_kanban_mobile">
                                 <templates>
                                     <t t-name="kanban-box">

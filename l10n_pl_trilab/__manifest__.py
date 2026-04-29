@@ -15,15 +15,16 @@
     'depends': [
         'trilab_jpk_vat',
         'trilab_pl_reports',
+        'account'
     ],
 
     'data': [
         'data/l10n_pl_trilab_chart_data.xml',
         'data/trilab_tax_group_data.xml',
-        'data/account.account.template.csv',
+        # 'data/account.account.template.csv',
         'data/l10n_pl_trilab_chart_data_def.xml',
-        'data/account.group.template.csv',
-        'data/res.country.state.csv',
+        # 'data/account.group.template.csv',
+        # 'data/res.country.state.csv',
         'data/trilab_tax_data.xml',
         'data/account_fiscal_position_data.xml',        
         'data/account_chart_template_data.xml',

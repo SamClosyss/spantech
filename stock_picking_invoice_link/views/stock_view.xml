@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- stock.picking -->
     <record id="view_picking_form" model="ir.ui.view">
@@ -12,8 +12,7 @@
                     type="object"
                     name="action_view_invoice"
                     class="oe_stat_button"
-                    icon="fa-pencil-square-o"
-                    attrs="{'invisible': [('invoice_count', '=', 0)]}"
+                    icon="fa-pencil-square-o" invisible="invoice_count == 0"
                 >
                     <field name="invoice_count" widget="statinfo" string="Invoice" />
                 </button>
@@ -31,8 +30,7 @@
                 <group
                     name="invoice_line"
                     string="Invoice Lines"
-                    colspan="2"
-                    attrs="{'invisible':[('invoice_line_ids', '=', [])]}"
+                    colspan="2" invisible="invoice_line_ids == []"
                 >
                     <field
                         name="invoice_line_ids"
@@ -53,8 +51,7 @@
                 <field name="invoice_line_ids" inivisible="1" />
                 <group
                     name="invoice_line"
-                    string="Invoice Lines"
-                    attrs="{'invisible':[('invoice_line_ids', '=', [])]}"
+                    string="Invoice Lines" invisible="invoice_line_ids == []"
                 >
                     <field
                         name="invoice_line_ids"

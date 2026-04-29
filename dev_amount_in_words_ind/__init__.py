@@ -9,11 +9,11 @@
 ##############################################################################
 
 from . import models
+from odoo.service import common
+from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import AccessError, UserError, ValidationError
 
 def pre_init_check(cr):
-    from odoo.service import common
-    from odoo import api, fields, models, SUPERUSER_ID, _
-    from odoo.exceptions import AccessError, UserError, ValidationError
     version_info = common.exp_version()
     server_serie = version_info.get('server_serie')
     if server_serie != '16.0':

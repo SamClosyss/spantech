@@ -38,15 +38,14 @@ class JPKTDocumentType(models.Model):
             # using odoo constrains instead of sql constrains because sql constrains is not removed automatically
             # when removed from odoo, causing problems
             if (
-                self.search(
+                self.search_count(
                     [('system_code', '=', record.system_code), ('schema_version', '=', record.schema_version)],
-                    count=True,
                 )
                 > 1
             ):
                 raise ValidationError(_('System Code & Schema Version must be unique'))
 
-            if self.search([('name', '=', record.name)], count=True) > 1:
+            if self.search_count([('name', '=', record.name)]) > 1:
                 raise ValidationError(_('Name must be unique'))
 
     @api.onchange('xsd_id_datas')

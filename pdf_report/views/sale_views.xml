@@ -9,13 +9,13 @@
                 <button name="action_order_confirmation_send" type="object" invisible="1"
                         string="Send Order Confirmation by Email" context="{'confirmation': True}"/>
             </xpath>
-            <xpath expr="//field[@name='analytic_account_id']" position="after">
+            <xpath expr="//field[@name='partner_invoice_id']" position="after">
                 <field name="shipping_info"/>
                 <field name="wo_incoterm"/>
             </xpath>
             <xpath expr="//group[@name='sale_reporting']" position="after">
-                <group name="mml_proform_info" string="Proforma Invoice"
-                       attrs="{'invisible': [('is_mml_report_format', '==', 'MML_report')]}">
+                <group name="mml_proform_info" string="Proforma Invoice" invisible="is_mml_report_format == 'MML_report'"
+                       >
                     <field name="is_mml_report_format" invisible="1"/>
                     <field name="proforma_inv_prices"/>
                     <field name="proforma_inv_delivery"/>

@@ -54,9 +54,9 @@
     </template>
 
     <template id="document_sale_tax_totals_extended" priority="99" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+        <xpath expr="//t[@t-call='sale.document_tax_totals']" position="replace">
             <t t-if="doc.company_id.report_format == 'lss_serbia_report'" t-call="pdf_report.document_account_tax_totals_extended"/>
-            <t t-if="not doc.company_id.report_format == 'lss_serbia_report'" t-call="account.document_tax_totals"/>
+            <t t-if="not doc.company_id.report_format == 'lss_serbia_report'" t-call="sale.document_tax_totals"/>
         </xpath>
     </template>
 

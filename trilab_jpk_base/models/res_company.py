@@ -30,7 +30,7 @@ class Company(models.Model):
         return bool(
             self.env['ir.module.module']
             .sudo()
-            .search([('name', '=', 'trilab_jpk_transfer'), ('state', '=', 'installed')], count=True)
+            .search_count([('name', '=', 'trilab_jpk_transfer'), ('state', '=', 'installed')])
         )
 
     def x_get_jpk_email(self):

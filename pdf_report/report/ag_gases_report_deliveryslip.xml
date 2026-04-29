@@ -500,7 +500,7 @@
     </template>
 
     <template id="stock_report_delivery_has_serial_move_line_inherit_weight" inherit_id="stock.stock_report_delivery_has_serial_move_line">
-        <xpath expr="//span[@t-esc='description']" position="after">
+        <xpath expr="//td/p[@t-if]" position="after">
             <t t-if="product_weight">
                 <t t-if="move_line.product_id and move_line.product_id.gross_weight">
                     <b>Gross Weight: </b><span t-field="move_line.product_id.gross_weight"/>

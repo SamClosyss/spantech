@@ -15,8 +15,8 @@
             </field>
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>
-            <field name="groups_id"
-                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>-->
             <field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>
         </record>
 
@@ -31,8 +31,8 @@
             </field>
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>
-            <field name="groups_id"
-                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('account.group_account_invoice')),(4, ref('account.group_account_readonly'))]"/>-->
             <field name="paperformat_id" ref="pdf_report.sspzoo_paperformat"/>
         </record>
 
@@ -61,7 +61,7 @@
             <field name="print_report_name">'PRO-FORMA - %s' % (object.name)</field>
             <field name="binding_model_id" ref="sale.model_sale_order"/>
             <field name="binding_type">report</field>
-            <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/>
+<!--            <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/>-->
             <!--<field name="paperformat_id" ref="pdf_report.spantech_paperformat"/>-->
         </record>
 

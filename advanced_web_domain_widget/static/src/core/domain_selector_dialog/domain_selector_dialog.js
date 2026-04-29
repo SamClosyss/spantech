@@ -2,7 +2,7 @@
 
 import { Dialog } from "@web/core/dialog/dialog";
 import { DomainSelectorBits, DomainSelectorBits2 } from "../domain_selector/domain_selector";
-import { _lt } from "@web/core/l10n/translation";
+import { _t } from "@web/core/l10n/translation";
 
 import { Component, useState } from "@odoo/owl";
 
@@ -14,7 +14,7 @@ export class DomainSelectorDialogBits extends Component {
     }
 
     get dialogTitle() {
-        return _lt("Domain");
+        return _t("Domain");
     }
 
     get domainSelectorProps() {

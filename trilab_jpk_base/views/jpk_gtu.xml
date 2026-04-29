@@ -4,10 +4,10 @@
         <field name="name">jpk_gtu_tree</field>
         <field name="model">jpk.gtu</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="description"/>
-            </tree>
+            </list>
         </field>
     </record>
 

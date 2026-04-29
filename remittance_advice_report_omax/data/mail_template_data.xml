@@ -54,8 +54,8 @@
                     </tr>
                 </table>
             </field>
-            <field name="report_template" ref="remittance_advice_report_omax.action_remittance_advice_report_menu"/>
-            <field name="report_name">{{ (object.name or '').replace('/','-') }}</field>
+<!--            <field name="report_template" ref="remittance_advice_report_omax.action_remittance_advice_report_menu"/>-->
+<!--            <field name="report_name">{{ (object.name or '').replace('/','-') }}</field>-->
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>

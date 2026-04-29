@@ -91,32 +91,32 @@
     <!-- buyer end -->
 
     <!-- update labels -->
-    <h2 position="replace">
-      <h2>
-        <t t-if="not o.x_advance_source_id and not o.x_advance_invoices_ids">
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
-        </t>
-        <t t-if="o.x_advance_invoices_ids">
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Final Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Final Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Final Invoice</span>
-        </t>
-        <t t-if="o.x_advance_source_id">
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Advance Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Pro Forma Invoice</span>
-          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Advance Invoice</span>
-        </t>
-        <span t-if="o.move_type == 'out_refund'">Correction Invoice</span>
-        <span t-if="o.move_type == 'in_refund'">Vendor Correction Invoice</span>
-        <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
-        <span t-if="o.name != '/'" t-field="o.name"/>
-        <t t-if="o.x_invoice_duplicate_date">
-          <br/><span class="text-small">Duplicate on <span t-out="o.x_invoice_duplicate_date"/></span>
-        </t>
-      </h2>
-    </h2>
+<!--    <h2 position="replace">-->
+<!--      <h2>-->
+<!--        <t t-if="not o.x_advance_source_id and not o.x_advance_invoices_ids">-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>-->
+<!--        </t>-->
+<!--        <t t-if="o.x_advance_invoices_ids">-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Final Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Final Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Final Invoice</span>-->
+<!--        </t>-->
+<!--        <t t-if="o.x_advance_source_id">-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Advance Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Pro Forma Invoice</span>-->
+<!--          <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Advance Invoice</span>-->
+<!--        </t>-->
+<!--        <span t-if="o.move_type == 'out_refund'">Correction Invoice</span>-->
+<!--        <span t-if="o.move_type == 'in_refund'">Vendor Correction Invoice</span>-->
+<!--        <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>-->
+<!--        <span t-if="o.name != '/'" t-field="o.name"/>-->
+<!--        <t t-if="o.x_invoice_duplicate_date">-->
+<!--          <br/><span class="text-small">Duplicate on <span t-out="o.x_invoice_duplicate_date"/></span>-->
+<!--        </t>-->
+<!--      </h2>-->
+<!--    </h2>-->
 
     <!-- add "NET" to the label -->
     <xpath expr="//table[@name='invoice_line_table']//th[@name='th_priceunit']/span" position="replace">

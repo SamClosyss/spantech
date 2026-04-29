@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { _lt } from "@web/core/l10n/translation";
+import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 
 function onDidChange(action) {
@@ -21,7 +21,7 @@ function matchValue() {
 const dso = registry.category("domain_selector/operator_bits");
 dso.add("date_filter", {
   category: "comparison",
-  label: _lt("Date filter"),
+  label: _t("Date filter"),
   value: "date_filter",
   onDidChange: onDidChange((fieldChange) => fieldChange()),
   matches({ operator, value, fieldInfo }) {
@@ -40,7 +40,7 @@ dso.add("=", {
 });
 dso.add("!=", {
   category: "equality",
-  label: _lt("is not ="),
+  label: _t("is not ="),
   value: "!=",
   onDidChange: onDidChange((fieldChange) => fieldChange()),
   matches({ operator, value }) {
@@ -77,77 +77,77 @@ dso.add("<=", {
 });
 dso.add("ilike", {
   category: "like",
-  label: _lt("contains"),
+  label: _t("contains"),
   value: "ilike",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("not ilike", {
   category: "like",
-  label: _lt("does not contain"),
+  label: _t("does not contain"),
   value: "not ilike",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("like", {
   category: "like",
-  label: _lt("like"),
+  label: _t("like"),
   value: "like",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("not like", {
   category: "like",
-  label: _lt("not like"),
+  label: _t("not like"),
   value: "not like",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("=like", {
   category: "like",
-  label: _lt("=like"),
+  label: _t("=like"),
   value: "=like",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("=ilike", {
   category: "like",
-  label: _lt("=ilike"),
+  label: _t("=ilike"),
   value: "=ilike",
   onDidChange: onDidChange(() => ({ value: "" })),
   matches: matchValue(),
 });
 dso.add("child_of", {
   category: "relation",
-  label: _lt("child of"),
+  label: _t("child of"),
   value: "child_of",
   onDidChange: onDidChange(() => ({ value: 1 })),
   matches: matchValue(),
 });
 dso.add("parent_of", {
   category: "relation",
-  label: _lt("parent of"),
+  label: _t("parent of"),
   value: "parent_of",
   onDidChange: onDidChange(() => ({ value: 1 })),
   matches: matchValue(),
 });
 dso.add("in", {
   category: "in",
-  label: _lt("in"),
+  label: _t("in"),
   value: "in",
   onDidChange: onDidChange(() => ({ value: [] })),
   matches: matchValue(),
 });
 dso.add("not in", {
   category: "in",
-  label: _lt("not in"),
+  label: _t("not in"),
   value: "not in",
   onDidChange: onDidChange(() => ({ value: [] })),
   matches: matchValue(),
 });
 dso.add("set", {
   category: "set",
-  label: _lt("is set"),
+  label: _t("is set"),
   value: "set",
   hideValue: true,
   onDidChange() {
@@ -162,7 +162,7 @@ dso.add("set", {
 });
 dso.add("not set", {
   category: "set",
-  label: _lt("is not set"),
+  label: _t("is not set"),
   value: "not set",
   hideValue: true,
   onDidChange() {

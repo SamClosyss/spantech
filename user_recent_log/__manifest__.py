@@ -19,7 +19,7 @@
     "author": "Aktiv Software",
     "website": "http://www.aktivsoftware.com",
     "category": "Extra Tools",
-    "version": "16.0.1.0.0",
+    # "version": "16.0.1.0.0",
     "license": "OPL-1",
     "price": 10.00,
     "currency": "EUR",

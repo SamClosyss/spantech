@@ -35,42 +35,42 @@
             </div>
         </xpath>
     </template>-->
-    <template
-        id="products_attributes_collapsible"
-        name="Collapsed Attributes &amp; Variants filters"
-        inherit_id="website_sale.products_attributes"
-    >
-        <xpath expr="//form" position="attributes">
-            <attribute
-                name="class"
-                add="wsale_accordion_collapsible accordion accordion-flush"
-                remove="mb-2"
-                separator=" "
-            />
-        </xpath>
-        <xpath expr="//div[hasclass('accordion-item')]//h6" position="replace">
-            <h6 class="accordion-header">
-                <button
-                    class="accordion-button px-0 bg-transparent shadow-none collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    t-attf-data-bs-target="#o_products_attributes_{{a.id}}"
-                    t-attf-aria-controls="o_products_attributes_{{a.id}}"
-                    aria-expanded="true"
-                >
-                    <b t-field="a.name"/>
-                </button>
-            </h6>
-        </xpath>
-        <xpath expr="//div[@t-attf-id='o_products_attributes_{{a.id}}']" position="attributes">
-            <attribute name="class" add="accordion-collapse collapse show" separator=" "/>
-            <attribute name="data-bs-parent" add="wsale_products_attributes_collapse"/>
-        </xpath>
-        <xpath expr="//select" position="attributes">
-            <attribute name="class" add="mb-3" remove="mb-2" separator=" "/>
-        </xpath>
-        <xpath expr="//div[hasclass('flex-column')]" position="attributes">
-            <attribute name="class" add="mb-3" separator=" "/>
-        </xpath>
-    </template>
+<!--    <template-->
+<!--        id="products_attributes_collapsible"-->
+<!--        name="Collapsed Attributes &amp; Variants filters"-->
+<!--        inherit_id="website_sale.products_attributes"-->
+<!--    >-->
+<!--        <xpath expr="//form" position="attributes">-->
+<!--            <attribute-->
+<!--                name="class"-->
+<!--                add="wsale_accordion_collapsible accordion accordion-flush"-->
+<!--                remove="mb-2"-->
+<!--                separator=" "-->
+<!--            />-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[hasclass('accordion-item')]//h6" position="replace">-->
+<!--            <h6 class="accordion-header">-->
+<!--                <button-->
+<!--                    class="accordion-button px-0 bg-transparent shadow-none collapsed"-->
+<!--                    type="button"-->
+<!--                    data-bs-toggle="collapse"-->
+<!--                    t-attf-data-bs-target="#o_products_attributes_{{a.id}}"-->
+<!--                    t-attf-aria-controls="o_products_attributes_{{a.id}}"-->
+<!--                    aria-expanded="true"-->
+<!--                >-->
+<!--                    <b t-field="a.name"/>-->
+<!--                </button>-->
+<!--            </h6>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[@t-attf-id='o_products_attributes_{{a.id}}']" position="attributes">-->
+<!--            <attribute name="class" add="accordion-collapse collapse show" separator=" "/>-->
+<!--            <attribute name="data-bs-parent" add="wsale_products_attributes_collapse"/>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//select" position="attributes">-->
+<!--            <attribute name="class" add="mb-3" remove="mb-2" separator=" "/>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[hasclass('flex-column')]" position="attributes">-->
+<!--            <attribute name="class" add="mb-3" separator=" "/>-->
+<!--        </xpath>-->
+<!--    </template>-->
 </odoo>

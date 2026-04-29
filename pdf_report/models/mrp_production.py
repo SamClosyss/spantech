@@ -10,29 +10,29 @@ from _datetime import datetime
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    def get_purchase_orders(self):
-        self.ensure_one()
-        purchase_order_ids = (
-                    self.procurement_group_id.stock_move_ids.created_purchase_line_id.order_id | self.procurement_group_id.stock_move_ids.move_orig_ids.purchase_line_id.order_id).ids
-        po = self.env['purchase.order'].browse(purchase_order_ids)
-        return po
-
-    @api.depends('procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.partner_requirement')
-    def _get_requirements(self):
-        """
-        Use: Get Special requirements from related SO
-        Added by: Jignesh
-        Added on: 17/3/23
-        Task: https://spantech.odoo.com/web#id=857&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form
-        """
-        for production in self:
-            production.requirement = production.procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.partner_requirement
-            production.sale_id = production.procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.id
-
-    # https://spantech.odoo.com/web#id=857&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form
-    requirement = fields.Text("Customer Special Requirements", compute='_get_requirements', store=True, readonly=False,
-                              groups="sales_team.group_sale_manager")
-    sale_id = fields.Many2one("sale.order", compute=_get_requirements, store=True)
+    # def get_purchase_orders(self):
+    #     self.ensure_one()
+    #     purchase_order_ids = (
+    #                 self.procurement_group_id.stock_move_ids.created_purchase_line_id.order_id | self.procurement_group_id.stock_move_ids.move_orig_ids.purchase_line_id.order_id).ids
+    #     po = self.env['purchase.order'].browse(purchase_order_ids)
+    #     return po
+    #
+    # @api.depends('procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.partner_requirement')
+    # def _get_requirements(self):
+    #     """
+    #     Use: Get Special requirements from related SO
+    #     Added by: Jignesh
+    #     Added on: 17/3/23
+    #     Task: https://spantech.odoo.com/web#id=857&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form
+    #     """
+    #     for production in self:
+    #         production.requirement = production.procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.partner_requirement
+    #         production.sale_id = production.procurement_group_id.mrp_production_ids.move_dest_ids.group_id.sale_id.id
+    #
+    # # https://spantech.odoo.com/web#id=857&menu_id=554&cids=7%2C4%2C3%2C2%2C1&action=806&model=project.task&view_type=form
+    # requirement = fields.Text("Customer Special Requirements", compute='_get_requirements', store=True, readonly=False,
+    #                           groups="sales_team.group_sale_manager")
+    # sale_id = fields.Many2one("sale.order", compute=_get_requirements, store=True)
     # certified_by = fields.Many2one("res.users", string="Certified By")
 
     # https://spantech.odoo.com/web?debug=1#id=1002&menu_id=554&cids=7%2C4%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form
@@ -69,11 +69,11 @@ class MrpProduction(models.Model):
                 raise UserError(
                     _("You cannot create cylinder serial number more then or less then manufacturer produce qty"))
 
-    @api.depends('product_id', 'date_planned_start')
+    @api.depends('product_id', 'date_start')
     def _compute_valid_date(self):
         months = self.product_id.product_tmpl_id.useable_time_span or 0
         #self.valid_date = self.date_planned_start + timedelta(days=days)
-        self.valid_date = self.date_planned_start + relativedelta(months=months)
+        self.valid_date = self.date_start + relativedelta(months=months)
 
     def print_bottle_label_pdf(self):
         cylinders = self.env['mrp.cylinder'].search(

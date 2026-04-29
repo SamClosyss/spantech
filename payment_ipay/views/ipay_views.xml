@@ -8,9 +8,9 @@
         <field name="arch" type="xml">
             <field name="provider_reference" position="after">
                 <field name="provider_code" invisible="True"/>
-                <field name="ipay_txncd" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
-                <field name="ipay_channel" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
-                <field name="ipay_amount" attrs="{'invisible':[('provider_code', '!=', 'ipayafrica')]}"/>
+                <field name="ipay_txncd" invisible="provider_code != 'ipayafrica'"/>
+                <field name="ipay_channel" invisible="provider_code != 'ipayafrica'" />
+                <field name="ipay_amount" invisible="provider_code != 'ipayafrica'"/>
                 <field name="ipay_currency_id" invisible="True"/>
             </field>
         </field>
@@ -23,7 +23,7 @@
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
             <group name="provider_credentials" position='inside'>
-                <group attrs="{'invisible': [('code', '!=', 'ipayafrica')]}" class="text-nowrap">
+                <group invisible="code != 'ipayafrica'" class="text-nowrap">
                     <field name="ipay_vendor_id"/>
                     <field name="ipay_hash_key"/>
                     <field name="ipay_checkout_url"/>
@@ -39,7 +39,7 @@
         <field name="name">ipay list</field>
         <field name="model">ipay.data</field>
         <field name="arch" type="xml">
-            <tree edit="0" delete="0" import="0" create="0" decoration-info="reconciled == False" decoration-muted="reconciled == True">
+            <list edit="0" delete="0" import="0" create="0" decoration-info="reconciled == False" decoration-muted="reconciled == True">
                 <field name="reconciled" invisible="1"/>
                 <field name="txncd"/>
                 <field name="msisdn_id"/>
@@ -49,10 +49,10 @@
                 <field name="tokenid"/>
                 <field name="tokenemail"/>
                 <field name="card_mask"/>
-                <field name="write_uid" string="Reconciled by" attrs="{'invisible': [('reconciled','=', False)]}"/>
-                <field name="write_date" string="Reconciled on" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                <field name="write_uid" string="Reconciled by" invisible="reconciled == False" />
+                <field name="write_date" string="Reconciled on" invisible="reconciled == False"/>
                 <field name="mc" sum="Total"/>
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_ipay_filter" model="ir.ui.view">
@@ -98,8 +98,8 @@
                         <field name="tokenid"/>
                         <field name="tokenemail"/>
                         <field name="card_mask"/>
-                        <field name="write_uid" string="Reconciled by" attrs="{'invisible': [('reconciled','=', False)]}"/>
-                        <field name="write_date" string="Reconciled on" attrs="{'invisible': [('reconciled','=', False)]}"/>
+                        <field name="write_uid" string="Reconciled by" invisible="reconciled == False" />
+                        <field name="write_date" string="Reconciled on" invisible="reconciled == False" />
                         <field name="mc"/>
                         <field name="qwh"/>
                         <field name="afd"/>
@@ -122,7 +122,7 @@
         <field name="name">iPay Data Details</field>
         <field name="res_model">ipay.data</field>
         <field name="search_view_id" ref="view_ipay_filter"/>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem name="iPay Details" id="ipay_mobile_root_menu" action="ipay_action_window" parent="account.root_payment_menu"  groups="account.group_account_manager"/>
 

@@ -32,11 +32,11 @@ class StockMoveLocationWizardLine(models.TransientModel):
         comodel_name="stock.lot",
         domain="[('product_id','=',product_id)]",
     )
-    package_id = fields.Many2one(
-        string="Package Number",
-        comodel_name="stock.quant.package",
-        domain="[('location_id', '=', origin_location_id)]",
-    )
+    # package_id = fields.Many2one(
+    #     string="Package Number",
+    #     comodel_name="stock.quant.package",
+    #     domain="[('location_id', '=', origin_location_id)]",
+    # )
     owner_id = fields.Many2one(comodel_name="res.partner", string="From Owner")
     move_quantity = fields.Float(
         string="Quantity to move", digits="Product Unit of Measure"
@@ -74,10 +74,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
             search_args.append(("lot_id", "=", self.lot_id.id))
         else:
             search_args.append(("lot_id", "=", False))
-        if self.package_id:
-            search_args.append(("package_id", "=", self.package_id.id))
-        else:
-            search_args.append(("package_id", "=", False))
+        # if self.package_id:
+        #     search_args.append(("package_id", "=", self.package_id.id))
+        # else:
+        #     search_args.append(("package_id", "=", False))
         if self.owner_id:
             search_args.append(("owner_id", "=", self.owner_id.id))
         else:

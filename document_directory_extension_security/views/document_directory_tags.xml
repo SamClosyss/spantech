@@ -24,9 +24,9 @@
             <field name="name">directory.tag.tree</field>
             <field name="model">directory.tag</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                         <field name="name"/>
-                </tree>
+                </list>
             </field>
         </record>
         
@@ -43,7 +43,7 @@
         <record id="action_dir_tags" model="ir.actions.act_window">
             <field name="name">Directory Tags</field>
             <field name="res_model">directory.tag</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help">Create Directory Tags</field>
         </record>
 

@@ -5,14 +5,14 @@
         <field name="name">user.recent.log.tree</field>
         <field name="model">user.recent.log</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="model" invisible="1"/>
                 <field name="res_id" invisible="1"/>
                 <field name="last_visited_on"/>
                 <field name="user_id"/>
                 <button name="redirect_on_record" string="Redirect on Record" type="object" icon="fa-arrow-right"/>
-            </tree>
+            </list>
         </field>
     </record>
     <!-- explicit list view definition -->    

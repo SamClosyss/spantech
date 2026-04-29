@@ -28,12 +28,12 @@
 
                 <page string="Home page Products">
                     <field name="home_product_ids">
-                        <tree string="Products">
+                        <list string="Products">
                             <field name="type" />
                             <field name="sequence"/>
                             <field name="name"/>
                             <field name="default_code"/>
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>

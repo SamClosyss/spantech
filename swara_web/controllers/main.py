@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request, Controller, route
-from odoo.addons.http_routing.models.ir_http import slug
+# from odoo.addons.http_routing.models.ir_http import slug
 from werkzeug.exceptions import NotFound
 from odoo.addons.website.controllers.main import QueryURL
 
@@ -98,7 +98,7 @@ class SwaraCollections(http.Controller):
         if Products:
             Products = request.env['product.template'].search([('id', 'in', Products.ids)], order=post.get('order'))
         categories = Products_in_collection.mapped('public_categ_ids')
-
+        slug = request.env['ir.http']._slug
         if category:
             url += "/category/%s" % slug(category)
         pager = request.website.pager(url=url, total=len(Products), page=page, step=8, scope=7, url_args=post)

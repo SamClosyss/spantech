@@ -4,21 +4,21 @@
         <field name="name">template.action.tree</field>
         <field name="model">template.action</field>
         <field name="arch" type="xml">
-            <tree string="Template Actions" editable="bottom">
+            <list string="Template Actions" editable="bottom">
                 <field name="company_id"/>
                 <field name="action_id" options="{'no_create': True}"/>
                 <field name="menu_action_ids" widget="many2many_tags" invisible="1"/>
                 <field name="template_model" invisible="1"/>
                 <field name="email_template_id" domain="[('model_id.model', '=', template_model)]"/>
                 <field name="pdf_report_id" domain="[('model', '=', template_model)]"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_template_action" model="ir.actions.act_window">
         <field name="name">Template Actions</field>
         <field name="res_model">template.action</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_template_action" name="Template Actions" parent="base.menu_administration" sequence="10"/>

@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { _lt } from "@web/core/l10n/translation";
+import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 
 import { Component } from "@odoo/owl";
@@ -24,7 +24,7 @@ Object.assign(DomainSelectorBooleanFieldBits, {
         return [
             {
                 category: "equality",
-                label: _lt("is"),
+                label: _t("is"),
                 value: "=",
                 onDidChange() {},
                 matches({ operator }) {
@@ -33,7 +33,7 @@ Object.assign(DomainSelectorBooleanFieldBits, {
             },
             {
                 category: "equality",
-                label: _lt("is not"),
+                label: _t("is not"),
                 value: "!=",
                 onDidChange() {},
                 matches({ operator }) {

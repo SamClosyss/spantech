@@ -14,7 +14,7 @@
               <field name="month" readonly="1"/>
               <field name="year" readonly="1" widget="text"/>
             </group>
-            <group attrs="{'invisible': [('cel_zlozenia', '=', 1)]}" colspan="8">
+            <group invisible="cel_zlozenia == 1" colspan="8">
               <label for="cel_zlozenia" string="Cel złożenia"/>
               <div class="o_row">
                 <field name="cel_zlozenia" readonly="1" invisible="1"/>
@@ -700,7 +700,7 @@
           <field name="is_jpk_transfer_installed" invisible="1"/>
           <button name="action_generate_xml" string="Export XML" class="oe_highlight" type="object"/>
           <button name="action_transfer_xml" string="Export XML and send" class="oe_highlight" type="object"
-                  attrs="{'invisible': [('is_jpk_transfer_installed', '!=', True)]}"/>
+                  invisible="is_jpk_transfer_installed == False"/>
           <button name="action_generate_pdf" string="Export PDF" class="oe_highlight" type="object"/>
           <button name="action_cancel" string="Cancel" type="object"/>
         </footer>

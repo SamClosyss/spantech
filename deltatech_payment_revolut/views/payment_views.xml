@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="payment.payment_provider_form" />
         <field name="arch" type="xml">
             <group name="provider_credentials" position='inside'>
-                <group attrs="{'invisible': [('code', '!=', 'revolut')]}">
+                <group invisible="code != 'revolut'">
                     <group>
                         <field name="revolut_api_key" />
                     </group>

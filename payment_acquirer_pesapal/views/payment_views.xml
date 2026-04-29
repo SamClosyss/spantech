@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="payment.payment_provider_form" />
         <field name="arch" type="xml">
             <group name="provider_credentials" position='inside'>
-                <group attrs="{'invisible': [('code', '!=', 'pesapal')]}">
+                <group invisible="code != 'pesapal'">
                     <field name="pesapal_consumer_key" />
                     <field name="pesapal_consumer_secret" password="True" />
                 </group>

@@ -18,7 +18,7 @@
     'data': [
         'views/product_product.xml',
         'views/template.xml',
-        'views/product_page.xml',
+        # 'views/product_page.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/ir_attachment_views.xml',

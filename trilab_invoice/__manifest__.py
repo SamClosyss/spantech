@@ -14,7 +14,7 @@
         'wizard/account_move_reversal.xml',
         'wizard/sale_advance_payment_inv.xml',
         'views/account_move.xml',
-        'views/report_invoice.xml',
+        # 'views/report_invoice.xml',
         'views/sale_views.xml',
         'views/res_config_settings.xml',
     ],

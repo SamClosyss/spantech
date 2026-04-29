@@ -3,7 +3,7 @@
 <data >
     <record id="group_number_edit" model="res.groups">
         <field name="name">Allow Number Editable</field>
-        <field name="category_id" ref="base.module_category_hidden"/>
+<!--        <field name="category_id" ref="base.module_category_hidden"/>-->
     </record>
 
 </data>

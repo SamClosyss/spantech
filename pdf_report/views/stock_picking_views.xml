@@ -10,7 +10,7 @@
             <!-- Button only for AG Gases Company -->
             <xpath expr="//button[@name='do_print_picking']" position="after">
                 <button name="do_print_shipping_invoice" string="Print Shipping Invoice" type="object"
-                         data-hotkey="o" attrs="{'invisible': [('company_id', '!=', 7)]}"/>
+                         data-hotkey="o" invisible="company_id != 7"/>
             </xpath>
              <xpath expr="//field[@name='carrier_id']" position="after">
                  <field name="packages_number" />

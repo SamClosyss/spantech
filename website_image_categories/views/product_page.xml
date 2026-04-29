@@ -19,23 +19,23 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                  <xpath expr="//field[@name='price_extra']" position="after">
-                     <field name="image" attrs="{'invisible':[('display_type','!=','color')]}"/>
+                     <field name="image" invisible="display_type != 'color'"/>
                  </xpath>
             </field>
         </record>
 
 
-     <template id="website_image_categories.custom_selection" inherit_id="sale.variants">
-        <xpath expr="//ul/li/label" position="before">
-            <t t-set="attribute_value" t-value="request.env['product.template.attribute.value'].search([('product_attribute_value_id','=',ptav.product_attribute_value_id.id),('product_tmpl_id','=',product.id)])"/>
-        </xpath>
+<!--     <template id="website_image_categories.custom_selection" inherit_id="sale.variants">-->
+<!--        <xpath expr="//ul/li/label" position="before">-->
+<!--            <t t-set="attribute_value" t-value="request.env['product.template.attribute.value'].search([('product_attribute_value_id','=',ptav.product_attribute_value_id.id),('product_tmpl_id','=',product.id)])"/>-->
+<!--        </xpath>-->
 
-        <xpath expr="//ul/li/label" position="attributes">
-            <attribute name="t-att-style">
-                "background-image:url('/web/image?model=product.template.attribute.value&amp;id="+str(attribute_value.id)+"&amp;field=image');background-size:cover;" if attribute_value.image else "background-color: "+attribute_value.name
-            </attribute>
-        </xpath>
+<!--        <xpath expr="//ul/li/label" position="attributes">-->
+<!--            <attribute name="t-att-style">-->
+<!--                "background-image:url('/web/image?model=product.template.attribute.value&amp;id="+str(attribute_value.id)+"&amp;field=image');background-size:cover;" if attribute_value.image else "background-color: "+attribute_value.name-->
+<!--            </attribute>-->
+<!--        </xpath>-->
 
-    </template>
+<!--    </template>-->
 </odoo>
 

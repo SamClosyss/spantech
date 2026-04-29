@@ -304,7 +304,7 @@ class AccountMove(models.Model):
 
         self._x_compute_corrected_amount_total()
 
-    @api.depends('reversal_move_id', 'move_type')
+    @api.depends('reversal_move_ids', 'move_type')
     def _x_compute_correction_invoices_len(self):
         for invoice in self:
             if invoice.move_type in ('in_invoice', 'out_invoice', 'in_refund', 'out_refund'):

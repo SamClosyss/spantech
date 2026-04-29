@@ -6,17 +6,16 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
-                <attribute name="attrs">{
-                    'invisible': ['|', ('invoice_status', '!=', 'to invoice'), ('x_use_ti', '=', True)]}</attribute>
+                <attribute name="invisible">invoice_status != 'to_invoice' or x_use_ti != False</attribute>
             </xpath>
             <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('x_use_ti', '=', True), '|', ('state', '!=', 'sale'), ('invoice_status', '!=', 'no')]}</attribute>
+                <attribute name="invisible">x_use_ti != False or state != 'sale' or invoice_status != 'no'</attribute>
             </xpath>
             <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="after">
                 <field name="x_use_ti" invisible="1"/>
                 <button name="%(trilab_invoice.action_view_sale_advance_payment_inv_pl)d" string="Create Invoice PL"
                         type="action" class="btn-primary"
-                        attrs="{'invisible': ['|', ('invoice_status', 'not in', ['no', 'to invoice']),('x_use_ti', '=', False)]}"/>
+                        invisible="invoice_status not in ['no','to_invoice'] or x_use_ti == False"/>
             </xpath>
         </field>
     </record>

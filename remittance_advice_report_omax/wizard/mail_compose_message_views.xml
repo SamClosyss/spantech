@@ -6,11 +6,11 @@
             <field name="model">mail.compose.message</field>
             <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[1]/group/field[@name='attachment_ids']" position="after">
+                <xpath expr="//field[@name='attachment_ids']" position="after">
                     <field name="show_remittance_advice" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='template_id']" position="after">
-                    <field name="remittance_advice" attrs="{'invisible': [('show_remittance_advice', '!=', True)]}"/>
+                    <field name="remittance_advice" invisible="show_remittance_advice != False" />
                 </xpath>
                 <xpath expr="//field[@name='template_id']" position="attributes">
                     <attribute name="context">{'default_model': model, 

@@ -2,7 +2,7 @@
 
 import { DomainSelectorBits, DomainSelectorBits2 } from "@advanced_web_domain_widget/core/domain_selector/domain_selector";
 import { DomainSelectorDialogBits, DomainSelectorDialogBits2 } from "@advanced_web_domain_widget/core/domain_selector_dialog/domain_selector_dialog";
-import { _lt } from "@web/core/l10n/translation";
+import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { useBus, useService, useOwnedDialogs } from "@web/core/utils/hooks";
 import { Domain } from "@web/core/domain";
@@ -338,7 +338,7 @@ DomainFieldBits.defaultProps = {
     editInDialog: false,
 };
 
-DomainFieldBits.displayName = _lt("Bits");
+DomainFieldBits.displayName = _t("Bits");
 DomainFieldBits.supportedTypes = ["char"];
 
 DomainFieldBits.isEmpty = () => false;

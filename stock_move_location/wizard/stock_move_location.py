@@ -6,7 +6,7 @@
 from itertools import groupby
 
 from odoo import api, fields, models
-from odoo.fields import first
+# from odoo.fields import first
 
 
 class StockMoveLocationWizard(models.TransientModel):
@@ -84,7 +84,7 @@ class StockMoveLocationWizard(models.TransientModel):
             self.env.context.get("active_ids", False)
         )
         res["stock_move_location_line_ids"] = self._prepare_wizard_move_lines(quants)
-        res["origin_location_id"] = first(quants).location_id.id
+        res["origin_location_id"] = quants[0].location_id.id if quants else False
         return res
 
     @api.model
