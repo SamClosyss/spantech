@@ -5,7 +5,7 @@
     'name': 'Droggol Theme Common',
     'description': 'Droggol Theme Common',
     'category': 'eCommerce',
-    # 'version': '16.0.0.0.3',
+    'version': '19.0.0.0.1',
     'depends': [
         # 'sale_product_configurator',
         'website_sale_comparison',
@@ -39,7 +39,7 @@
         'views/backend/dr_website_content.xml',
         'views/backend/product_pricelist.xml',
         'views/backend/pwa_shortcuts.xml',
-        'views/backend/res_config_settings.xml',
+        # 'views/backend/res_config_settings.xml',
         'views/backend/dr_theme_config.xml',
         'views/backend/category_label.xml',
         'views/backend/product_category.xml',

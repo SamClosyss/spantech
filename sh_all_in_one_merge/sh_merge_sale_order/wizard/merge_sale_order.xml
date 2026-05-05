@@ -5,19 +5,12 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="sale.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@data-key='sale_management']//div[1]" position="after">
-                <h2>Merge Sale Order Quantity</h2>
-                <div class="row mt16 o_settings_container">
-                    <div class="col-12 col-lg-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="sh_so_sub_merge_qty" />
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="sh_so_sub_merge_qty" />
-                            <div class="text-muted"></div>
-                        </div>
-                    </div>
-                </div>
+            <xpath expr="//app[@name='sale_management']" position="inside">
+                <block title="Merge Sale Order Quantity" id="sh_merge_sale_order_qty">
+                    <setting help="Merge Sale Order Quantity">
+                        <field name="sh_so_sub_merge_qty" />
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>
@@ -38,14 +31,14 @@
                 </group>
                 <notebook>
                     <page string="Merge Lines" name="merge_line_ids">
-                        <field name="merge_line_ids" widget="section_and_note_one2many" mode="tree">
-                            <tree editable="bottom" create="false" delete="false">
+                        <field name="merge_line_ids" mode="list">
+                            <list editable="bottom" create="false" delete="false">
                                 <field name="sale_order_id" required="1" readonly="1" force_save="1" />
                                 <field name="product_id" readonly="1" force_save="1" required="1" />
                                 <field name="qty" required="1" />
                                 <field name="qty_available" readonly="1" />
                                 <field name="sale_order_line_id" invisible="1" />
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>

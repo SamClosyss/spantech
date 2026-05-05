@@ -19,8 +19,8 @@
     Variants
     ============================================================================
     -->
-    <template id="variants" inherit_id="sale.variants">
-        <xpath expr="//strong[hasclass('attribute_name')]" position="replace">
+    <template id="variants" inherit_id="website_sale.variants">
+        <xpath expr="//h6[hasclass('attribute_name')]" position="replace">
             <div class="d-flex align-items-center mb-2">
                 <h6 t-field="ptal.attribute_id.name" class="attribute_name mb-0 pb-0"/>
                 <t t-set="dr_attribute_popup_id" t-value="ptal.dr_attribute_popup_id or ptal.attribute_id.dr_attribute_popup_id"/>
@@ -59,8 +59,8 @@
                 </ul>
             </t>
         </xpath>
-        <xpath expr="//t[contains(@t-if, 'color')]//label" position="attributes">
-            <attribute name="t-attf-style">#{'background-image: url(/web/image/product.template.attribute.value/%s/dr_thumb_image); background-size: cover;' % ptav.id if ptav.dr_thumb_image else 'background-color:%s' % (ptav.html_color or ptav.product_attribute_value_id.name if not ptav.is_custom else '')}</attribute>
+        <xpath expr="//t[@t-set='img_style']" position="attributes">
+            <attribute name="t-value">#{'background-image: url(/web/image/product.template.attribute.value/%s/dr_thumb_image); background-size: cover;' % ptav.id if ptav.dr_thumb_image else 'background-color:%s' % (ptav.html_color or ptav.product_attribute_value_id.name if not ptav.is_custom else '')}</attribute>
         </xpath>
     </template>
 

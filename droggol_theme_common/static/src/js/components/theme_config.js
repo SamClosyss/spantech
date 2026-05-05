@@ -3,11 +3,10 @@
 import { WebsiteDialog } from '@website/components/dialog/dialog';
 import { evaluateExpr } from "@web/core/py_js/py";
 
-const { Component, useState, onWillStart, onWillUpdateProps, toRaw } = owl;
+import { Component, useState, onWillStart, onWillUpdateProps, toRaw } from "@odoo/owl";
 import { useService } from '@web/core/utils/hooks';
 import { useCore } from '@droggol_theme_common/js/hooks';
-
-import { _t } from 'web.core';
+import { _t } from "@web/core/l10n/translation";
 
 
 export class AbstractThemeOption extends Component {

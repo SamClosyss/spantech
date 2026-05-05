@@ -10,7 +10,7 @@
         """,
 
     # Dependencies
-    'depends': ['account', 'sale','purchase', 'x_studio_convert_backend', 'stock_picking_invoice_link'],
+    'depends': ['account', 'sale', 'purchase', 'stock', 'mrp', 'sale_renting', 'x_studio_convert_backend', 'stock_picking_invoice_link'],
 
     'data': [
         'security/ir.model.access.csv',

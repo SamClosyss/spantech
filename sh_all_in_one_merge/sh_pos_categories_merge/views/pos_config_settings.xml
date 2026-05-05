@@ -6,32 +6,15 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@data-key='point_of_sale']" position="inside">
-                <h2>Merge Internal Category to POS Category</h2>
-                <div class="row mt16 o_settings_container">
-                    <div class="col-xs-6 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="sync_with_pos_category" />
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="sync_with_pos_category" />
-                            <div class="text-muted">
-                                Sync new Internal Category to POS Category
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="auto_sync_product_with_pos_category" />
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="auto_sync_product_with_pos_category" />
-                            <div class="text-muted">
-                                Auto Sync new product to POS Category
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <xpath expr="//app[@name='point_of_sale']" position="inside">
+                <block title="Merge Internal Category to POS Category" id="sh_pos_categories_merge_config">
+                    <setting help="Sync new Internal Category to POS Category">
+                        <field name="sync_with_pos_category" />
+                    </setting>
+                    <setting help="Auto Sync new product to POS Category">
+                        <field name="auto_sync_product_with_pos_category" />
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>

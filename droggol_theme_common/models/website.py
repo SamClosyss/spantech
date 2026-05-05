@@ -54,10 +54,10 @@ class Website(models.Model):
             return website_config.get(key)
         return website_config
 
-    def _get_pricelist_available(self, req, show_visible=False):
+    def _get_pricelist_available(self, show_visible=False):
         if self._get_dr_theme_config('json_b2b_shop_config')['dr_only_assigned_pricelist'] and not self.env.user.has_group('base.group_website_designer'):
             return self.env.user.partner_id.property_product_pricelist
-        return super()._get_pricelist_available(req, show_visible=show_visible)
+        return super()._get_pricelist_available(show_visible=show_visible)
 
     @api.model
     def get_theme_prime_shop_config(self):

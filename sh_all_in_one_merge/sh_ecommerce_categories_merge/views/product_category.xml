@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <field name="parent_id" position="after">
                 <field name="hide_sync_field" invisible="1" />
-                <field name="sync_with_ecommerce_category" attrs="{'invisible':[('hide_sync_field','=',True)]}" />
+                <field name="sync_with_ecommerce_category" invisible="hide_sync_field" />
             </field>
         </field>
     </record>

@@ -9,9 +9,9 @@
     "category": "Extra Tools",
     "summary": "Merge Sales Order,Merge Quotation,Merge Request For Quotation,Merge MRP,Merge Bill,Merge Credit Note, Merge Debit Note,Merge Categories,Merge POS Category,Merge ecommerce Category,Merge Incoming Order,Merge Delivery Order Odoo",
     "description": """This module useful to merge sale orders/quotation, purchase order/request for quotation, incoming order/outgoing order/internal transfer, invoice/bill/credit note/debit note, manufacturing order, product internal category with the POS category & product internal category with the e-commerce category.""",
-    # "version": "16.0.1",
+    "version": "19.0.1.0.0",
     "depends": [
-        "website_sale", "sale_management", "mrp", "stock", "purchase", "point_of_sale"
+        "website_sale", "sale_management", "mrp", "stock", "purchase", "point_of_sale", "account"
     ],
     "application": True,
     "data": [

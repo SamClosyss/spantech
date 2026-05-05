@@ -28,14 +28,14 @@
         <field name="name">product.attribute.value.view.tree</field>
         <field name="model">product.attribute.value</field>
         <field name="arch" type="xml">
-            <tree string="Brands" expand="1" create="0">
+            <list string="Brands" expand="1" create="0">
                 <field name="sequence" widget="handle"/>
                 <field name="name" string="Name"/>
                 <field name="attribute_id" invisible="1"/>
                 <groupby name="attribute_id">
                     <button name="open_create_brand_value" string="Add New Brand" type="object" class=""/>
                 </groupby>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -43,9 +43,9 @@
         <field name="name">product.attribute.value.view.search</field>
         <field name="model">product.attribute.value</field>
         <field name="arch" type="xml">
-            <search string="Brands">
+            <search>
                 <field name="name"/>
-                <group expand="0" string="Group By">
+                <group >
                     <filter string="Attributes" name="group_by_attributes" domain="[]" context="{'group_by': 'attribute_id'}"/>
                 </group>
             </search>
@@ -56,7 +56,7 @@
         <field name="name">Brands</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.attribute.value</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain" eval="[('attribute_id.dr_is_brand', '=', True)]"/>
         <field name="context">{'search_default_group_by_attributes': True}</field>
     </record>

@@ -8,7 +8,7 @@
                 <group string="Select the operation to do.">
                     <field name="operation" widget="radio" nolabel="1" />
                 </group>
-                <group string="Select Categories to merge with Ecommerce" attrs="{'invisible':[('operation','=','assign_category')]}">
+                <group string="Select Categories to merge with Ecommerce" invisible="operation == 'assign_category'">
                     <field name="category_ids" widget="many2many_list" nolabel="1" />
                 </group>
                 <footer>

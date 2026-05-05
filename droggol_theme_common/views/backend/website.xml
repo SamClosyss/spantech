@@ -19,7 +19,7 @@
         <field name="model">website</field>
         <field name="inherit_id" ref="website_sale.view_website_sale_website_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='shop_extra_field_ids']/tree" position="inside">
+            <xpath expr="//field[@name='shop_extra_field_ids']/list" position="inside">
                 <field name="dr_label"/>
             </xpath>
         </field>

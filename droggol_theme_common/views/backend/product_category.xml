@@ -6,7 +6,7 @@
         <field name="model">product.public.category</field>
         <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
         <field name="arch" type="xml">
-            <div class="oe_left" position="after">
+            <xpath expr="//sheet/div" position="after">
                 <notebook>
                     <page name="theme_prime" string="Theme Prime">
                         <group>
@@ -22,7 +22,7 @@
                         </group>
                     </page>
                 </notebook>
-            </div>
+            </xpath>
         </field>
     </record>
 
