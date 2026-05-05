@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { useModelField } from "./model_field_hook";
-import { useUniquePopover } from "@web/core/model_field_selector/unique_popover_hook";
+import { useUniquePopover } from "./unique_popover_hook";
 import { ModelFieldSelectorPopoverBits, ModelFieldSelectorPopoverBits2 } from "./model_field_selector_popover";
 
 import { Component, onWillStart, onWillUpdateProps } from "@odoo/owl";

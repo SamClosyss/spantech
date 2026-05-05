@@ -18,8 +18,8 @@ class HelpdeskTicket(models.Model):
     client_po = fields.Char(string="Client PO")
     invoiced_to_client_on = fields.Char(string="Invoiced To Client On")
     receipt = fields.Char(string="Receipt")
-    # product_tmpl_id = fields.Many2one('product.template', 'Product Template', related='product_id.product_tmpl_id')
-    # product_tmpl_id = fields.Many2one(related='product_id.product_tmpl_id', string='Product Template')
+    product_id = fields.Many2one('product.product', string='Product')
+    product_tmpl_id = fields.Many2one('product.template', string='Product Template', related='product_id.product_tmpl_id', store=True)
 
     # https://spantech.odoo.com/web?debug=1#id=1085&menu_id=554&cids=4%2C7%2C3%2C2%2C1%2C6%2C8%2C5%2C10%2C9&action=806&model=project.task&view_type=form
     organisation_id = fields.Many2one('res.partner', string='Organisation', tracking=True)

@@ -3,8 +3,7 @@ import { sortBy } from "@web/core/utils/arrays";
 import { fuzzyLookup } from "@web/core/utils/search";
 import { useModelRecord } from "./model_record_hook";
 import { useUniquePopover } from "./unique_popover_hook";
-import core from 'web.core';
-var _t = core._t;
+import { _t } from "@web/core/l10n/translation";
 
 import { Component, onWillStart, onWillUpdateProps } from "@odoo/owl";
 

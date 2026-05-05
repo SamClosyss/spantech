@@ -6,7 +6,7 @@
         <field name="model">helpdesk.team</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='productivity']/div/div" position="after">
+            <xpath expr="//div[@id='productivity']/setting" position="after">
                 <div class="o_setting_right_pane">
                     <label for="restrict_partner_ids"/>
                     <div class="text-muted">

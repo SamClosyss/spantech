@@ -1,7 +1,8 @@
 /** @odoo-module **/
 
-import { DatePicker, DateTimePicker } from "@web/core/datepicker/datepicker";
-import { DateSelectionBits } from "@advanced_web_domain_widget/js/dateSelectionBits/dateSelectionBits";
+import { DateTimePicker } from "@web/core/datetime/datetime_picker";
+const DatePicker = DateTimePicker;
+import { DateSelectionBits } from "../../../js/dateSelectionBits/dateSelectionBits";
 import {
   deserializeDate,
   deserializeDateTime,

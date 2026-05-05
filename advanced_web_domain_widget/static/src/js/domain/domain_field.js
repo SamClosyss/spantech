@@ -349,7 +349,17 @@ DomainFieldBits.extractProps = ({ attrs }) => {
     };
 };
 
-registry.category("fields").add("terabits_domain", DomainFieldBits);
+registry.category("fields").add("terabits_domain", {
+    component: DomainFieldBits,
+    supportedTypes: ["char"],
+    isEmpty: () => false,
+    extractProps: ({ attrs }) => {
+        return {
+            editInDialog: attrs.options.in_dialog,
+            resModel: attrs.options.model,
+        };
+    },
+});
 
 
 class DomainFieldBits2 extends DomainFieldBits {
@@ -371,4 +381,14 @@ DomainFieldBits2.components = {
 
 DomainFieldBits2.template = "advanced_web_domain_widget.DomainFieldBits2"
 
-registry.category("fields").add("terabits_field_domain", DomainFieldBits2);
+registry.category("fields").add("terabits_field_domain", {
+    component: DomainFieldBits2,
+    supportedTypes: ["char"],
+    isEmpty: () => false,
+    extractProps: ({ attrs }) => {
+        return {
+            editInDialog: attrs.options.in_dialog,
+            resModel: attrs.options.model,
+        };
+    },
+});

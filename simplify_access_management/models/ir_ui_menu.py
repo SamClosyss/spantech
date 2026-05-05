@@ -5,8 +5,11 @@ class ir_ui_menu(models.Model):
     _inherit = 'ir.ui.menu'
 
     @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
-        ids = super(ir_ui_menu, self).search(args, offset=0, limit=None, order=order, count=False)
+    def search(self, domain, offset=0, limit=None, order=None, **kwargs):
+        count = kwargs.get('count', False)
+        # In Odoo 17+, search() does not take 'count' argument.
+        # We fetch all matching menus (offset=0, limit=None) and filter them manually.
+        ids = super(ir_ui_menu, self).search(domain, offset=0, limit=None, order=order)
         user = self.env.user
         # user.clear_caches()
         cids = request.httprequest.cookies.get('cids') and request.httprequest.cookies.get('cids').split(',')[0] or self.env.company.id

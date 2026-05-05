@@ -20,3 +20,4 @@ access_hide_field,access.hide.field,model_hide_field,simplify_access_management.
 access_hide_view_nodes,access.hide.view.nodes,model_hide_view_nodes,simplify_access_management.group_access_management_bits,1,1,1,1
 access_hide_filters_groups,access_hide_filters_groups,model_hide_filters_groups,simplify_access_management.group_access_management_bits,1,1,1,1
 access_hide_chatter,access.hide.chatter,model_hide_chatter,simplify_access_management.group_access_management_bits,1,1,1,1
+access_product_wishlist_user,product.wishlist.user,website_sale_wishlist.model_product_wishlist,base.group_user,1,1,1,1
