@@ -2,13 +2,17 @@
 
 import { ActionMenus } from "@web/search/action_menus/action_menus";
 import { registry } from "@web/core/registry";
-import core from 'web.core';
-const { patch } = require('web.utils');
-var _t = core._t;
+import { patch } from "@web/core/utils/patch";
+import { _t } from "@web/core/l10n/translation";
+import { useService } from "@web/core/utils/hooks";
+
 let registryActionId = 0;
 
-
-patch(ActionMenus.prototype, "actionMenuAccessPatch", {
+patch(ActionMenus.prototype, {
+    setup() {
+        super.setup(...arguments);
+        this.orm = useService("orm");
+    },
     async setActionItems(props) {
         // Callback based actions
         const callbackActions = (props.items.other || []).map((action) =>

@@ -2,13 +2,14 @@
 
 import { ListController } from "@web/views/list/list_controller";
 import { session } from "@web/session";
-const { patch } = require("web.utils");
-const {onWillStart} = owl;
-var rpc = require("web.rpc");
+import { patch } from "@web/core/utils/patch";
+import { onWillStart } from "@odoo/owl";
+import { useService } from "@web/core/utils/hooks";
 
-patch(ListController.prototype,"simplify_access_management.ListController",{
+patch(ListController.prototype, {
     setup() {
-        this._super();  
+        super.setup(...arguments);
+        this.orm = useService("orm");
         onWillStart(async () => {
             await this.is_hide_export();
         });

@@ -30,7 +30,7 @@ class hide_filters_groups(models.Model):
             view_list = ['search']
             for view in view_list:
                 for views in view_obj.search([('model', '=', self.model_name),('type', '=', view)]): #
-                    res = self.env[self.model_name].sudo().fields_view_get(view_id=views.id, view_type=view)
+                    res = self.env[self.model_name].sudo().get_view(view_id=views.id, view_type=view)
                     doc = etree.XML(res['arch'])
 
                     object_groups = doc.xpath("//group")
@@ -77,11 +77,9 @@ class store_model_nodes(models.Model):
     attribute_name = fields.Char('Attribute Name')
     attribute_string = fields.Char('Attribute String', required=True)
 
-    def name_get(self):
-        result = []
+    def _compute_display_name(self):
         for rec in self:
             name = rec.attribute_string
             if rec.attribute_name:
                 name = name +' (' + rec.attribute_name + ')'
-            result.append((rec.id, name))
-        return result
+            rec.display_name = name

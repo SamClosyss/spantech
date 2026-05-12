@@ -41,12 +41,17 @@ class Home(Home):
     @http.route('/web', type='http', auth="none")
     def web_client(self, s_action=None, **kw):
         ensure_db()
-        request.env['ir.ui.view'].clear_caches()
-        request.env['ir.qweb'].clear_caches()
-        request.env['ir.actions.actions'].clear_caches()
+        if hasattr(request.env['ir.ui.view'], 'clear_caches'):
+            request.env['ir.ui.view'].clear_caches()
+            request.env['ir.qweb'].clear_caches()
+            request.env['ir.actions.actions'].clear_caches()
+        else:
+            request.env.registry.clear_cache()
+
         user = request.env.user.browse(request.session.uid)
         if len(user.company_ids) > 1:
-            request.env['ir.ui.menu'].clear_caches()
+            if hasattr(request.env['ir.ui.menu'], 'clear_caches'):
+                request.env['ir.ui.menu'].clear_caches()
         if not kw.get('debug') or kw.get('debug') != "0":
             cids = request.httprequest.cookies.get('cids') and request.httprequest.cookies.get('cids').split(',')[0] or request.env.company.id
             access_management = request.env['access.management'].sudo().search([('active','=',True),('company_ids','in',int(cids)),('disable_debug_mode','=',True),('user_ids','in',user.id)],limit=1)

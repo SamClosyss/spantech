@@ -7,36 +7,33 @@ class ir_model(models.Model):
 
     abstract = fields.Boolean('Abstract', readonly=True)
 
-    def name_get(self):
-        res = super().name_get()
+    def _compute_display_name(self):
         if self._context.get('is_access_rights'):
-            res = []
             for model in self:
-                res.append((model.id, "{} ({})".format(model.name, model.model)))
-        return res
+                model.display_name = "{} ({})".format(model.name, model.model)
+        else:
+            super()._compute_display_name()
 
 
 class IrModelField(models.Model):
     _inherit = 'ir.model.fields'
 
-    def name_get(self):
-        res = super().name_get()
+    def _compute_display_name(self):
         if self._context.get('is_access_rights'):
-            res = []
             for field in self:
-                res.append((field.id, "{} => {} ({})".format(field.field_description, field.name, field.model_id.model)))
-        return res
+                field.display_name = "{} => {} ({})".format(field.field_description, field.name, field.model_id.model)
+        else:
+            super()._compute_display_name()
 
 class ir_ui_view(models.Model):
     _inherit = 'ir.ui.view'
 
-    def name_get(self):
-        res = super().name_get()
+    def _compute_display_name(self):
         if self._context.get('is_access_rights'):
-            res = []
             for view in self:
-                res.append((view.id, "{} ({})".format(view.name, view.model)))
-        return res
+                view.display_name = "{} ({})".format(view.name, view.model)
+        else:
+            super()._compute_display_name()
     
 class ir_module_module(models.Model):
     _inherit = 'ir.module.module'
@@ -48,5 +45,8 @@ class ir_module_module(models.Model):
             for record in self.env['ir.model'].search([]):
                 if record.name == 'Email Thread':
                     pass
-                record.abstract = self.env[record.model]._abstract
+                # record.abstract = self.env[record.model]._abstract
+                model_obj = self.env.get(record.model)
+                if model_obj is not None:
+                    record.abstract = model_obj._abstract
         return res

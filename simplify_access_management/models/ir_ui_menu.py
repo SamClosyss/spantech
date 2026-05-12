@@ -12,7 +12,7 @@ class ir_ui_menu(models.Model):
         ids = super(ir_ui_menu, self).search(domain, offset=0, limit=None, order=order)
         user = self.env.user
         # user.clear_caches()
-        cids = request.httprequest.cookies.get('cids') and request.httprequest.cookies.get('cids').split(',')[0] or self.env.company.id
+        cids = request and request.httprequest.cookies.get('cids') and request.httprequest.cookies.get('cids').split(',')[0] or self.env.company.id
         for menu_id in user.access_management_ids.filtered(lambda line: int(cids) in line.company_ids.ids).mapped('hide_menu_ids'):
             if menu_id in ids:
                 ids = ids - menu_id
